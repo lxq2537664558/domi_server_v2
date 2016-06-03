@@ -1,4 +1,7 @@
+#include <stdlib.h>
+#include <unistd.h>
 #include <sys/epoll.h>
+
 #include "ae.h"
 
 typedef struct aeApiState {

@@ -136,7 +136,8 @@ void CTcpServer::DoRead(aeEventLoop* el, int fd, void* privdata, int mask){
 #endif
 	} else {
 		//res = send(fd, buffer, 1024, 0);
-		//printf("%s\n", buffer);
+		printf("read len = %d\n",res);
+		printf("%s\n", buffer);
 	}
 }
 
