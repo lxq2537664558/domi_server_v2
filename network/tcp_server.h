@@ -7,6 +7,11 @@
 #include "../common/basic/basicTypes.h"
 #include "../common/thread/thread.h"
 
+#ifndef WIN32
+#define HAVE_EPOLL
+#endif // WIN32
+
+
 // aenet
 extern "C" {
 #include "ae.h"
