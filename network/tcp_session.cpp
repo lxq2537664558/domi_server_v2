@@ -19,7 +19,11 @@ CTcpSession::~CTcpSession(){
 	m_id = 0;
 	m_mask = 0;
 	if (m_fd>0){
+#ifdef WIN32
 		closesocket(m_fd);
+#else
+		close(m_fd);
+#endif
 		m_fd = 0;
 	}
 }

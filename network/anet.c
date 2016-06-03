@@ -12,6 +12,15 @@
 #include <winsock2.h>
 #include <windows.h>
 #pragma comment(lib,"ws2_32.lib")
+#else
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <netdb.h>
+#include <errno.h>
 #endif
 
 #include "anet.h"
@@ -30,6 +39,7 @@ static void anetSetError(char *err, const char *fmt, ...)
 int anetSetBlock(char *err, int fd, int non_block) {
     int flags;
 
+#ifdef WIN32
     if (non_block) /* 设置非阻塞 */
 		flags = 1;
     else	/* 清除非阻塞 */
@@ -39,6 +49,19 @@ int anetSetBlock(char *err, int fd, int non_block) {
         anetSetError(err, "fcntl(F_SETFL,O_NONBLOCK): %s", strerror(errno));
         return ANET_ERR;
     }
+#else
+    /* Set the socket nonblocking.
+    * Note that fcntl(2) for F_GETFL and F_SETFL can't be
+    * interrupted by a signal. */
+    if ((flags = fcntl(fd, F_GETFL)) == -1) {
+        anetSetError(err, "fcntl(F_GETFL): %s", strerror(errno));
+        return ANET_ERR;
+    }
+    if (fcntl(fd, F_SETFL, flags | O_NONBLOCK) == -1) {
+        anetSetError(err, "fcntl(F_SETFL,O_NONBLOCK): %s", strerror(errno));
+        return ANET_ERR;
+    }
+#endif
     return ANET_OK;
 }
 

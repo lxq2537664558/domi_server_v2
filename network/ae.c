@@ -11,6 +11,10 @@
 #include <winsock2.h>
 #include <windows.h>
 #pragma comment(lib,"ws2_32.lib")
+#else
+#include <sys/time.h>
+#include <unistd.h>
+#include <poll.h>
 #endif
 
 #include "ae.h"	
@@ -31,6 +35,7 @@
     #endif
 #endif
 
+#ifdef WIN32
 int gettimeofday(struct timeval *tp, void *tzp)
 {
 	time_t clock;
@@ -49,6 +54,7 @@ int gettimeofday(struct timeval *tp, void *tzp)
 	tp->tv_usec = wtm.wMilliseconds * 1000;
 	return (0);
 }
+#endif
 
 aeEventLoop *aeCreateEventLoop(int setsize) {
     aeEventLoop *eventLoop;

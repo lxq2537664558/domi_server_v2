@@ -107,21 +107,33 @@ void CTcpServer::DoAccept(aeEventLoop* el, int fd, void* privdata, int mask){
 	CLog::info("sid = %d\n", pSession->m_id);
 	if (aeCreateFileEvent(el, cfd, AE_READABLE, DoRead, pSession) == AE_ERR){
 		fprintf(stderr, "client connect fail: %d\n", fd);
+#ifdef WIN32	
 		closesocket(fd);
+#else
+		close(fd);
+#endif
 	}
 }
 
 void CTcpServer::DoRead(aeEventLoop* el, int fd, void* privdata, int mask){
 	char buffer[1024] = { 0 };
 	int res;
+#ifdef WIN32
 	res = recv(fd, buffer, 1024, 0);
+#else
+	res = read(fd, buffer, 1024);
+#endif
 	if (res <= 0){
 		fprintf(stderr, "rece err len: %d\n", res);
 		CTcpSession* pSession = (CTcpSession*)privdata;
 		pSession->m_tcpServer->m_free.push(pSession);
 		pSession->m_tcpServer->m_sessions.erase(pSession->m_id);
 		aeDeleteFileEvent(el, fd, AE_READABLE);
+#ifdef WIN32	
 		closesocket(fd);
+#else
+		close(fd);
+#endif
 	} else {
 		//res = send(fd, buffer, 1024, 0);
 		//printf("%s\n", buffer);
@@ -132,7 +144,11 @@ THREAD_RETURN CTcpServer::_el_thread_(void* _param){
 	CLog::info("[CTcpServer]Ïß³ÌÆô¶¯,id = %d¡­¡­", CThread::getCurrentThreadID());
 	CTcpServer* _this = (CTcpServer*)_param;
 	if (!_this) {
+#ifdef WIN32
 		return -1;
+#else
+		return nullptr;
+#endif
 	}
 
 	_this->StartServer(17777);

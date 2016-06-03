@@ -1,6 +1,11 @@
 
 #include <string.h>
+#ifdef WIN32
 #include <winsock2.h>
+#else
+#include <sys/select.h>
+#endif
+
 #include "ae.h"
 
 typedef struct aeApiState {

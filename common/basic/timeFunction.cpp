@@ -9,6 +9,7 @@
 #include <unistd.h> 
 #include <sys/times.h> 
 #endif//WIN32
+#include <time.h>
 
 /*--------------------------------------------------------------
 *
