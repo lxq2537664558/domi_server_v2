@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <stdarg.h>
-/*************************************************************/
+
 extern void		set_locale(pc_str _locale);
 extern pc_str	get_locale();
 
@@ -17,16 +17,16 @@ extern uint32	dStrlen(const char *s);
 
 //--- ×Ö·û´®Á´½Ó
 #ifdef WIN32
-extern int32	dStrcat(char *dst,uint32 _size, const char *src);
+extern int32 dStrcat(char *dst,uint32 _size, const char *src);
 #else // WIN32
-extern char*	dStrcat(char *dst,uint32 _size, const char *src);
+extern char* dStrcat(char *dst,uint32 _size, const char *src);
 #endif // WIN32
 
 //--- ×Ö·û´®Á´½Ó(_count:×î¶à¿ÉÁ´½ÓÊý)
 #ifdef WIN32
-extern int32	dStrncat(char *dst,uint32 _size, const char *src,uint32 _count);
+extern int32 dStrncat(char *dst,uint32 _size, const char *src,uint32 _count);
 #else // WIN32
-extern char*	dStrncat(char *dst,uint32 _size, const char *src,uint32 _count);
+extern char* dStrncat(char *dst,uint32 _size, const char *src,uint32 _count);
 #endif // WIN32
 
 //--- ×Ö·û´®¿½±´
@@ -83,6 +83,7 @@ extern int		dVsprintf(char *string,size_t sizeInBytes,const char *format,va_list
 //--- ×Ö·û´®´òÓ¡
 extern int		dPrintf(const char *format, ... );
 extern int		dVprintf(const char *format,va_list _Args);
+
 //------------------------------------------------------
 //------------------------------ String Types
 //--- ´ÓÓÒ²à¼ì²â¶à×Ö½ÚÊÇ·ñºÏ·¨

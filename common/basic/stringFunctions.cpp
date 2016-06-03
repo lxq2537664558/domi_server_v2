@@ -31,14 +31,15 @@ pc_str get_locale(){
 uint32 dStrlen(const char *s){
 	return ::strlen(s);
 }
-
-int32 dStrcat(char *dst, uint32 _size, const char *src) {
 #ifdef WIN32
+int32 dStrcat(char *dst, uint32 _size, const char *src) {
 	return ::strcat_s(dst, _size, src);
-#else // WIN32
-	return ::strcat(dst, src);
-#endif // WIN32
 }
+#else // WIN32
+char* dStrcat(char *dst, uint32 _size, const char *src) {
+	return ::strcat(dst, src);
+}
+#endif // WIN32
 
 #ifdef WIN32
 int32 dStrncat(char *dst,uint32 _size, const char *src,uint32 _count){
