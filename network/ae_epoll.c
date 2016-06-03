@@ -1,3 +1,4 @@
+#ifndef WIN32
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/epoll.h>
@@ -101,3 +102,4 @@ static int aeApiPoll(aeEventLoop *eventLoop, struct timeval *tvp) {
 static char *aeApiName(void) {
     return "epoll";
 }
+#endif
