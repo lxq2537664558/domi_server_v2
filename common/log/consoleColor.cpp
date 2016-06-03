@@ -35,7 +35,7 @@ WORD CConsoleColor::g_back_color[color_max] = {
 	BACKGROUND_INTENSITY								,//¸ßÁÁ
 };
 #else // WIN32
-const char*	CConsoleColor::g_fore_color[CConsoleColor::color_max] =
+const char*	CConsoleColor::g_fore_color[CConsoleColor::color_max+1] =
 {
 	"31"	,//ºì
 	"32"	,//ÂÌ
@@ -44,7 +44,7 @@ const char*	CConsoleColor::g_fore_color[CConsoleColor::color_max] =
 	"37"	,//°×
 	"1"		,//¸ßÁÁ
 };
-const char*	CConsoleColor::g_back_color[CConsoleColor::color_max] =
+const char*	CConsoleColor::g_back_color[CConsoleColor::color_max+1] =
 {
 	"41"	,//ºì
 	"42"	,//ÂÌ
