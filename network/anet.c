@@ -7,15 +7,14 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-
+#ifdef WIN32
 #include <ws2tcpip.h>
 #include <winsock2.h>
 #include <windows.h>
-
 #pragma comment(lib,"ws2_32.lib")
+#endif
 
 #include "anet.h"
-
 
 static void anetSetError(char *err, const char *fmt, ...)
 {

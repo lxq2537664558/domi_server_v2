@@ -21,8 +21,8 @@ solution("DomiServer")
 		defines { "_CRT_SECURE_NO_WARNINGS", "_SCL_SECURE_NO_WARNINGS", "_WINSOCK_DEPRECATED_NO_WARNINGS", "WIN32" }
 	
 	configuration { "linux", "gmake" }
-		linkoptions  { "-std=c++11"}
-		buildoptions { "-std=c++11"}		
+		--linkoptions  { "-std=c++11"}
+		--buildoptions { "-std=c++11"}		
 
 -- domiserver
 project "DomiServer"
