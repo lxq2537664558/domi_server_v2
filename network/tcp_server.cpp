@@ -68,10 +68,10 @@ bool CTcpServer::StartServer(uint16 port) {
 
 bool CTcpServer::StopServer(){
 	aeStop(m_event_loop);
-	CLog::info("[CTcpServer::StopServer],开始关闭 tcp server……");
+	CLog::info("[CTcpServer::StopServer],close tcp server……");
 	timeval delay = { 0, 0 };
 
-	CLog::info("[CTcpServer::StopServer],线程全部关闭……");
+	//CLog::info("[CTcpServer::StopServer],线程全部关闭……");
 	return true;
 }
 

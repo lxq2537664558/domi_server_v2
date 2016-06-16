@@ -136,7 +136,7 @@ void CDomiServer::denyServices(){
 }
 
 void CDomiServer::stopServices(){
-	CLog::info("服务器已关闭!...");
+	CLog::info("server shutdown!...");
 	// 各种底层的shutdown
 	CLog::shutdown();
 }
