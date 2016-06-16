@@ -1,14 +1,14 @@
-/*----------------- consoleColor.cpp
+ï»¿/*----------------- consoleColor.cpp
 *windows:
-*Ç°¾°É«:FOREGROUND_BLUE£¨À¶É«£©¡¢FOREGROUND_GREEN£¨ÂÌÉ«£©¡¢FOREGROUND_RED£¨ºìÉ«£©¡¢FOREGROUND_INTENSITY£¨¸ßÁÁ£©
-*±³¾°É«:BACKGROUND_BLUE£¨À¶É«£©¡¢BACKGROUND_GREEN£¨ÂÌÉ«£©¡¢BACKGROUND_RED£¨ºìÉ«£©¡¢BACKGROUND_INTENSITY£¨¸ßÁÁ£©
+*å‰æ™¯è‰²:FOREGROUND_BLUEï¼ˆè“è‰²ï¼‰ã€FOREGROUND_GREENï¼ˆç»¿è‰²ï¼‰ã€FOREGROUND_REDï¼ˆçº¢è‰²ï¼‰ã€FOREGROUND_INTENSITYï¼ˆé«˜äº®ï¼‰
+*èƒŒæ™¯è‰²:BACKGROUND_BLUEï¼ˆè“è‰²ï¼‰ã€BACKGROUND_GREENï¼ˆç»¿è‰²ï¼‰ã€BACKGROUND_REDï¼ˆçº¢è‰²ï¼‰ã€BACKGROUND_INTENSITYï¼ˆé«˜äº®ï¼‰
 *
 *
 *--------------------------------------------------------------
-*linux:\033[ÑÕÉ«;ÑÕÉ«;m
-*ÏÔÊ¾·½Ê½:0£¨Ä¬ÈÏÖµ£©¡¢1£¨¸ßÁÁ£©¡¢22£¨·Ç´ÖÌå£©¡¢4£¨ÏÂ»®Ïß£©¡¢24£¨·ÇÏÂ»®Ïß£©¡¢5£¨ÉÁË¸£©¡¢25£¨·ÇÉÁË¸£©¡¢7£¨·´ÏÔ£©¡¢27£¨·Ç·´ÏÔ£©
-*Ç°¾°É«:30£¨ºÚÉ«£©¡¢31£¨ºìÉ«£©¡¢32£¨ÂÌÉ«£©¡¢ 33£¨»ÆÉ«£©¡¢34£¨À¶É«£©¡¢35£¨Ñóºì£©¡¢36£¨ÇàÉ«£©¡¢37£¨°×É«£©
-*±³¾°É«:40£¨ºÚÉ«£©¡¢41£¨ºìÉ«£©¡¢42£¨ÂÌÉ«£©¡¢ 43£¨»ÆÉ«£©¡¢44£¨À¶É«£©¡¢45£¨Ñóºì£©¡¢46£¨ÇàÉ«£©¡¢47£¨°×É«£©
+*linux:\033[é¢œè‰²;é¢œè‰²;m
+*æ˜¾ç¤ºæ–¹å¼:0ï¼ˆé»˜è®¤å€¼ï¼‰ã€1ï¼ˆé«˜äº®ï¼‰ã€22ï¼ˆéžç²—ä½“ï¼‰ã€4ï¼ˆä¸‹åˆ’çº¿ï¼‰ã€24ï¼ˆéžä¸‹åˆ’çº¿ï¼‰ã€5ï¼ˆé—ªçƒï¼‰ã€25ï¼ˆéžé—ªçƒï¼‰ã€7ï¼ˆåæ˜¾ï¼‰ã€27ï¼ˆéžåæ˜¾ï¼‰
+*å‰æ™¯è‰²:30ï¼ˆé»‘è‰²ï¼‰ã€31ï¼ˆçº¢è‰²ï¼‰ã€32ï¼ˆç»¿è‰²ï¼‰ã€ 33ï¼ˆé»„è‰²ï¼‰ã€34ï¼ˆè“è‰²ï¼‰ã€35ï¼ˆæ´‹çº¢ï¼‰ã€36ï¼ˆé’è‰²ï¼‰ã€37ï¼ˆç™½è‰²ï¼‰
+*èƒŒæ™¯è‰²:40ï¼ˆé»‘è‰²ï¼‰ã€41ï¼ˆçº¢è‰²ï¼‰ã€42ï¼ˆç»¿è‰²ï¼‰ã€ 43ï¼ˆé»„è‰²ï¼‰ã€44ï¼ˆè“è‰²ï¼‰ã€45ï¼ˆæ´‹çº¢ï¼‰ã€46ï¼ˆé’è‰²ï¼‰ã€47ï¼ˆç™½è‰²ï¼‰
 *------------------------------------------------------------*/
 
 #include "consoleColor.h"
@@ -17,43 +17,43 @@
 #ifdef WIN32
 HANDLE	CConsoleColor::g_hConsole	= INVALID_HANDLE_VALUE;
 
-// Ç°¾°É«
+// å‰æ™¯è‰²
 WORD CConsoleColor::g_fore_color[color_max] = {
-	FOREGROUND_RED										,//ºì
-	FOREGROUND_GREEN									,//ÂÌ
-	FOREGROUND_RED | FOREGROUND_GREEN					,//»Æ
-	FOREGROUND_BLUE										,//À¶
-	FOREGROUND_INTENSITY								,//¸ßÁÁ
+	FOREGROUND_RED										,//çº¢
+	FOREGROUND_GREEN									,//ç»¿
+	FOREGROUND_RED | FOREGROUND_GREEN					,//é»„
+	FOREGROUND_BLUE										,//è“
+	FOREGROUND_INTENSITY								,//é«˜äº®
 };
 
-// ±³¾°É«
+// èƒŒæ™¯è‰²
 WORD CConsoleColor::g_back_color[color_max] = {
-	BACKGROUND_RED										,//ºì
-	BACKGROUND_GREEN									,//ÂÌ
-	BACKGROUND_RED | BACKGROUND_GREEN					,//»Æ
-	BACKGROUND_BLUE										,//À¶
-	BACKGROUND_INTENSITY								,//¸ßÁÁ
+	BACKGROUND_RED										,//çº¢
+	BACKGROUND_GREEN									,//ç»¿
+	BACKGROUND_RED | BACKGROUND_GREEN					,//é»„
+	BACKGROUND_BLUE										,//è“
+	BACKGROUND_INTENSITY								,//é«˜äº®
 };
 #else // WIN32
 const char*	CConsoleColor::g_fore_color[CConsoleColor::color_max] =
 {
-	"31"	,//ºì
-	"32"	,//ÂÌ
-	"33"	,//»Æ
-	"34"	,//À¶
-	"1"		,//¸ßÁÁ
+	"31"	,//çº¢
+	"32"	,//ç»¿
+	"33"	,//é»„
+	"34"	,//è“
+	"1"		,//é«˜äº®
 };
 const char*	CConsoleColor::g_back_color[CConsoleColor::color_max] =
 {
-	"41"	,//ºì
-	"42"	,//ÂÌ
-	"43"	,//»Æ
-	"44"	,//À¶
-	"1"		,//¸ßÁÁ
+	"41"	,//çº¢
+	"42"	,//ç»¿
+	"43"	,//é»„
+	"44"	,//è“
+	"1"		,//é«˜äº®
 };
 #endif // WIN32
 
-// ³õÊ¼»¯
+// åˆå§‹åŒ–
 bool CConsoleColor::initialize(){
 #ifdef WIN32
 	if(g_hConsole == INVALID_HANDLE_VALUE || g_hConsole == nullptr){
@@ -65,7 +65,7 @@ bool CConsoleColor::initialize(){
 	return true;
 }
 
-// ¹Ø±Õ 
+// å…³é—­ 
 void CConsoleColor::shutdown(){
 #ifdef WIN32
 	if(g_hConsole != nullptr && g_hConsole != INVALID_HANDLE_VALUE)
@@ -90,7 +90,7 @@ CConsoleColor::CConsoleColor(uint8 _fore,uint8 _bank){
 }
  
 CConsoleColor::~CConsoleColor(){
-	//Çå³ý
+	//æ¸…é™¤
 #ifdef WIN32
 	if(g_hConsole != nullptr && g_hConsole != INVALID_HANDLE_VALUE)
 		::SetConsoleTextAttribute(g_hConsole,m_wColorSave);

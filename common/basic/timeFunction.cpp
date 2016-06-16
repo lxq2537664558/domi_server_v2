@@ -1,4 +1,4 @@
-#include "timeFunction.h"
+ï»¿#include "timeFunction.h"
 #include "memoryFunctions.h"
 #include "stringFunctions.h"
 #include <memory.h> 
@@ -13,19 +13,19 @@
 
 /*--------------------------------------------------------------
 *
-LinuxÔÚ±à³ÌÊ±Ê¹ÓÃÁËÒÔÏÂ¼¸ÖÖÊ±¼äÀàĞÍ£¬
-1.typedef long time_t;      //<time.h>£¬×î³£ÓÃµÄ
-2.struct tim //<sys/time.h>£¬×îĞ¡µ¥Î»ÊÇÎ¢Ãë
+Linuxåœ¨ç¼–ç¨‹æ—¶ä½¿ç”¨äº†ä»¥ä¸‹å‡ ç§æ—¶é—´ç±»å‹ï¼Œ
+1.typedef long time_t;      //<time.h>ï¼Œæœ€å¸¸ç”¨çš„
+2.struct tim //<sys/time.h>ï¼Œæœ€å°å•ä½æ˜¯å¾®ç§’
 {
 time_t      tv_sec;
 suseconds_t tv_usec;
 }
-3.struct timespec //<time.h>£¬×îĞ¡µ¥Î»ÊÇÄÉÃë
+3.struct timespec //<time.h>ï¼Œæœ€å°å•ä½æ˜¯çº³ç§’
 {
 time_t tv_sec;
 long   tv_nsec;
 }
-4.struct tm//<time.h>£¬ÓĞÄêÔÂÈÕ
+4.struct tm//<time.h>ï¼Œæœ‰å¹´æœˆæ—¥
 {
 int tm_sec;
 int tm_min;
@@ -50,9 +50,9 @@ static uint64	s_init_time = ::time( nullptr );
 
 uint32 getTickCount(){
 #ifdef WIN32
-	//Ö»¾«È·µ½55ms
+	//åªç²¾ç¡®åˆ°55ms
 	return ::GetTickCount();
-	//Ö»¾«È·µ½10ms
+	//åªç²¾ç¡®åˆ°10ms
 	//timeGetTime();
 #else//WIN32
 	tms tm;
@@ -67,15 +67,15 @@ uint64 getTickCount64()
 #else//WIN32
 	/*struct timespec
 	{
-		time_t tv_sec; // seconds[Ãë]
-		long tv_nsec; // nanoseconds[ÄÉÃë]
+		time_t tv_sec; // seconds[ç§’]
+		long tv_nsec; // nanoseconds[çº³ç§’]
 	};
 	int clock_gettime(clockid_t clk_id, struct timespect *tp);
 	//@clk_id:
-	CLOCK_REALTIME:ÏµÍ³ÊµÊ±Ê±¼ä,ËæÏµÍ³ÊµÊ±Ê±¼ä¸Ä±ä¶ø¸Ä±ä
-	CLOCK_MONOTONIC:´ÓÏµÍ³Æô¶¯ÕâÒ»¿ÌÆğ¿ªÊ¼¼ÆÊ±,²»ÊÜÏµÍ³Ê±¼ä±»ÓÃ»§¸Ä±äµÄÓ°Ïì
-	CLOCK_PROCESS_CPUTIME_ID:±¾½ø³Ìµ½µ±Ç°´úÂëÏµÍ³CPU»¨·ÑµÄÊ±¼ä
-	CLOCK_THREAD_CPUTIME_ID:±¾Ïß³Ìµ½µ±Ç°´úÂëÏµÍ³CPU»¨·ÑµÄÊ±¼ä
+	CLOCK_REALTIME:ç³»ç»Ÿå®æ—¶æ—¶é—´,éšç³»ç»Ÿå®æ—¶æ—¶é—´æ”¹å˜è€Œæ”¹å˜
+	CLOCK_MONOTONIC:ä»ç³»ç»Ÿå¯åŠ¨è¿™ä¸€åˆ»èµ·å¼€å§‹è®¡æ—¶,ä¸å—ç³»ç»Ÿæ—¶é—´è¢«ç”¨æˆ·æ”¹å˜çš„å½±å“
+	CLOCK_PROCESS_CPUTIME_ID:æœ¬è¿›ç¨‹åˆ°å½“å‰ä»£ç ç³»ç»ŸCPUèŠ±è´¹çš„æ—¶é—´
+	CLOCK_THREAD_CPUTIME_ID:æœ¬çº¿ç¨‹åˆ°å½“å‰ä»£ç ç³»ç»ŸCPUèŠ±è´¹çš„æ—¶é—´
 	*/
 
 	timespec _spec;
@@ -105,22 +105,22 @@ uint64 getSecond(){
 
 uint64 getMillisecond(){
 #ifdef WIN32
-	//ÏµÍ³Æô¶¯ÒÔºóµÄºÁÃë¼¶Ê±¼ä
+	//ç³»ç»Ÿå¯åŠ¨ä»¥åçš„æ¯«ç§’çº§æ—¶é—´
 	//clock();
-	//Ö»¾«È·µ½55ms
+	//åªç²¾ç¡®åˆ°55ms
 	return ::GetTickCount64();
 #else//WIN32
 	/*struct timespec
 	{
-		time_t tv_sec; // seconds[Ãë]
-		long tv_nsec; // nanoseconds[ÄÉÃë]
+		time_t tv_sec; // seconds[ç§’]
+		long tv_nsec; // nanoseconds[çº³ç§’]
 	};
 	int clock_gettime(clockid_t clk_id, struct timespect *tp);
 	//@clk_id:
-	CLOCK_REALTIME:ÏµÍ³ÊµÊ±Ê±¼ä,ËæÏµÍ³ÊµÊ±Ê±¼ä¸Ä±ä¶ø¸Ä±ä
-	CLOCK_MONOTONIC:´ÓÏµÍ³Æô¶¯ÕâÒ»¿ÌÆğ¿ªÊ¼¼ÆÊ±,²»ÊÜÏµÍ³Ê±¼ä±»ÓÃ»§¸Ä±äµÄÓ°Ïì
-	CLOCK_PROCESS_CPUTIME_ID:±¾½ø³Ìµ½µ±Ç°´úÂëÏµÍ³CPU»¨·ÑµÄÊ±¼ä
-	CLOCK_THREAD_CPUTIME_ID:±¾Ïß³Ìµ½µ±Ç°´úÂëÏµÍ³CPU»¨·ÑµÄÊ±¼ä
+	CLOCK_REALTIME:ç³»ç»Ÿå®æ—¶æ—¶é—´,éšç³»ç»Ÿå®æ—¶æ—¶é—´æ”¹å˜è€Œæ”¹å˜
+	CLOCK_MONOTONIC:ä»ç³»ç»Ÿå¯åŠ¨è¿™ä¸€åˆ»èµ·å¼€å§‹è®¡æ—¶,ä¸å—ç³»ç»Ÿæ—¶é—´è¢«ç”¨æˆ·æ”¹å˜çš„å½±å“
+	CLOCK_PROCESS_CPUTIME_ID:æœ¬è¿›ç¨‹åˆ°å½“å‰ä»£ç ç³»ç»ŸCPUèŠ±è´¹çš„æ—¶é—´
+	CLOCK_THREAD_CPUTIME_ID:æœ¬çº¿ç¨‹åˆ°å½“å‰ä»£ç ç³»ç»ŸCPUèŠ±è´¹çš„æ—¶é—´
 	*/
 
 	timespec _spec;
@@ -145,15 +145,15 @@ uint64 getMicroseconds(){
 #else//WIN32
 	/*struct timespec
 	{
-		time_t tv_sec; // seconds[Ãë]
-		long tv_nsec; // nanoseconds[ÄÉÃë]
+		time_t tv_sec; // seconds[ç§’]
+		long tv_nsec; // nanoseconds[çº³ç§’]
 	};
 	int clock_gettime(clockid_t clk_id, struct timespect *tp);
 	//@clk_id:
-	CLOCK_REALTIME:ÏµÍ³ÊµÊ±Ê±¼ä,ËæÏµÍ³ÊµÊ±Ê±¼ä¸Ä±ä¶ø¸Ä±ä
-	CLOCK_MONOTONIC:´ÓÏµÍ³Æô¶¯ÕâÒ»¿ÌÆğ¿ªÊ¼¼ÆÊ±,²»ÊÜÏµÍ³Ê±¼ä±»ÓÃ»§¸Ä±äµÄÓ°Ïì
-	CLOCK_PROCESS_CPUTIME_ID:±¾½ø³Ìµ½µ±Ç°´úÂëÏµÍ³CPU»¨·ÑµÄÊ±¼ä
-	CLOCK_THREAD_CPUTIME_ID:±¾Ïß³Ìµ½µ±Ç°´úÂëÏµÍ³CPU»¨·ÑµÄÊ±¼ä
+	CLOCK_REALTIME:ç³»ç»Ÿå®æ—¶æ—¶é—´,éšç³»ç»Ÿå®æ—¶æ—¶é—´æ”¹å˜è€Œæ”¹å˜
+	CLOCK_MONOTONIC:ä»ç³»ç»Ÿå¯åŠ¨è¿™ä¸€åˆ»èµ·å¼€å§‹è®¡æ—¶,ä¸å—ç³»ç»Ÿæ—¶é—´è¢«ç”¨æˆ·æ”¹å˜çš„å½±å“
+	CLOCK_PROCESS_CPUTIME_ID:æœ¬è¿›ç¨‹åˆ°å½“å‰ä»£ç ç³»ç»ŸCPUèŠ±è´¹çš„æ—¶é—´
+	CLOCK_THREAD_CPUTIME_ID:æœ¬çº¿ç¨‹åˆ°å½“å‰ä»£ç ç³»ç»ŸCPUèŠ±è´¹çš„æ—¶é—´
 	*/
 
 	timespec _spec;
@@ -196,12 +196,12 @@ uint64 setSysTime(){
 	if(!g_uTime){
 		/*
 		tm tm_temp;
-		tm_temp.tm_year	= 2010-1900;//Äê1900+
-		tm_temp.tm_mon	= 0;		//ÔÂ[0,11]
-		tm_temp.tm_mday	= 1;		//ÈÕ[1,31]
-		tm_temp.tm_hour	= 0;		//Ê±[0,23]
-		tm_temp.tm_min	= 0;		//·Ö[0,59]
-		tm_temp.tm_sec	= 0;		//Ãë[0,59]
+		tm_temp.tm_year	= 2010-1900;//å¹´1900+
+		tm_temp.tm_mon	= 0;		//æœˆ[0,11]
+		tm_temp.tm_mday	= 1;		//æ—¥[1,31]
+		tm_temp.tm_hour	= 0;		//æ—¶[0,23]
+		tm_temp.tm_min	= 0;		//åˆ†[0,59]
+		tm_temp.tm_sec	= 0;		//ç§’[0,59]
 		g_uTime	= mktime(&tm_temp);
 		*/
 	}
@@ -209,7 +209,7 @@ uint64 setSysTime(){
 	g_uSystemTime = getTime();
 	if(g_uSystemTime > g_uTime) g_uSystemTime -=g_uTime;
 
-	//ÔÚÕâÀï¿ÉÒÔÖÆ¶¨Ò»¸ö³õÊ¼Ê±¼ä,ÓÃÀ´×öÊ±¼äÆ¬
+	//åœ¨è¿™é‡Œå¯ä»¥åˆ¶å®šä¸€ä¸ªåˆå§‹æ—¶é—´,ç”¨æ¥åšæ—¶é—´ç‰‡
 	return g_uSystemTime;
 }
 
@@ -261,21 +261,21 @@ int32 diffTimeDay(uint32 _early,uint32 _late){
 	getLocalTime(&tm_late,_late);
 
 	if(tm_early.tm_year > tm_late.tm_year) return 0;
-	if(tm_early.tm_year == tm_late.tm_year && tm_early.tm_yday == tm_late.tm_yday) //Í¬ÄêÍ¬ÈÕ
+	if(tm_early.tm_year == tm_late.tm_year && tm_early.tm_yday == tm_late.tm_yday) //åŒå¹´åŒæ—¥
 		return 0;
 
-	//Í¬ÄêÅĞ¶Ï
+	//åŒå¹´åˆ¤æ–­
 	if(tm_early.tm_year == tm_late.tm_year){
 		if(tm_early.tm_yday >= tm_late.tm_yday) return 0;
 		return (tm_late.tm_yday - tm_early.tm_yday);
 	}
 
 	int32 iDay = 0;
-	//²»Í¬ÄêÊ±
+	//ä¸åŒå¹´æ—¶
 	if(tm_early.tm_year != tm_late.tm_year){
 		tm tm_temp = tm_early;
 
-		//»ñÈ¡12ÔÂ31ÈÕÊ±¼ä
+		//è·å–12æœˆ31æ—¥æ—¶é—´
 		tm_temp.tm_mon	= 11;
 		tm_temp.tm_mday = 31;
 		tm_temp.tm_yday = 0;
@@ -283,8 +283,8 @@ int32 diffTimeDay(uint32 _early,uint32 _late){
 
 		getLocalTime(&tm_temp,_temp);
 		iDay = tm_temp.tm_yday - tm_early.tm_yday;
-		iDay+=1;//¿çÄê+1
-		//»ñµÃÏà²îÄêÌìÊı
+		iDay+=1;//è·¨å¹´+1
+		//è·å¾—ç›¸å·®å¹´å¤©æ•°
 		for (int32 i = tm_early.tm_year + 1;i < tm_late.tm_year;i++){
 			tm_temp.tm_year++;
 			tm_temp.tm_yday = 0;
@@ -293,7 +293,7 @@ int32 diffTimeDay(uint32 _early,uint32 _late){
 			getLocalTime(&tm_temp,_temp);
 
 			iDay += tm_temp.tm_yday;
-			iDay+=1;//¿çÄê+1
+			iDay+=1;//è·¨å¹´+1
 		}
 	}
 	return (iDay + tm_late.tm_yday);
@@ -311,10 +311,10 @@ int32 diffTimeWeek(uint64 _early,uint64 _late){
 	getLocalTime(&tm_late,_late);
 
 	if(tm_early.tm_year > tm_late.tm_year) return 0;
-	if(tm_early.tm_year == tm_late.tm_year && tm_early.tm_yday == tm_late.tm_yday) //Í¬ÄêÍ¬ÈÕ
+	if(tm_early.tm_year == tm_late.tm_year && tm_early.tm_yday == tm_late.tm_yday) //åŒå¹´åŒæ—¥
 		return 0;
 
-	//¼ÆËãÁ½¸öÈÕÆÚµÄÃ¿Ò»¸öÖÜÁùÏà²î¶àÉÙÌì
+	//è®¡ç®—ä¸¤ä¸ªæ—¥æœŸçš„æ¯ä¸€ä¸ªå‘¨å…­ç›¸å·®å¤šå°‘å¤©
 	if(tm_early.tm_wday == 0) tm_early.tm_wday = 7;
 	if(tm_late.tm_wday == 0) tm_late.tm_wday = 7;
 	if(tm_early.tm_wday != 7) tm_early.tm_mday += (7 - tm_early.tm_wday);
@@ -322,7 +322,7 @@ int32 diffTimeWeek(uint64 _early,uint64 _late){
 
 	int32 iDay = diffTimeDay((uint32)mktime(&tm_early),(uint32)mktime(&tm_late));
 	int32 iWeek = 0;
-	if(iDay > 0) iWeek = iDay / 7;//¿Ï¶¨Ïà²î¶¼ÊÇ7µÄ±¶ÊıÒòÎª¶¼ÊÇÖÜÁù
+	if(iDay > 0) iWeek = iDay / 7;//è‚¯å®šç›¸å·®éƒ½æ˜¯7çš„å€æ•°å› ä¸ºéƒ½æ˜¯å‘¨å…­
 	return iWeek;
 }
 
@@ -337,18 +337,18 @@ int32 diffTimeMonth(uint64 _early,uint64 _late){
 	getLocalTime(&tm_late,_late);
 
 	if(tm_early.tm_year > tm_late.tm_year)return 0;
-	if(tm_early.tm_year == tm_late.tm_year && tm_early.tm_mon == tm_late.tm_mon)//Í¬ÄêÍ¬ÔÂ
+	if(tm_early.tm_year == tm_late.tm_year && tm_early.tm_mon == tm_late.tm_mon)//åŒå¹´åŒæœˆ
 		return 0;
 
-	//Í¬ÄêÅĞ¶Ï
+	//åŒå¹´åˆ¤æ–­
 	if(tm_early.tm_year == tm_late.tm_year) return (tm_late.tm_mon - tm_early.tm_mon);
 
 	int32 iMon = 0;
-	//²»Í¬ÄêÊ±
+	//ä¸åŒå¹´æ—¶
 	if(tm_early.tm_year != tm_late.tm_year){
-		//¼ÆËãÏà²îÄêÊı
+		//è®¡ç®—ç›¸å·®å¹´æ•°
 		iMon = (tm_late.tm_year - tm_early.tm_year) * 12;
-		//ÔÙ¼ÆËãÏà²îÔÂÊı
+		//å†è®¡ç®—ç›¸å·®æœˆæ•°
 		iMon += tm_late.tm_mon;
 		if(iMon >= tm_early.tm_mon)
 			iMon -= tm_early.tm_mon;

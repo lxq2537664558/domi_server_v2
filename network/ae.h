@@ -1,6 +1,4 @@
-// aeÍ·ÎÄ¼ş
-
-#ifndef __AE_H__
+ï»¿#ifndef __AE_H__
 #define __AE_H__
 
 #include <time.h>

@@ -1,8 +1,8 @@
-#include "log.h"
+ï»¿#include "log.h"
 #include "../basic/platform.h"
 #include "../basic/stringFunctions.h"
 
-// static³õÊ¼»¯
+// staticåˆå§‹åŒ–
 bool		CLog::m_bInitiate		= false;
 SYSTEMTIME	CLog::m_gSysTime[CLog::LT_Max];
 char		CLog::m_szDirectory[256]= {0};
@@ -11,7 +11,7 @@ CMutex		CLog::m_csLock;
 CFileStream	CLog::m_clgFile[CLog::LT_Max];
 char        CLog::m_logFilePrev[ 256 ] = {0};
 
-//³õÊ¼»¯
+//åˆå§‹åŒ–
 bool CLog::initialize( const char* root, const char* prev ){
 	if(m_bInitiate) return true;
     if ( root == nullptr )  root = ".";
@@ -38,7 +38,7 @@ void CLog::shutdown(){
 		m_clgFile[i].close();
 }
 
-// »ñÈ¡ÈÕÆÚÇ°×º 
+// è·å–æ—¥æœŸå‰ç¼€ 
 void CLog::getDate(char* pDate,const uint32& uSize){
 	SYSTEMTIME systime;
 	getLocalTime(systime);
@@ -46,13 +46,13 @@ void CLog::getDate(char* pDate,const uint32& uSize){
 		systime.wHour,systime.wMinute,systime.wSecond,systime.wMilliseconds);
 }
 
-// ÉèÖÃÄ¿Â¼
+// è®¾ç½®ç›®å½•
 void CLog::setDirectory(const char* pDir){
 	if (!pDir || !*pDir) return;
 	dSprintf(m_szDirectory,sizeof(m_szDirectory),pDir);
 }
 
-// ´´½¨ÎÄ¼ş 
+// åˆ›å»ºæ–‡ä»¶ 
 void CLog::createAFile(uint8 ucType){
 	if (ucType >= LT_Max)
 		ucType	= LT_Log;
@@ -65,9 +65,9 @@ void CLog::createAFile(uint8 ucType){
 		return;
 
 	m_gSysTime[ucType]	= systime;
-	/*ÎÄ¼şÊ±¼ä*/ 
+	/*æ–‡ä»¶æ—¶é—´*/ 
 	dSprintf(szTime,sizeof(szTime),"%.4d%.2d%.2d",m_gSysTime[ucType].wYear,m_gSysTime[ucType].wMonth,m_gSysTime[ucType].wDay);
-	/*Ä¿Â¼±êÖ¾*/ 
+	/*ç›®å½•æ ‡å¿—*/ 
 	bool dirFlag = true;
 
 	if(m_szDirectory[0] && !findDirectory(m_szDirectory)){
@@ -75,7 +75,7 @@ void CLog::createAFile(uint8 ucType){
 			dirFlag = false;
 	}
 
-	/*×ÓÄ¿Â¼*/ 
+	/*å­ç›®å½•*/ 
 	char szDir[256]	= {0};
 	if (dirFlag && m_szDirectory[0])
 		dSprintf(szDir,sizeof(szDir),"%s/%s",m_szDirectory,szTime);
@@ -152,7 +152,7 @@ void CLog::info(const char* pFormat, ...){
 	CCritLocker lock(m_csLock);
 	initialize();
 
-	/*ÉèÖÃÂÌÉ«×Ö·ûÇ°¾°É«*/
+	/*è®¾ç½®ç»¿è‰²å­—ç¬¦å‰æ™¯è‰²*/
 	CConsoleColor clColor(_BIT32(CConsoleColor::color_green) | _BIT32(CConsoleColor::color_intensity));
 	va_list	argptr;
 	va_start(argptr, pFormat);
@@ -164,14 +164,14 @@ void CLog::info(const char* pFormat, ...){
 	m_clgFile[LT_Log].flush();
 }
 
-// ¾¯¸æ
+// è­¦å‘Š
 void CLog::warn(const char* pFormat,...){
 	if (!pFormat) return;
 
 	CCritLocker lock(m_csLock);
 	initialize();
 
-	/*ÉèÖÃ»ÆÉ«×Ö·ûÇ°¾°É«*/ 
+	/*è®¾ç½®é»„è‰²å­—ç¬¦å‰æ™¯è‰²*/ 
 	CConsoleColor clColor(_BIT32(CConsoleColor::color_yellow)|_BIT32(CConsoleColor::color_intensity));
 
 	va_list	argptr;
@@ -191,7 +191,7 @@ void CLog::error(const char* pFormat,...){
 	CCritLocker lock(m_csLock);
 	initialize();
 
-	/*ÉèÖÃºìÉ«×Ö·ûÇ°¾°É«*/ 
+	/*è®¾ç½®çº¢è‰²å­—ç¬¦å‰æ™¯è‰²*/ 
 	CConsoleColor clColor(_BIT32(CConsoleColor::color_read)|_BIT32(CConsoleColor::color_intensity));
 
 	va_list	argptr;
@@ -211,7 +211,7 @@ void CLog::lastError(const char* pFormat,...){
 	CCritLocker lock(m_csLock);
 	initialize();
 
-	/*ÉèÖÃºìÉ«×Ö·ûÇ°¾°É«*/ 
+	/*è®¾ç½®çº¢è‰²å­—ç¬¦å‰æ™¯è‰²*/ 
 	CConsoleColor clColor(_BIT32(CConsoleColor::color_read)|_BIT32(CConsoleColor::color_intensity));
 
 	char szDate[32]={0};

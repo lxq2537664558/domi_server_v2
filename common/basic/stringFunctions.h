@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "basicTypes.h"
 #include <memory.h>
 #include <string>
@@ -12,127 +12,127 @@ typedef std::vector< std::string > strarray;
 
 //------------------------------------------------------
 //------------------------------ String Basic Functions
-//--- ¼ÆËã×Ö·û´®³¤¶È
+//--- è®¡ç®—å­—ç¬¦ä¸²é•¿åº¦
 extern uint32	dStrlen(const char *s);
 
-//--- ×Ö·û´®Á´½Ó
+//--- å­—ç¬¦ä¸²é“¾æ¥
 #ifdef WIN32
 extern int32 dStrcat(char *dst,uint32 _size, const char *src);
 #else // WIN32
 extern char* dStrcat(char *dst,uint32 _size, const char *src);
 #endif // WIN32
 
-//--- ×Ö·û´®Á´½Ó(_count:×î¶à¿ÉÁ´½ÓÊı)
+//--- å­—ç¬¦ä¸²é“¾æ¥(_count:æœ€å¤šå¯é“¾æ¥æ•°)
 #ifdef WIN32
 extern int32 dStrncat(char *dst,uint32 _size, const char *src,uint32 _count);
 #else // WIN32
 extern char* dStrncat(char *dst,uint32 _size, const char *src,uint32 _count);
 #endif // WIN32
 
-//--- ×Ö·û´®¿½±´
+//--- å­—ç¬¦ä¸²æ‹·è´
 #ifdef WIN32
 extern int32	dStrcpy(char *dst,uint32 _size, const char *src);
 #else // WIN32
 extern char*	dStrcpy(char *dst,uint32 _size, const char *src);
 #endif // WIN32
 
-//--- ×Ö·û´®¿½±´(len:¿½±´Êı)
+//--- å­—ç¬¦ä¸²æ‹·è´(len:æ‹·è´æ•°)
 #ifdef WIN32
 extern int32	dStrncpy(char *dst,uint32 _size, const char *src, uint32 len);
 #else // WIN32
 extern char*	dStrncpy(char *dst,uint32 _size, const char *src, uint32 len);
 #endif // WIN32
 
-//--- ¿½±´×Ö·û´®
+//--- æ‹·è´å­—ç¬¦ä¸²
 extern	int32	dStrcpyMax(char *dst,uint32 _size, const char *src, uint32 len);
 
-//--- ´ÓbufËùÖ¸ÄÚ´æÇøÓòµÄÇ°count¸ö×Ö½Ú²éÕÒ×Ö·ûchÎ»ÖÃ
+//--- ä»bufæ‰€æŒ‡å†…å­˜åŒºåŸŸçš„å‰countä¸ªå­—èŠ‚æŸ¥æ‰¾å­—ç¬¦chä½ç½®
 extern void*	dMemchr(void *buf,char ch,uint32 count);
 
-//--- ×Ö·û´®ÖĞ²éÕÒµÚÒ»´Î³öÏÖcµÄÎ»ÖÃ
+//--- å­—ç¬¦ä¸²ä¸­æŸ¥æ‰¾ç¬¬ä¸€æ¬¡å‡ºç°cçš„ä½ç½®
 extern char*	dStrchr(char *s,char c);
 extern pc_str 	dStrchr(const char *s,char c);
 
-//--- ·Ö½â×Ö·û´®ÎªÒ»×é±ê¼Ç´®
+//--- åˆ†è§£å­—ç¬¦ä¸²ä¸ºä¸€ç»„æ ‡è®°ä¸²
 extern char*	dStrtok(char *s, const char *delim);
 
-//--- ½«×Ö·û´®×ª»»ÎªĞ¡Ğ´ĞÎÊ½
+//--- å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºå°å†™å½¢å¼
 extern char*	dStrlwr(char *s);
 
-//--- ½«×Ö·û´®×ª»»Îª´óĞ´ĞÎÊ½
+//--- å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºå¤§å†™å½¢å¼
 extern char*	dStrupr(char *s);
 
-//--- ÊÇ·ñ¿í×Ö½Ú
+//--- æ˜¯å¦å®½å­—èŠ‚
 extern int32	ismbblead(char c);
 
-//--- ×Ö·û´®±È½Ï(Çø·Ö´óĞ¡Ğ´)
+//--- å­—ç¬¦ä¸²æ¯”è¾ƒ(åŒºåˆ†å¤§å°å†™)
 extern int		dStrncmp(const char *s1,const char * s2,int n);
 
-//--- ×Ö·û´®±È½Ï(²»Çø·Ö´óĞ¡Ğ´)
+//--- å­—ç¬¦ä¸²æ¯”è¾ƒ(ä¸åŒºåˆ†å¤§å°å†™)
 extern int		dStrnicmp(const char *s1,const char * s2,int n);
 
-//--- ×Ö·û´®²éÕÒµÚÒ»´Î³öÏÖµÄÎ»ÖÃ(Çø·Ö´óĞ¡Ğ´)
+//--- å­—ç¬¦ä¸²æŸ¥æ‰¾ç¬¬ä¸€æ¬¡å‡ºç°çš„ä½ç½®(åŒºåˆ†å¤§å°å†™)
 extern char*	dStrstr(char *haystack, char *needle);
 
-//--- ×Ö·û´®²éÕÒµÚÒ»´Î³öÏÖµÄÎ»ÖÃ(²»Çø·Ö´óĞ¡Ğ´)
+//--- å­—ç¬¦ä¸²æŸ¥æ‰¾ç¬¬ä¸€æ¬¡å‡ºç°çš„ä½ç½®(ä¸åŒºåˆ†å¤§å°å†™)
 extern char*	dStristr(char *haystack, char *needle);
 
-//--- ×Ö·û´®¸ñÊ½»¯
+//--- å­—ç¬¦ä¸²æ ¼å¼åŒ–
 extern int		dSprintf(char *string,size_t sizeInBytes,const char *format, ... );
 extern int		dVsprintf(char *string,size_t sizeInBytes,const char *format,va_list _Args);
-//--- ×Ö·û´®´òÓ¡
+//--- å­—ç¬¦ä¸²æ‰“å°
 extern int		dPrintf(const char *format, ... );
 extern int		dVprintf(const char *format,va_list _Args);
 
 //------------------------------------------------------
 //------------------------------ String Types
-//--- ´ÓÓÒ²à¼ì²â¶à×Ö½ÚÊÇ·ñºÏ·¨
+//--- ä»å³ä¾§æ£€æµ‹å¤šå­—èŠ‚æ˜¯å¦åˆæ³•
 extern bool		testMultibyte(char* pStr);
 
-//--- È¥³ıÖ¸¶¨×Ö·û
+//--- å»é™¤æŒ‡å®šå­—ç¬¦
 extern void		wipeOffChar(char* pStr,uint32 uLen,char cChar);
 
-//--- ¹ıÂËÈ«°ë½Ç¿Õ¸ñ
+//--- è¿‡æ»¤å…¨åŠè§’ç©ºæ ¼
 extern void		filtrationBlank(char* pStr,uint32 uLen);
 
-//--- ÊÇ·ñÊÇÊı×Ö×Ö·û´®
+//--- æ˜¯å¦æ˜¯æ•°å­—å­—ç¬¦ä¸²
 extern bool		numeralString(const char* pStr,int32 nLen);
 
-//--- ÊÇ·ñÓµÓĞ×Ö·û
+//--- æ˜¯å¦æ‹¥æœ‰å­—ç¬¦
 extern bool		haveFromString		(std::string&strString,char c);
-//--- »ñµÃ×Ö·û´®¶Î
+//--- è·å¾—å­—ç¬¦ä¸²æ®µ
 extern void		getSubString		(std::string&strString,std::string&strSubString,char c = ';');
-//--- ½Ø¶Ï×Ö·û´®
+//--- æˆªæ–­å­—ç¬¦ä¸²
 extern void		truncateString		(std::string&strString,char c = ';');
-//--- ¶ÁÈ¡Êı×Ö(·µ»Ø0ÎªÎ´¶ÁÈ¡µ½)
+//--- è¯»å–æ•°å­—(è¿”å›0ä¸ºæœªè¯»å–åˆ°)
 extern int32	readInt32FromString(std::string&strString,char c = ';');
 extern int64	readInt64FromString(std::string&strString,char c = ';');
-//--- ¶ÁÈ¡ÈÕÆÚÊ±¼ä(·µ»Ø0ÎªÎ´¶ÁÈ¡µ½)
+//--- è¯»å–æ—¥æœŸæ—¶é—´(è¿”å›0ä¸ºæœªè¯»å–åˆ°)
 extern uint64	readDateTimeFromString(std::string&strString);
 
-//--- »ñµÃ×Ó×Ö·û´®
+//--- è·å¾—å­å­—ç¬¦ä¸²
 extern bool		getSubString (std::string& strString, std::string& strSubString, const char* pStrtok);
-//--- ×Ö·û´®Ìæ»»
+//--- å­—ç¬¦ä¸²æ›¿æ¢
 extern void		replaceString(std::string& strString, const char* szSrc, const char* szDst);
 
-//--- ²ğ·Ö×Ö·û´®
+//--- æ‹†åˆ†å­—ç¬¦ä¸²
 extern strarray splitStr ( const char* src, char lexpr, char rexpr = 0 );
 
-//--- ²ğ·Ö×Ö·û´®(¶à¸öÁ¬ĞøµÄ·Ö¸ô·û»á±»Ò»²¢È¥µô)
-//--- Èç"abc,,,de,,f,"¸ù¾İ','²ğ·ÖµÄ½á¹ûÊÇ{abc}{de}{f}
+//--- æ‹†åˆ†å­—ç¬¦ä¸²(å¤šä¸ªè¿ç»­çš„åˆ†éš”ç¬¦ä¼šè¢«ä¸€å¹¶å»æ‰)
+//--- å¦‚"abc,,,de,,f,"æ ¹æ®','æ‹†åˆ†çš„ç»“æœæ˜¯{abc}{de}{f}
 extern strarray divideStr (const char* src, char token);
 
 //------------------------------------------------------
-//------------------------------ ANSIÓëUTF8µÄ×ª»»
-//--- ANSI×ª»»UTF8
+//------------------------------ ANSIä¸UTF8çš„è½¬æ¢
+//--- ANSIè½¬æ¢UTF8
 extern bool	convertANSItoUTF8(char* pAnsiString,int32 nLen);
-//--- UTF8×ªANSI
+//--- UTF8è½¬ANSI
 extern bool	convertUTF8toANSI(char* pUtf8String,int32 nLen);
-//--- ANSI×ª»»UTF8
+//--- ANSIè½¬æ¢UTF8
 extern char*_convertANSItoUTF8(const char* pAnsiString,int32 nLen);
-//--- UTF8×ªANSI
+//--- UTF8è½¬ANSI
 extern char*_convertUTF8toANSI(const char* pUtf8String,int32 nLen);
-//--- ×ª»»Îª¿í×Ö½Ú
+//--- è½¬æ¢ä¸ºå®½å­—èŠ‚
 extern std::wstring&convertToWString(const char *str);
-//--- ¿í×Ö·ûµ½µ¥×Ö·û×ª»»
+//--- å®½å­—ç¬¦åˆ°å•å­—ç¬¦è½¬æ¢
 extern std::string&convertToCString(std::wstring&str);

@@ -1,9 +1,9 @@
-/******************************************************************** 
-´´½¨Ê±¼ä:        2015/07/06 17:03
-ÎÄ¼şÃû³Æ:        map_pool.h
-ÎÄ¼ş×÷Õß:        Domi
-¹¦ÄÜËµÃ÷:        map pool
-ÆäËûËµÃ÷:		 map ·ÖÅä³Ø 
+ï»¿/******************************************************************** 
+åˆ›å»ºæ—¶é—´:        2015/07/06 17:03
+æ–‡ä»¶åç§°:        map_pool.h
+æ–‡ä»¶ä½œè€…:        Domi
+åŠŸèƒ½è¯´æ˜:        map pool
+å…¶ä»–è¯´æ˜:		 map åˆ†é…æ±  
 *********************************************************************/
 
 #pragma once
@@ -30,7 +30,7 @@ private:
 
 	volatile int		m_nCount;
 	volatile int		m_nMaxFree;
-	QUEUE				m_FreeList;		// ¿ÕÏĞ¶ÓÁĞ
+	QUEUE				m_FreeList;		// ç©ºé—²é˜Ÿåˆ—
 
 
 public:
@@ -80,7 +80,7 @@ template<typename Key,class T,int COUNT>
 inline void	CMapPool<Key,T,COUNT>::_build(){
 	T*	lp_t = nullptr;
 	try{
-		/*·ÖÅäm_nCount¸öÄÚ´æ¿é*/ 
+		/*åˆ†é…m_nCountä¸ªå†…å­˜å—*/ 
 		for( int i = 0; i < m_nCount; i++ ){
 			lp_t = new T;
 			m_FreeList.push(lp_t);
@@ -116,7 +116,7 @@ void CMapPool<Key,T,COUNT>::_free(T* p_t){
 	}
 }
  
-// Çå¿Õmap
+// æ¸…ç©ºmap
 template<typename Key,class T,int COUNT>
 void CMapPool<Key,T,COUNT>::initPool(){
 	try{
@@ -136,12 +136,12 @@ void CMapPool<Key,T,COUNT>::initPool(){
 	m_UseList.clear();
 }
 
-// ·ÖÅä¿Õ¼ä
+// åˆ†é…ç©ºé—´
 template<typename Key,class T,int COUNT>
 T* CMapPool<Key,T,COUNT>::allocate(const Key& key){
 	T*	lp_t = nullptr;
 	try{
-		/*±ÜÃâÖØ¸´KeyÔÙ´Î·ÖÅä*/ 
+		/*é¿å…é‡å¤Keyå†æ¬¡åˆ†é…*/ 
 		iterator _pos = m_UseList.find(key);
 		if (_pos != m_UseList.end()){
 			lp_t = _pos->second;

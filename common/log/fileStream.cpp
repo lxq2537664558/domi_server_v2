@@ -1,13 +1,13 @@
-#include <stdarg.h>
+ï»¿#include <stdarg.h>
 #include <stdio.h>
 #include "fileStream.h"
 
-// ÎÄ¼ş²Ù×÷¶¨Òå
+// æ–‡ä»¶æ“ä½œå®šä¹‰
 const char	CFileStream::m_gszAccess[Access_Max][5] ={
-	"rb",	// ¶ÁÎÄ¼ş
-	"wb",	// Ğ´ÎÄ¼ş
-	"rb+",	// ¶ÁĞ´ÎÄ¼ş
-	"ab+",	// ×·¼Ó
+	"rb",	// è¯»æ–‡ä»¶
+	"wb",	// å†™æ–‡ä»¶
+	"rb+",	// è¯»å†™æ–‡ä»¶
+	"ab+",	// è¿½åŠ 
 };
 
 CFileStream::CFileStream(){
@@ -18,13 +18,13 @@ CFileStream::~CFileStream(){
 	close();
 }
 
-// ´ò¿ªÎÄ¼ş
+// æ‰“å¼€æ–‡ä»¶
 bool CFileStream::open(const char*pszFileName,_enAccess eAccess){
 	if(eAccess >= Access_Max) eAccess = _Read;
 	return open(pszFileName,m_gszAccess[eAccess]);
 }
 
-// ´ò¿ªÎÄ¼ş
+// æ‰“å¼€æ–‡ä»¶
 bool CFileStream::open(const char*pszFileName,const char* pszMode){
 	if(!pszFileName)return false;
 	close();
@@ -36,19 +36,19 @@ bool CFileStream::open(const char*pszFileName,const char* pszMode){
 	return (m_pFile != nullptr);
 }
 
-//¹Ø±Õ
+//å…³é—­
 void CFileStream::close(){	
 	if(m_pFile) ::fclose(m_pFile);
 	m_pFile = nullptr;
 }
 
-//¸üĞÂ»º³åÇø
+//æ›´æ–°ç¼“å†²åŒº
 void CFileStream::flush(){
-	//È·±£Ğ´Èëµ½ÎÄ¼ş-²»Ò»¶¨ÊÇ´ÅÅÌµ«ÊÇ±ğ´¦¿ÉÒÔ¶ÁÈ¡
+	//ç¡®ä¿å†™å…¥åˆ°æ–‡ä»¶-ä¸ä¸€å®šæ˜¯ç£ç›˜ä½†æ˜¯åˆ«å¤„å¯ä»¥è¯»å–
 	if(m_pFile) fflush(m_pFile);
 }
 
-// »ñµÃÎÄ¼ş³¤¶È
+// è·å¾—æ–‡ä»¶é•¿åº¦
 uint32	CFileStream::getFileLength(){
 	if(!m_pFile) return 0;
 
@@ -63,47 +63,47 @@ uint32	CFileStream::getFileLength(){
 	return uLength;
 }
 
-//»ñµÃµ±Ç°ÎÄ¼şÖ¸ÕëÎ»ÖÃ
+//è·å¾—å½“å‰æ–‡ä»¶æŒ‡é’ˆä½ç½®
 uint32	CFileStream::position(){
 	if(!m_pFile) return 0;
 	return ::ftell(m_pFile);
 }
 
-//Çå³ıÎÄ¼ş
+//æ¸…é™¤æ–‡ä»¶
 int	CFileStream::clear(){
 	if(!m_pFile) return 0;
 	return ::fflush(m_pFile);
 }
 
-//ÊÇ·ñÒÑµ½ÎÄ¼şÎ²
+//æ˜¯å¦å·²åˆ°æ–‡ä»¶å°¾
 bool CFileStream::eof(){
 	if(!m_pFile) return true;
 	return (::feof(m_pFile) != 0);
 }
 
 /*
-**Æ«ÒÆ
+**åç§»
 **|SEEK_SET | SEEK_CUR		| SEEK_END	|
-**|ÎÄ¼ş¿ªÍ· | µ±Ç°¶ÁĞ´µÄÎ»ÖÃ| ÎÄ¼şÎ²	|
+**|æ–‡ä»¶å¼€å¤´ | å½“å‰è¯»å†™çš„ä½ç½®| æ–‡ä»¶å°¾	|
 */
 int	CFileStream::seek(int32 _n8Offset, int _Origin){
 	if(!m_pFile) return 0;
 	return ::fseek(m_pFile,_n8Offset,_Origin);
 }
 
-//¶ÁÈ¡
+//è¯»å–
 bool CFileStream::_read(uint32 uBytes,void* outBuffer){
 	if(!m_pFile || !uBytes || !outBuffer) return 0;
 	return (::fread(outBuffer,1,uBytes,m_pFile) == uBytes);
 }
 
-//Ğ´Èë
+//å†™å…¥
 bool CFileStream::_write(uint32 uBytes,const void*inBuffer){
 	if(!m_pFile || !uBytes || !inBuffer) return 0;
 	return (::fwrite(inBuffer,1,uBytes,m_pFile) == uBytes);
 }
 
-// ¶ÁÈ¡³öuMaxBytes¸ö×Ö½Ú
+// è¯»å–å‡ºuMaxBytesä¸ªå­—èŠ‚
 uint32 CFileStream::fread(uint32 uMaxBytes,void* outBuffer){
 	if(!m_pFile || !uMaxBytes || !outBuffer) return 0;
 	return ::fread(outBuffer,1,uMaxBytes,m_pFile);

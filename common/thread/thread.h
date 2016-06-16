@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <stdio.h>
 #include <stdlib.h> 
 #ifdef WIN32
@@ -6,7 +6,7 @@
 #include <windows.h>
 #include <process.h>
 #else//linux
-#include <sys/types.h>//ÏµÍ³ÀàĞÍ¶¨Òå
+#include <sys/types.h>//ç³»ç»Ÿç±»å‹å®šä¹‰
 #include <pthread.h> 
 #include <signal.h>
 #endif//WIN32
@@ -49,7 +49,7 @@ public:
 	virtual~CThread();
 
 public:
-	static int64 getCurrentThreadID(); //--- »ñµÃµ±Ç°Ïß³ÌID
+	static int64 getCurrentThreadID(); //--- è·å¾—å½“å‰çº¿ç¨‹ID
 
 public:
 #ifdef WIN32
@@ -59,41 +59,41 @@ public:
 #endif//WIN32
 	void shutdown();
 
-public://µ±Ç°Ïß³Ì
-	int32 terminate(uint64 exit_code = 0);	//--- ÖÕÖ¹Ïß³Ì
-	int32 wait_exit();						//--- µÈ´ıÏß³ÌÍË³ö
-	bool is_runing();						//--- ÊÇ·ñÔËĞĞÖĞ
-	int32 set_sched_param(int32 policy,const struct sched_param *param);//--- ÉèÖÃÏß³ÌµÄÓÅÏÈ¼¶
+public://å½“å‰çº¿ç¨‹
+	int32 terminate(uint64 exit_code = 0);	//--- ç»ˆæ­¢çº¿ç¨‹
+	int32 wait_exit();						//--- ç­‰å¾…çº¿ç¨‹é€€å‡º
+	bool is_runing();						//--- æ˜¯å¦è¿è¡Œä¸­
+	int32 set_sched_param(int32 policy,const struct sched_param *param);//--- è®¾ç½®çº¿ç¨‹çš„ä¼˜å…ˆçº§
 	int32 get_sched_param(int32*policy,struct sched_param *param);
-	int32 kill(int32 sig);					//--- ÏòÏß³Ì·¢ËÍĞÅºÅ
+	int32 kill(int32 sig);					//--- å‘çº¿ç¨‹å‘é€ä¿¡å·
 
-public://Ïß³ÌÊôĞÔ
-	int32 set_scope(int32 scope);							//--- Ïß³Ì°ó¶¨×´Ì¬
+public://çº¿ç¨‹å±æ€§
+	int32 set_scope(int32 scope);							//--- çº¿ç¨‹ç»‘å®šçŠ¶æ€
 	int32 get_scope(int32*scope);
-	int32 set_detach_state(int32 detach_state);				//--- Ïß³Ì·ÖÀë×´Ì¬
+	int32 set_detach_state(int32 detach_state);				//--- çº¿ç¨‹åˆ†ç¦»çŠ¶æ€
 	int32 get_detach_state(int32*detach_state);
-	int32 set_guard_size(size_t guardsize);					//--- Õ»Òç³ö±£»¤Çø´óĞ¡
+	int32 set_guard_size(size_t guardsize);					//--- æ ˆæº¢å‡ºä¿æŠ¤åŒºå¤§å°
 	int32 get_guard_size(size_t*guardsize);
-	int32 set_sched_policy(int32 policy);					//--- ÉèÖÃµ÷¶È²ßÂÔ
+	int32 set_sched_policy(int32 policy);					//--- è®¾ç½®è°ƒåº¦ç­–ç•¥
 	int32 get_sched_policy(int32*policy);
-	int32 set_inherit_sched(int32 inherit);					//--- ¼Ì³ĞµÄµ÷¶È²ßÂÔ
+	int32 set_inherit_sched(int32 inherit);					//--- ç»§æ‰¿çš„è°ƒåº¦ç­–ç•¥
 	int32 get_inherit_sched(int32*inherit);
-	int32 set_sched_param(const struct sched_param *param);	//--- µ÷¶È²ÎÊı
+	int32 set_sched_param(const struct sched_param *param);	//--- è°ƒåº¦å‚æ•°
 	int32 get_sched_param(struct sched_param *param);
-	int32 set_stack_size(size_t stacksize);					//--- Õ»´óĞ¡
+	int32 set_stack_size(size_t stacksize);					//--- æ ˆå¤§å°
 	int32 get_stack_size(size_t*stacksize);
-	int32 set_stack(void *stackaddr,size_t stacksize);		//--- Õ»µØÖ·ºÍ´óĞ¡
+	int32 set_stack(void *stackaddr,size_t stacksize);		//--- æ ˆåœ°å€å’Œå¤§å°
 	int32 get_stack(void **stackaddr,size_t*stacksize);
 };
 
 /*----------------- thread.h
 *--------------------------------------------------------------
-* Ïß³Ì·â×°Àà
+* çº¿ç¨‹å°è£…ç±»
 *------- linux ----------------
-*Ïß³Ì´´½¨²½Öğ(·µ»ØEINVAL=Ê§°Ü)
-*1 ³õÊ¼»¯Ïß³ÌÊôĞÔ
-*2 ÉèÖÃÏß³ÌÊôĞÔ
-*3 ´´½¨Ïß³Ì
+*çº¿ç¨‹åˆ›å»ºæ­¥é€(è¿”å›EINVAL=å¤±è´¥)
+*1 åˆå§‹åŒ–çº¿ç¨‹å±æ€§
+*2 è®¾ç½®çº¿ç¨‹å±æ€§
+*3 åˆ›å»ºçº¿ç¨‹
 pthread_cond_wait
 pthread_join
 pthread_exit(NULL);
@@ -104,46 +104,46 @@ sem_destroy
 sem_t sem
 
 http://mingarlic.blog.163.com/blog/static/31148911201081664512718/
-uninstall crossover in ubuntu  ´´½¨ÊØ»¤½ø³Ì daemon.
+uninstall crossover in ubuntu  åˆ›å»ºå®ˆæŠ¤è¿›ç¨‹ daemon.
 *------------------------------------------------------------*/
 
 /*************************************************************/
 /*win32
 HANDLE	GetCurrentThread();
 DWORD	GetCurrentThreadId();
-HANDLE	GetCurrentProcess();				//·µ»Øµ±Ç°½ø³Ì¾ä±ú
-DWORD	GetCurrentProcessId();				//·µ»Øµ±Ç°½ø³ÌID
-DWORD	GetThreadId(HANDLE Thread);			//ÓÉÏß³Ì¾ä±úµÃµ½Ïß³ÌID
-DWORD	GetProcessIdOfThread(HANDLE Thread);//ÓÉÏß³Ì¾ä±úµÃµ½½ø³ÌID
-DWORD	GetProcessId( HANDLE Process );		//ÓÉ½ø³Ì¾ä±úµÃµ½½ø³ÌID
-DWORD	GetCurrentProcessorNumber();		//µ±Ç°ÔËĞĞCPU±àºÅ
-DWORD_PTR SetThreadAffinityMask(HANDLE hThread,DWORD_PTR dwThreadAffinityMask);//Îª¸÷¸öÏß³ÌÉèÖÃÇ×ÔµĞÔÆÁ±Î
---Ïß³Ì0Ö»ÄÜÔÚcpu 0ÉÏÔËĞĞ
+HANDLE	GetCurrentProcess();				//è¿”å›å½“å‰è¿›ç¨‹å¥æŸ„
+DWORD	GetCurrentProcessId();				//è¿”å›å½“å‰è¿›ç¨‹ID
+DWORD	GetThreadId(HANDLE Thread);			//ç”±çº¿ç¨‹å¥æŸ„å¾—åˆ°çº¿ç¨‹ID
+DWORD	GetProcessIdOfThread(HANDLE Thread);//ç”±çº¿ç¨‹å¥æŸ„å¾—åˆ°è¿›ç¨‹ID
+DWORD	GetProcessId( HANDLE Process );		//ç”±è¿›ç¨‹å¥æŸ„å¾—åˆ°è¿›ç¨‹ID
+DWORD	GetCurrentProcessorNumber();		//å½“å‰è¿è¡ŒCPUç¼–å·
+DWORD_PTR SetThreadAffinityMask(HANDLE hThread,DWORD_PTR dwThreadAffinityMask);//ä¸ºå„ä¸ªçº¿ç¨‹è®¾ç½®äº²ç¼˜æ€§å±è”½
+--çº¿ç¨‹0åªèƒ½åœ¨cpu 0ä¸Šè¿è¡Œ
 -SetThreadAffinityMask(hThread0,0x00000001);
---//Ïß³Ì1£¬2£¬3Ö»ÄÜÔÚcpu 1£¬2£¬3ÉÏÔËĞĞ
+--//çº¿ç¨‹1ï¼Œ2ï¼Œ3åªèƒ½åœ¨cpu 1ï¼Œ2ï¼Œ3ä¸Šè¿è¡Œ
 -SetThreadAffinityMask(hThread1,0x0000000E);
 -SetThreadAffinityMask(hThread2,0x0000000E);
 -SetThreadAffinityMask(hThread3,0x0000000E);
-DWORD SetThreadIdealProcessor(HANDLE hThread,DWORD dwIdealProcessor);//ÉèÖÃ½ø³ÌÊ×Ñ¡µÄCPU
---¸Ãº¯ÊıµÄµÚ¶ş¸ö²ÎÊı²»ÊÇÎ»ÆÁ±ÎÊı¾İ£¬¶øÊÇÒ»¸ö0¡«31£¨32Î»ÏµÍ³£©»ò0¡«63£¨64Î»ÏµÍ³£©µÄÕûÊı¡£¸ÃÊı¾İÖ¸Ã÷Ê×Ñ¡µÄCPU¡£
---Ò²¿ÉÒÔ´«µİMAXIMUM_PROCESSORS±íÃ÷µ±Ç°Ã»ÓĞÀíÏëµÄCPU¡£
-VOID	ExitThread(DWORD dwExitCode);		//ÍË³öµ±Ç°Ïß³Ì
+DWORD SetThreadIdealProcessor(HANDLE hThread,DWORD dwIdealProcessor);//è®¾ç½®è¿›ç¨‹é¦–é€‰çš„CPU
+--è¯¥å‡½æ•°çš„ç¬¬äºŒä¸ªå‚æ•°ä¸æ˜¯ä½å±è”½æ•°æ®ï¼Œè€Œæ˜¯ä¸€ä¸ª0ï½31ï¼ˆ32ä½ç³»ç»Ÿï¼‰æˆ–0ï½63ï¼ˆ64ä½ç³»ç»Ÿï¼‰çš„æ•´æ•°ã€‚è¯¥æ•°æ®æŒ‡æ˜é¦–é€‰çš„CPUã€‚
+--ä¹Ÿå¯ä»¥ä¼ é€’MAXIMUM_PROCESSORSè¡¨æ˜å½“å‰æ²¡æœ‰ç†æƒ³çš„CPUã€‚
+VOID	ExitThread(DWORD dwExitCode);		//é€€å‡ºå½“å‰çº¿ç¨‹
 */
 /*linux
-pthread_t	pthread_self(void);								//»ñÈ¡µ±Ç°Ïß³ÌID¡¾±êÊ¶·û¡¿
-int			pthread_equal(pthread_t tid1, pthread_t tid2);	//±È½ÏÏß³ÌID¡¾ÏàµÈ ·ÇÁãÖµ£¬·ñÔò½«·µ»ØÁã¡¿
-pid_t		getpid();										//»ñµÃµ±Ç°½ø³Ì
-pid_t		getppid();										//¸¸½ø³Ì
-pid_t		getpgrp();										//»ñÈ¡½ø³Ì×éid
-pid_t		getpgid(pid_t pid)								//»ñµÃÖ¸¶¨pid½ø³ÌËùÊô×éµÄid
-int			pthread_exit(void*status);						//ÍË³öµ±Ç°Ïß³Ì
---Èç¹ûµ÷ÓÃÏß³ÌÉĞÎ´·ÖÀë£¬ÔòÏß³Ì ID ºÍ status Ö¸¶¨µÄÍË³ö×´Ì¬½«±£³Ö²»±ä£¬
---Ö±µ½Ó¦ÓÃ³ÌĞòµ÷ÓÃ pthread_join() ÒÔµÈ´ı¸ÃÏß³Ì¡£·ñÔò£¬½«ºöÂÔ status¡£Ïß³Ì ID ¿ÉÒÔÁ¢¼´»ØÊÕ
-int			pthread_setconcurrency(int new_level);			//ÉèÖÃÏµÍ³Ïß³ÌËùĞèµÄ²¢·¢¼¶±ğ
-int			pthread_getconcurrency();						//»ñÈ¡ÏµÍ³Ïß³ÌËùĞèµÄ²¢·¢¼¶±ğ¡¾Èç£ºpthread_setconcurrencyÎ´ÉèÖÃ·µ»Ø0¡¿
-int			pthread_sigmask(int _how,const sigset_t *_new,sigset_t *_old)//¸ü¸Ä·ÃÎÊµ÷ÓÃÏß³ÌµÄĞÅºÅÑÚÂë
--@how ÓÃÀ´È·¶¨ÈçºÎ¸ü¸ÄĞÅºÅ×é
--SIG_BLOCK		Ïòµ±Ç°µÄĞÅºÅÑÚÂëÖĞÌí¼Ó new£¬ÆäÖĞ new ±íÊ¾Òª×èÈûµÄĞÅºÅ×é¡£
--SIG_UNBLOCK	´Óµ±Ç°µÄĞÅºÅÑÚÂëÖĞÉ¾³ı new£¬ÆäÖĞ new ±íÊ¾ÒªÈ¡Ïû×èÈûµÄĞÅºÅ×é¡£
--SIG_SETMASK	½«µ±Ç°µÄĞÅºÅÑÚÂëÌæ»»Îª new£¬ÆäÖĞ new ±íÊ¾ĞÂµÄĞÅºÅÑÚÂë¡£
+pthread_t	pthread_self(void);								//è·å–å½“å‰çº¿ç¨‹IDã€æ ‡è¯†ç¬¦ã€‘
+int			pthread_equal(pthread_t tid1, pthread_t tid2);	//æ¯”è¾ƒçº¿ç¨‹IDã€ç›¸ç­‰ éé›¶å€¼ï¼Œå¦åˆ™å°†è¿”å›é›¶ã€‘
+pid_t		getpid();										//è·å¾—å½“å‰è¿›ç¨‹
+pid_t		getppid();										//çˆ¶è¿›ç¨‹
+pid_t		getpgrp();										//è·å–è¿›ç¨‹ç»„id
+pid_t		getpgid(pid_t pid)								//è·å¾—æŒ‡å®špidè¿›ç¨‹æ‰€å±ç»„çš„id
+int			pthread_exit(void*status);						//é€€å‡ºå½“å‰çº¿ç¨‹
+--å¦‚æœè°ƒç”¨çº¿ç¨‹å°šæœªåˆ†ç¦»ï¼Œåˆ™çº¿ç¨‹ ID å’Œ status æŒ‡å®šçš„é€€å‡ºçŠ¶æ€å°†ä¿æŒä¸å˜ï¼Œ
+--ç›´åˆ°åº”ç”¨ç¨‹åºè°ƒç”¨ pthread_join() ä»¥ç­‰å¾…è¯¥çº¿ç¨‹ã€‚å¦åˆ™ï¼Œå°†å¿½ç•¥ statusã€‚çº¿ç¨‹ ID å¯ä»¥ç«‹å³å›æ”¶
+int			pthread_setconcurrency(int new_level);			//è®¾ç½®ç³»ç»Ÿçº¿ç¨‹æ‰€éœ€çš„å¹¶å‘çº§åˆ«
+int			pthread_getconcurrency();						//è·å–ç³»ç»Ÿçº¿ç¨‹æ‰€éœ€çš„å¹¶å‘çº§åˆ«ã€å¦‚ï¼špthread_setconcurrencyæœªè®¾ç½®è¿”å›0ã€‘
+int			pthread_sigmask(int _how,const sigset_t *_new,sigset_t *_old)//æ›´æ”¹è®¿é—®è°ƒç”¨çº¿ç¨‹çš„ä¿¡å·æ©ç 
+-@how ç”¨æ¥ç¡®å®šå¦‚ä½•æ›´æ”¹ä¿¡å·ç»„
+-SIG_BLOCK		å‘å½“å‰çš„ä¿¡å·æ©ç ä¸­æ·»åŠ  newï¼Œå…¶ä¸­ new è¡¨ç¤ºè¦é˜»å¡çš„ä¿¡å·ç»„ã€‚
+-SIG_UNBLOCK	ä»å½“å‰çš„ä¿¡å·æ©ç ä¸­åˆ é™¤ newï¼Œå…¶ä¸­ new è¡¨ç¤ºè¦å–æ¶ˆé˜»å¡çš„ä¿¡å·ç»„ã€‚
+-SIG_SETMASK	å°†å½“å‰çš„ä¿¡å·æ©ç æ›¿æ¢ä¸º newï¼Œå…¶ä¸­ new è¡¨ç¤ºæ–°çš„ä¿¡å·æ©ç ã€‚
 */

@@ -1,9 +1,9 @@
-/******************************************************************** 
-´´½¨Ê±¼ä:        2015/07/01 12:02
-ÎÄ¼şÃû³Æ:        CQueuePool.h
-ÎÄ¼ş×÷Õß:        Domi
-¹¦ÄÜËµÃ÷:        ¶ÓÁĞ³Ø  
-ÆäËûËµÃ÷:        ¿ÉÑ­»·ÀûÓÃ
+ï»¿/******************************************************************** 
+åˆ›å»ºæ—¶é—´:        2015/07/01 12:02
+æ–‡ä»¶åç§°:        CQueuePool.h
+æ–‡ä»¶ä½œè€…:        Domi
+åŠŸèƒ½è¯´æ˜:        é˜Ÿåˆ—æ±   
+å…¶ä»–è¯´æ˜:        å¯å¾ªç¯åˆ©ç”¨
 *********************************************************************/
 
 #pragma once
@@ -15,7 +15,7 @@ class CQueuePool
 {
 protected:
 	typedef std::queue<_Ty*> QUEUE;
-	enum{ _block_max = 10000 };	//Ã¿´ÎÉêÇë¿é×î´ó³ß´ç
+	enum{ _block_max = 10000 };	//æ¯æ¬¡ç”³è¯·å—æœ€å¤§å°ºå¯¸
 
 public:
 	CQueuePool();
@@ -39,10 +39,10 @@ public:
 	inline _Ty*	front();
 
 public:
-	CMutex	m_mutex;		//Ïß³Ì°²È«»¥³âËø
-	int		m_block_size;	//Ã¿´ÎÉêÇë¿é´óĞ¡(Ä¬ÈÏ1,×î´ó10000)
-	QUEUE	m_use_queue;	//Ê¹ÓÃ¶ÓÁĞ
-	QUEUE	m_free_queue;	//ÊÍ·Å¶ÓÁĞ
+	CMutex	m_mutex;		//çº¿ç¨‹å®‰å…¨äº’æ–¥é”
+	int		m_block_size;	//æ¯æ¬¡ç”³è¯·å—å¤§å°(é»˜è®¤1,æœ€å¤§10000)
+	QUEUE	m_use_queue;	//ä½¿ç”¨é˜Ÿåˆ—
+	QUEUE	m_free_queue;	//é‡Šæ”¾é˜Ÿåˆ—
 };
 
 //-----------------------------------------------------------------------
@@ -58,7 +58,7 @@ CQueuePool<_Ty>::~CQueuePool(){
 
 template<class _Ty>
 inline void	CQueuePool<_Ty>::_build(){
-	//µ÷Õû³ß´ç
+	//è°ƒæ•´å°ºå¯¸
 	if(m_block_size < 1)
 		m_block_size = 1;
 
@@ -66,7 +66,7 @@ inline void	CQueuePool<_Ty>::_build(){
 		m_block_size = _block_max;
 
 	try{
-		_Ty*_val = nullptr; //·ÖÅä¶ÔÏñÄÚ´æ
+		_Ty*_val = nullptr; //åˆ†é…å¯¹åƒå†…å­˜
 		for (int i = 0;i < m_block_size;i++){
 			_val = new _Ty;
 			if(_val) m_free_queue.push(_val);
@@ -76,8 +76,8 @@ inline void	CQueuePool<_Ty>::_build(){
 	}
 }
 
-// ·ÖÅä¿Õ¼ä
-// Èç¹ûÓÃfree¿Õ¼ä£¬Ôò´Ófree¿Õ¼äÈ¡³ö£¬·´Ö®£¬ÖØĞÂnew
+// åˆ†é…ç©ºé—´
+// å¦‚æœç”¨freeç©ºé—´ï¼Œåˆ™ä»freeç©ºé—´å–å‡ºï¼Œåä¹‹ï¼Œé‡æ–°new
 template<class _Ty>
 inline _Ty*	CQueuePool<_Ty>::_malloc(){
 	_Ty*_val = nullptr;
@@ -94,7 +94,7 @@ inline _Ty*	CQueuePool<_Ty>::_malloc(){
 	return _val;
 }
 
-// ÊÍ·Å¿Õ¼ä£¬Ê¹Ö®³ÉÎª¿ÕÏĞ
+// é‡Šæ”¾ç©ºé—´ï¼Œä½¿ä¹‹æˆä¸ºç©ºé—²
 template<class _Ty>
 inline void	CQueuePool<_Ty>::_free(_Ty*_val){
 	try{
@@ -103,19 +103,19 @@ inline void	CQueuePool<_Ty>::_free(_Ty*_val){
 	}
 }
 
-// Ïú»Ù¶ÓÁĞ³Ø£¬Çå¿ÕÒÑ¾­Ê¹ÓÃµÄºÍ¿ÕÏĞµÄ
+// é”€æ¯é˜Ÿåˆ—æ± ï¼Œæ¸…ç©ºå·²ç»ä½¿ç”¨çš„å’Œç©ºé—²çš„
 template<class _Ty>
 inline void	CQueuePool<_Ty>::destroy(){
 	try{
 		_Ty*_val = nullptr;
-		//Ïú»ÙÊ¹ÓÃ¶ÓÁĞ
+		//é”€æ¯ä½¿ç”¨é˜Ÿåˆ—
 		while(!m_use_queue.empty()){
 			_val = m_use_queue.front();
 			m_use_queue.pop();
 			if(_val) delete _val;
 		}
 
-		//Ïú»ÙÊÍ·Å¶ÓÁĞ
+		//é”€æ¯é‡Šæ”¾é˜Ÿåˆ—
 		while(!m_free_queue.empty()){
 			_val = m_free_queue.front();
 			m_free_queue.pop();
@@ -125,7 +125,7 @@ inline void	CQueuePool<_Ty>::destroy(){
 	}
 }
 
-//Çå¿ÕÊ¹ÓÃ¶ÓÁĞ£¬¶ªµ½freeÀïÃæ
+//æ¸…ç©ºä½¿ç”¨é˜Ÿåˆ—ï¼Œä¸¢åˆ°freeé‡Œé¢
 template<class _Ty>
 inline void	CQueuePool<_Ty>::clear(){
 	try{
@@ -137,7 +137,7 @@ inline void	CQueuePool<_Ty>::clear(){
 	}
 }
 
-// ´ÓÊ¹ÓÃ¶ÓÁĞÖĞpop³öÒ»¸öÔªËØ
+// ä»ä½¿ç”¨é˜Ÿåˆ—ä¸­popå‡ºä¸€ä¸ªå…ƒç´ 
 template<class _Ty>
 inline void	CQueuePool<_Ty>::pop(){
 	try{
@@ -149,7 +149,7 @@ inline void	CQueuePool<_Ty>::pop(){
 	}
 }
 
-// Ñ¹ÈëÒ»¸öÔªËØ
+// å‹å…¥ä¸€ä¸ªå…ƒç´ 
 template<class _Ty>
 inline _Ty*	CQueuePool<_Ty>::push()
 {
@@ -162,8 +162,8 @@ inline _Ty*	CQueuePool<_Ty>::push()
 	return _val;
 }
  
-// ·µ»Ø¶ÓÁĞÍ·²¿ÔªËØ
-// Ò»°ãÏÈµ÷ÓÃfront()£¬È¡³öÔªËØ²¢Íê³ÉÄ³Ğ©²Ù×÷ºó£¬ÔÚpop()
+// è¿”å›é˜Ÿåˆ—å¤´éƒ¨å…ƒç´ 
+// ä¸€èˆ¬å…ˆè°ƒç”¨front()ï¼Œå–å‡ºå…ƒç´ å¹¶å®ŒæˆæŸäº›æ“ä½œåï¼Œåœ¨pop()
 template<class _Ty>
 inline _Ty*	CQueuePool<_Ty>::front(){
 	_Ty*_val = nullptr;

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #ifdef WIN32
 #include <winsock2.h>
@@ -7,55 +7,55 @@
 #pragma comment(lib, "Mswsock.lib")
 #pragma comment (lib,"wsock32.lib")
 #else
-#include <netinet/in.h>//°üº¬ÁË<sys/socket.h>
+#include <netinet/in.h>//åŒ…å«äº†<sys/socket.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
-#include <sys/types.h>//ÏµÍ³ÀàĞÍ¶¨Òå
+#include <sys/types.h>//ç³»ç»Ÿç±»å‹å®šä¹‰
 #include <arpa/inet.h>
-#include <fcntl.h>//×èÈûÄ£Ê½Í·ÎÄ¼ş
+#include <fcntl.h>//é˜»å¡æ¨¡å¼å¤´æ–‡ä»¶
 #include <netdb.h>
-#include <unistd.h>//closeº¯Êı
+#include <unistd.h>//closeå‡½æ•°
 #endif
-#include <errno.h>	//°üº¬´ËÎÄ¼ş¾Í»áÉèÖÃerrno±äÁ¿¡¾int geterror()¡¿
+#include <errno.h>	//åŒ…å«æ­¤æ–‡ä»¶å°±ä¼šè®¾ç½®errnoå˜é‡ã€int geterror()ã€‘
 
 #include "../common/basic/basicTypes.h"
 
 #define MaxBuffLen 1024*10			// 10k
 #define MaxBuffLenLimit 1024*20		// 20k
 
-// Ğ­Òé°üÍ·
+// åè®®åŒ…å¤´
 struct PacketHead
 {
-	uint16	uHeadFlag;		// °üÍ·±êÊ¾
-	uint16	uPacketSize;	// °ü´óĞ¡
+	uint16	uHeadFlag;		// åŒ…å¤´æ ‡ç¤º
+	uint16	uPacketSize;	// åŒ…å¤§å°
 	PacketHead() {memset( this, 0, sizeof( *this ) );	}
 };
 
 class CTcpServer;
-class CTcpSession		//×´Ì¬ÓĞ¡¾Á´½ÓÖĞ|ÒÑÁ´½Ó|¶Ï¿ªÖĞ¡¿
+class CTcpSession		//çŠ¶æ€æœ‰ã€é“¾æ¥ä¸­|å·²é“¾æ¥|æ–­å¼€ä¸­ã€‘
 {
 public:
 	CTcpSession();
 	~CTcpSession();
 
 public:
-	inline int getPendingLen()	{ return m_inbufLen - m_readBegin; }// Ê£ÓàÎ´´¦ÀíµÄ×Ö½ÚÊı
-	inline int getFreeLen()		{ return MaxBuffLen - m_inbufLen; }	// ¿ÉÒÔappendµÄ³¤¶È
+	inline int getPendingLen()	{ return m_inbufLen - m_readBegin; }// å‰©ä½™æœªå¤„ç†çš„å­—èŠ‚æ•°
+	inline int getFreeLen()		{ return MaxBuffLen - m_inbufLen; }	// å¯ä»¥appendçš„é•¿åº¦
 
-	void initialize();	// ³õÊ¼»¯
+	void initialize();	// åˆå§‹åŒ–
 	bool send(const char* pBuffer,int32 nSize);
-	void disconnect();			// ¶Ï¿ªÁ¬½Ó
-	ulong remote_address();		// Ô¶³ÌµØÖ·
-	const char*	remote_ip();	// Ô¶³ÌµØÖ·µÄip
+	void disconnect();			// æ–­å¼€è¿æ¥
+	ulong remote_address();		// è¿œç¨‹åœ°å€
+	const char*	remote_ip();	// è¿œç¨‹åœ°å€çš„ip
 
 public:
 	// char* p = new char[100]; delete []p;
-	CTcpServer*	m_tcpServer;	// ËùÊôµÄserver
+	CTcpServer*	m_tcpServer;	// æ‰€å±çš„server
 	int m_fd;					// socket fd
-	int m_id;					// session id(¸øÉÏ²ãÓÃµÄ)
-	int m_mask;					// ±êÊ¾
+	int m_id;					// session id(ç»™ä¸Šå±‚ç”¨çš„)
+	int m_mask;					// æ ‡ç¤º
 	char* m_income;	
 	char* m_outcome;
-	int m_inbufLen;				// inbuff ½áÊøÎ»ÖÃ
-	int m_readBegin;			// ÏÂÒ»´Î¿ªÊ¼¶ÁÈ¡µÄÎ»ÖÃ
+	int m_inbufLen;				// inbuff ç»“æŸä½ç½®
+	int m_readBegin;			// ä¸‹ä¸€æ¬¡å¼€å§‹è¯»å–çš„ä½ç½®
 };

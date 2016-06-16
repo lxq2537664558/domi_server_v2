@@ -1,9 +1,9 @@
-/******************************************************************** 
-´´½¨Ê±¼ä:        2015/06/22 14:50
-ÎÄ¼şÃû³Æ:        singleton.h
-ÎÄ¼ş×÷Õß:        Domi
-¹¦ÄÜËµÃ÷:        µ¥ÀıÄ£°å  
-ÆäËûËµÃ÷:         
+ï»¿/******************************************************************** 
+åˆ›å»ºæ—¶é—´:        2015/06/22 14:50
+æ–‡ä»¶åç§°:        singleton.h
+æ–‡ä»¶ä½œè€…:        Domi
+åŠŸèƒ½è¯´æ˜:        å•ä¾‹æ¨¡æ¿  
+å…¶ä»–è¯´æ˜:         
 *********************************************************************/
 
 #pragma once
@@ -11,7 +11,7 @@
 using namespace std;
 //#include "system/basic/basicTypes.h"
 
-// µÚÒ»ÖÖÊµÏÖ
+// ç¬¬ä¸€ç§å®ç°
 template <typename T>
 class Singleton
 {
@@ -32,7 +32,7 @@ public:
 
 
 /*
-// µÚ¶şÖÖÊµÏÖ
+// ç¬¬äºŒç§å®ç°
 template <typename T>
 class Singleton
 {
@@ -40,7 +40,7 @@ private:
 	static T* m_pInstance;
 
 	// GC
-	//ËüµÄÎ¨Ò»¹¤×÷¾ÍÊÇÔÚÎö¹¹º¯ÊıÖĞÉ¾³ıCSingletonµÄÊµÀı 
+	//å®ƒçš„å”¯ä¸€å·¥ä½œå°±æ˜¯åœ¨ææ„å‡½æ•°ä¸­åˆ é™¤CSingletonçš„å®ä¾‹ 
 	template<class M>
 	class CGarbo 
 	{
@@ -62,7 +62,7 @@ protected:
 public:
 	inline static T* GetSingletonPtr()
 	{
-		if (m_pInstance == nullptr)  //ÅĞ¶ÏÊÇ·ñµÚÒ»´Îµ÷ÓÃ  
+		if (m_pInstance == nullptr)  //åˆ¤æ–­æ˜¯å¦ç¬¬ä¸€æ¬¡è°ƒç”¨  
 		{
 			static CGarbo<T> garbo;
 			garbo.ptr = new T();

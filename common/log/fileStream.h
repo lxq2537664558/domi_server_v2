@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <memory.h>
 #include "../basic/basicTypes.h"
@@ -7,10 +7,10 @@ class CFileStream
 {
 public:
 	enum _enAccess{
-		_Read		,/*¶Á*/ 
-		_Write		,/*Ğ´*/ 
-		_ReadWrite	,/*¶ÁĞ´*/ 
-		_Append		,/*×·¼Ó*/ 
+		_Read		,/*è¯»*/ 
+		_Write		,/*å†™*/ 
+		_ReadWrite	,/*è¯»å†™*/ 
+		_Append		,/*è¿½åŠ */ 
 		Access_Max
 	};
 
@@ -29,20 +29,20 @@ public:
 	virtual~CFileStream();
 
 public:
-	bool open(const char*pszFileName,_enAccess eAccess);			// ´ò¿ªÎÄ¼ş
-	bool open(const char*pszFileName, const char* pszMode = "rb");	// ´ò¿ªÎÄ¼ş
-	void close();													// ¹Ø±ÕÎÄ¼ş
-	void flush();													// ¸üĞÂ»º³åÇø
+	bool open(const char*pszFileName,_enAccess eAccess);			// æ‰“å¼€æ–‡ä»¶
+	bool open(const char*pszFileName, const char* pszMode = "rb");	// æ‰“å¼€æ–‡ä»¶
+	void close();													// å…³é—­æ–‡ä»¶
+	void flush();													// æ›´æ–°ç¼“å†²åŒº
 
 public:
-	uint32	getFileLength();							// »ñµÃÎÄ¼ş³¤¶È
-	int	clear();										// Çå³ıÎÄ¼ş
-	int	seek(int32 _nOffset, int _Origin = SEEK_SET);	// Æ«ÒÆ(³É¹¦·µ»Ø0)
+	uint32	getFileLength();							// è·å¾—æ–‡ä»¶é•¿åº¦
+	int	clear();										// æ¸…é™¤æ–‡ä»¶
+	int	seek(int32 _nOffset, int _Origin = SEEK_SET);	// åç§»(æˆåŠŸè¿”å›0)
 
 public:
-	inline int seekBegin(int32 _nOffset)	{return seek(_nOffset,SEEK_SET);}	// ´ÓÎÄ¼şÍ·Æ«ÒÆ
-	inline int seekEnd(int32 _nOffset)		{return seek(_nOffset,SEEK_END);}	// ´ÓÎÄ¼şÎ²Æ«ÒÆ
-	inline int seekCurrent(int32 _nOffset)	{return seek(_nOffset,SEEK_CUR);}	// ´ÓÎÄ¼şµ±Ç°Î»ÖÃÆ«ÒÆ 
+	inline int seekBegin(int32 _nOffset)	{return seek(_nOffset,SEEK_SET);}	// ä»æ–‡ä»¶å¤´åç§»
+	inline int seekEnd(int32 _nOffset)		{return seek(_nOffset,SEEK_END);}	// ä»æ–‡ä»¶å°¾åç§»
+	inline int seekCurrent(int32 _nOffset)	{return seek(_nOffset,SEEK_CUR);}	// ä»æ–‡ä»¶å½“å‰ä½ç½®åç§» 
 
 public:
 	virtual uint32	size()	{return getFileLength();}

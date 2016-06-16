@@ -1,4 +1,4 @@
-#ifndef WIN32
+﻿#ifndef WIN32
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/epoll.h>

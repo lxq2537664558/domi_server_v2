@@ -1,4 +1,4 @@
-#include "basicFunctions.h"
+ï»¿#include "basicFunctions.h"
 
 int32 dAtoi	(const char*pString){
 	return static_cast<int32>(dAtoll(pString));
@@ -47,7 +47,6 @@ uint8 getNumberBit(uint32 uNumber){
 
 uint32 getAddValue(uint32 uFrom,uint32 uValue,uint32 nMax){
 	uint32 uSum = uFrom + uValue;
-	/*Òç³ö||¹ý´ó*/ 
 	if (uFrom > uSum || uSum >= nMax)
 		return nMax;
 	return uSum;

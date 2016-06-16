@@ -1,23 +1,23 @@
-// msgpack Ö±½ÓÄÜ¸øÒµÎñ²ãÊ¹ÓÃµÄ
+ï»¿// msgpack ç›´æ¥èƒ½ç»™ä¸šåŠ¡å±‚ä½¿ç”¨çš„
 #pragma once
 #include "../common/basic/basicTypes.h"
 
 /*
-Ğ­ÒéÊı¾İÊ¹ÓÃgoogle protobuf
+åè®®æ•°æ®ä½¿ç”¨google protobuf
 message NetMessage{
-	uint16 uProtocol = 1;	// Ğ­ÒéºÅ
-	uint8 type = 2;			// ÏûÏ¢°üÀàĞÍ£¬1=ÇëÇó°ü£¨³öÈ¥µÄ°ü£©£¬2 = ·µ»Ø°ü£¨½øÀ´µÄ°ü£©
-	optional bytes content = 3;	// ÏûÏ¢×Ö½Ú
+	uint16 uProtocol = 1;	// åè®®å·
+	uint8 type = 2;			// æ¶ˆæ¯åŒ…ç±»å‹ï¼Œ1=è¯·æ±‚åŒ…ï¼ˆå‡ºå»çš„åŒ…ï¼‰ï¼Œ2 = è¿”å›åŒ…ï¼ˆè¿›æ¥çš„åŒ…ï¼‰
+	optional bytes content = 3;	// æ¶ˆæ¯å­—èŠ‚
 }
 */
 
-#pragma pack(push,1) //½ûÓÃ×Ö½Ú¶ÔÆë
+#pragma pack(push,1) //ç¦ç”¨å­—èŠ‚å¯¹é½
 struct _stNetMessage 
 {
-	uint32 m_op;		//Ğ­ÒéºÅ
+	uint32 m_op;		//åè®®å·
 	uint32 m_mask;		//mask
-	uint16 m_size;		//Êı¾İ´óĞ¡
-	char m_buffer[1024];//Êı¾İÄÚÈİ
+	uint16 m_size;		//æ•°æ®å¤§å°
+	char m_buffer[1024];//æ•°æ®å†…å®¹
 	
 	_stNetMessage()
 		:m_op(0),

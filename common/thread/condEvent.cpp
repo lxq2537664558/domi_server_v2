@@ -1,4 +1,4 @@
-#ifndef WIN32
+ï»¿#ifndef WIN32
 #include <sys/time.h> 
 #endif//WIN32
 #include "condEvent.h"
@@ -17,9 +17,9 @@ CCondEvent::~CCondEvent(){
 	close_event();
 }
 
-// ´´½¨ÊÂ¼ş
-// @bManualReset  ÊÇ·ñÊÖ¶¯¸´Ô­ÊÂ¼ş  true=ĞèÒªÊÖ¶¯¸´Ô­  false= µ±Ïß³Ì±»ÊÍ·Åºó£¬ÊÂ¼ş½«¸´Ô­µ½ÎŞĞÅºÅ×´Ì¬
-// @bInitialState Ö¸¶¨ÊÂ¼ş¶ÔÏóµÄ³õÊ¼×´Ì¬¡£Èç¹ûÎªTRUE£¬³õÊ¼×´Ì¬ÎªÓĞĞÅºÅ×´Ì¬£»·ñÔòÎªÎŞĞÅºÅ×´Ì¬¡£
+// åˆ›å»ºäº‹ä»¶
+// @bManualReset  æ˜¯å¦æ‰‹åŠ¨å¤åŸäº‹ä»¶  true=éœ€è¦æ‰‹åŠ¨å¤åŸ  false= å½“çº¿ç¨‹è¢«é‡Šæ”¾åï¼Œäº‹ä»¶å°†å¤åŸåˆ°æ— ä¿¡å·çŠ¶æ€
+// @bInitialState æŒ‡å®šäº‹ä»¶å¯¹è±¡çš„åˆå§‹çŠ¶æ€ã€‚å¦‚æœä¸ºTRUEï¼Œåˆå§‹çŠ¶æ€ä¸ºæœ‰ä¿¡å·çŠ¶æ€ï¼›å¦åˆ™ä¸ºæ— ä¿¡å·çŠ¶æ€ã€‚
 bool CCondEvent::create_event(bool bManualReset,bool bInitialState){
 	close_event();
 #ifdef WIN32
@@ -35,7 +35,7 @@ bool CCondEvent::create_event(bool bManualReset,bool bInitialState){
 	return true;
 }
 
-// ¹Ø±ÕÊÂ¼ş
+// å…³é—­äº‹ä»¶
 void CCondEvent::close_event(){
 	if(!m_bCreated) return;
 #ifdef WIN32
@@ -47,51 +47,51 @@ void CCondEvent::close_event(){
 	m_bCreated = false;
 }
 
-// ´¥·¢ÊÂ¼ş
+// è§¦å‘äº‹ä»¶
 void CCondEvent::set_event(){
 	if(!m_bCreated) return;
 #ifdef WIN32
-	::SetEvent(m_hEvent);	// ÉèÖÃÎªÓĞĞÅºÅ×´Ì¬
+	::SetEvent(m_hEvent);	// è®¾ç½®ä¸ºæœ‰ä¿¡å·çŠ¶æ€
 #else//linux
 	CCritLocker clLock(m_clLocker);
 	if(m_manual_reset)
-		pthread_cond_broadcast(&m_pthread_cond);//½â³ı×èÈûËùÓĞÏß³Ì
+		pthread_cond_broadcast(&m_pthread_cond);//è§£é™¤é˜»å¡æ‰€æœ‰çº¿ç¨‹
 	else
-		pthread_cond_signal(&m_pthread_cond);//½â³ı×èÈûÌØ¶¨Ïß³Ì
+		pthread_cond_signal(&m_pthread_cond);//è§£é™¤é˜»å¡ç‰¹å®šçº¿ç¨‹
 	
 	m_signaled = true;
 #endif//WIN32
 }
 
-// ¸´Î»ÊÂ¼ş
+// å¤ä½äº‹ä»¶
 void CCondEvent::reset_event(){
 	if(!m_bCreated) return;
 
 #ifdef WIN32
-	::ResetEvent(m_hEvent);		// ¸´Ô­ÊÂ¼şµ½ÎŞĞÅºÅ×´Ì¬
+	::ResetEvent(m_hEvent);		// å¤åŸäº‹ä»¶åˆ°æ— ä¿¡å·çŠ¶æ€
 #else//linux
 	CCritLocker clLock(m_clLocker);
 	m_signaled = false;
 #endif//WIN32
 }
 
-// µÈ´ıÊÂ¼ş[·µ»Øfalse±êÊ¾³¬Ê±]
+// ç­‰å¾…äº‹ä»¶[è¿”å›falseæ ‡ç¤ºè¶…æ—¶]
 bool CCondEvent::wait_event(uint64 milliseconds){
 	if(!m_bCreated) return true;
 
 #ifdef WIN32
-	if(::WaitForSingleObject(m_hEvent,(DWORD)milliseconds) == WAIT_TIMEOUT)	// µÈ´ıĞÅºÅ£¬Ã»ÓĞ¾ÍÒ»Ö±×èÈû
+	if(::WaitForSingleObject(m_hEvent,(DWORD)milliseconds) == WAIT_TIMEOUT)	// ç­‰å¾…ä¿¡å·ï¼Œæ²¡æœ‰å°±ä¸€ç›´é˜»å¡
 		return false;
 #else//linux
-	//ĞèÒªÊ¹ÓÃlock wait unlock·½·¨Ê¹ÓÃ
+	//éœ€è¦ä½¿ç”¨lock wait unlockæ–¹æ³•ä½¿ç”¨
 	CCritLocker clLock(m_clLocker);
 	if(m_signaled){
-		//²»ĞèÒªÊÖ¶¯¸´Î»
+		//ä¸éœ€è¦æ‰‹åŠ¨å¤ä½
 		if (!m_manual_reset) m_signaled = false;
 		return true;
 	}
 
-	//Î´ÉèÖÃ³¬Ê±Ê±¼ä
+	//æœªè®¾ç½®è¶…æ—¶æ—¶é—´
 	if(!milliseconds) return false;
 	timeval _now;
 	gettimeofday(&_now,nullptr);
@@ -109,51 +109,51 @@ bool CCondEvent::wait_event(uint64 milliseconds){
 
 	} while (ret == 0 && !m_signaled);
 
-	//³¬Ê±
+	//è¶…æ—¶
 	if(ret == ETIMEDOUT) return false;
 #endif//WIN32
 	return true;
 }
 
 
-/*TODO::Ìõ¼ş±äÁ¿ÊôĞÔ
- Ìõ¼ş±äÁ¿Ê¼ÖÕÓë»¥³âËøÒ»ÆğÊ¹ÓÃ
-Èç¹ûÌõ¼şÎª¼Ù£¬Ïß³ÌÍ¨³£»á»ùÓÚÌõ¼ş±äÁ¿×èÈû£¬²¢ÒÔÔ­×Ó·½Ê½ÊÍ·ÅµÈ´ıÌõ¼ş±ä»¯µÄ»¥³âËø¡£Èç¹ûÁíÒ»¸öÏß³Ì¸ü¸ÄÁËÌõ¼ş£¬¸ÃÏß³Ì¿ÉÄÜ»áÏòÏà¹ØµÄÌõ¼ş±äÁ¿·¢³öĞÅºÅ£¬´Ó¶øÊ¹Ò»¸ö»ò¶à¸öµÈ´ıµÄÏß³ÌÖ´ĞĞÒÔÏÂ²Ù×÷£º
-	»½ĞÑ
-	ÔÙ´Î»ñÈ¡»¥³âËø
-	ÖØĞÂÆÀ¹ÀÌõ¼ş
+/*TODO::æ¡ä»¶å˜é‡å±æ€§
+ æ¡ä»¶å˜é‡å§‹ç»ˆä¸äº’æ–¥é”ä¸€èµ·ä½¿ç”¨
+å¦‚æœæ¡ä»¶ä¸ºå‡ï¼Œçº¿ç¨‹é€šå¸¸ä¼šåŸºäºæ¡ä»¶å˜é‡é˜»å¡ï¼Œå¹¶ä»¥åŸå­æ–¹å¼é‡Šæ”¾ç­‰å¾…æ¡ä»¶å˜åŒ–çš„äº’æ–¥é”ã€‚å¦‚æœå¦ä¸€ä¸ªçº¿ç¨‹æ›´æ”¹äº†æ¡ä»¶ï¼Œè¯¥çº¿ç¨‹å¯èƒ½ä¼šå‘ç›¸å…³çš„æ¡ä»¶å˜é‡å‘å‡ºä¿¡å·ï¼Œä»è€Œä½¿ä¸€ä¸ªæˆ–å¤šä¸ªç­‰å¾…çš„çº¿ç¨‹æ‰§è¡Œä»¥ä¸‹æ“ä½œï¼š
+	å”¤é†’
+	å†æ¬¡è·å–äº’æ–¥é”
+	é‡æ–°è¯„ä¼°æ¡ä»¶
 
- ÔÚÒÔÏÂÇé¿öÏÂ£¬Ìõ¼ş±äÁ¿¿ÉÓÃÓÚÔÚ½ø³ÌÖ®¼äÍ¬²½Ïß³Ì£º
-	Ïß³ÌÊÇÔÚ¿ÉÒÔĞ´ÈëµÄÄÚ´æÖĞ·ÖÅäµÄ
-	ÄÚ´æÓÉĞ­×÷½ø³Ì¹²Ïí
+ åœ¨ä»¥ä¸‹æƒ…å†µä¸‹ï¼Œæ¡ä»¶å˜é‡å¯ç”¨äºåœ¨è¿›ç¨‹ä¹‹é—´åŒæ­¥çº¿ç¨‹ï¼š
+	çº¿ç¨‹æ˜¯åœ¨å¯ä»¥å†™å…¥çš„å†…å­˜ä¸­åˆ†é…çš„
+	å†…å­˜ç”±åä½œè¿›ç¨‹å…±äº«
 
-Ìõ¼ş±äÁ¿ÊôĞÔ±ØĞëÊ×ÏÈÓÉ pthread_condattr_destroy ÖØĞÂ³õÊ¼»¯ºó²ÅÄÜÖØÓÃ
+æ¡ä»¶å˜é‡å±æ€§å¿…é¡»é¦–å…ˆç”± pthread_condattr_destroy é‡æ–°åˆå§‹åŒ–åæ‰èƒ½é‡ç”¨
 */
 /*
-³õÊ¼»¯Ìõ¼ş±äÁ¿ÊôĞÔ	int	pthread_condattr_init(pthread_condattr_t *cattr);//cattr·¶Î§¿ÉÄÜµÄÖµÎª PTHREAD_PROCESS_PRIVATE[È±Ê¡Öµ] ºÍ PTHREAD_PROCESS_SHARED
-É¾³ıÌõ¼ş±äÁ¿ÊôĞÔ	int	pthread_condattr_destroy(pthread_condattr_t *cattr);
-ÉèÖÃÌõ¼ş±äÁ¿µÄ·¶Î§	int	pthread_condattr_setpshared(pthread_condattr_t *cattr,int pshared);//PTHREAD_PROCESS_SHARED/PTHREAD_PROCESS_PRIVATE
-»ñÈ¡Ìõ¼ş±äÁ¿µÄ·¶Î§	int	pthread_condattr_getpshared(const pthread_condattr_t *cattr,int *pshared);
+åˆå§‹åŒ–æ¡ä»¶å˜é‡å±æ€§	int	pthread_condattr_init(pthread_condattr_t *cattr);//cattrèŒƒå›´å¯èƒ½çš„å€¼ä¸º PTHREAD_PROCESS_PRIVATE[ç¼ºçœå€¼] å’Œ PTHREAD_PROCESS_SHARED
+åˆ é™¤æ¡ä»¶å˜é‡å±æ€§	int	pthread_condattr_destroy(pthread_condattr_t *cattr);
+è®¾ç½®æ¡ä»¶å˜é‡çš„èŒƒå›´	int	pthread_condattr_setpshared(pthread_condattr_t *cattr,int pshared);//PTHREAD_PROCESS_SHARED/PTHREAD_PROCESS_PRIVATE
+è·å–æ¡ä»¶å˜é‡çš„èŒƒå›´	int	pthread_condattr_getpshared(const pthread_condattr_t *cattr,int *pshared);
 */
 /*
-Solaris			POSIX							¶¨Òå 
-USYNC_PROCESS	PTHREAD_PROCESS_SHARED			ÓÃÓÚÍ¬²½¸Ã½ø³ÌºÍÆäËû½ø³ÌÖĞµÄÏß³Ì 
-USYNC_THREAD	PTHREAD_PROCESS_PRIVATE			ÓÃÓÚ½öÍ¬²½¸Ã½ø³ÌÖĞµÄÏß³Ì
+Solaris			POSIX							å®šä¹‰ 
+USYNC_PROCESS	PTHREAD_PROCESS_SHARED			ç”¨äºåŒæ­¥è¯¥è¿›ç¨‹å’Œå…¶ä»–è¿›ç¨‹ä¸­çš„çº¿ç¨‹ 
+USYNC_THREAD	PTHREAD_PROCESS_PRIVATE			ç”¨äºä»…åŒæ­¥è¯¥è¿›ç¨‹ä¸­çš„çº¿ç¨‹
 */
 
-/*TODO:Ê¹ÓÃÌõ¼ş±äÁ¿
-³õÊ¼»¯Ìõ¼ş±äÁ¿			int	pthread_cond_init(pthread_cond_t *cv,const pthread_condattr_t *cattr);//cattr¿ÉÎªNULL=È±Ê¡
-»ùÓÚÌõ¼ş±äÁ¿×èÈû		int	pthread_cond_wait(pthread_cond_t *cv,pthread_mutex_t *mutex);//×èÈûµÄÏß³Ì¿ÉÒÔÍ¨¹ı pthread_cond_signal() »ò pthread_cond_broadcast() »½ĞÑ£¬Ò²¿ÉÒÔÔÚĞÅºÅ´«ËÍ½«ÆäÖĞ¶ÏÊ±»½ĞÑ
-ÔÚÖ¸¶¨µÄÊ±¼äÖ®Ç°×èÈû	int	pthread_cond_timedwait(pthread_cond_t *cv,pthread_mutex_t *mp, const struct timespec *abstime);//ETIMEDOUT=³¬Ê±
-ÔÚÖ¸¶¨µÄÊ±¼ä¼ä¸ôÄÚ×èÈû	int pthread_cond_reltimedwait_np(pthread_cond_t *cv,pthread_mutex_t *mp,const struct timespec *reltime);
-½â³ı×èÈûÌØ¶¨Ïß³Ì		int	pthread_cond_signal(pthread_cond_t *cv);
-½â³ı×èÈûËùÓĞÏß³Ì		int	pthread_cond_broadcast(pthread_cond_t *cv);
-Ïú»ÙÌõ¼ş±äÁ¿×´Ì¬		int	pthread_cond_destroy(pthread_cond_t *cv);
+/*TODO:ä½¿ç”¨æ¡ä»¶å˜é‡
+åˆå§‹åŒ–æ¡ä»¶å˜é‡			int	pthread_cond_init(pthread_cond_t *cv,const pthread_condattr_t *cattr);//cattrå¯ä¸ºNULL=ç¼ºçœ
+åŸºäºæ¡ä»¶å˜é‡é˜»å¡		int	pthread_cond_wait(pthread_cond_t *cv,pthread_mutex_t *mutex);//é˜»å¡çš„çº¿ç¨‹å¯ä»¥é€šè¿‡ pthread_cond_signal() æˆ– pthread_cond_broadcast() å”¤é†’ï¼Œä¹Ÿå¯ä»¥åœ¨ä¿¡å·ä¼ é€å°†å…¶ä¸­æ–­æ—¶å”¤é†’
+åœ¨æŒ‡å®šçš„æ—¶é—´ä¹‹å‰é˜»å¡	int	pthread_cond_timedwait(pthread_cond_t *cv,pthread_mutex_t *mp, const struct timespec *abstime);//ETIMEDOUT=è¶…æ—¶
+åœ¨æŒ‡å®šçš„æ—¶é—´é—´éš”å†…é˜»å¡	int pthread_cond_reltimedwait_np(pthread_cond_t *cv,pthread_mutex_t *mp,const struct timespec *reltime);
+è§£é™¤é˜»å¡ç‰¹å®šçº¿ç¨‹		int	pthread_cond_signal(pthread_cond_t *cv);
+è§£é™¤é˜»å¡æ‰€æœ‰çº¿ç¨‹		int	pthread_cond_broadcast(pthread_cond_t *cv);
+é”€æ¯æ¡ä»¶å˜é‡çŠ¶æ€		int	pthread_cond_destroy(pthread_cond_t *cv);
 
 ******
-»½ĞÑ¶ªÊ§ÎÊÌâ
-1 Ò»¸öÏß³Ìµ÷ÓÃ pthread_cond_signal() »ò pthread_cond_broadcast() 
-2 ÁíÒ»¸öÏß³ÌÒÑ¾­²âÊÔÁË¸ÃÌõ¼ş£¬µ«ÊÇÉĞÎ´µ÷ÓÃ pthread_cond_wait() 
-3 Ã»ÓĞÕıÔÚµÈ´ıµÄÏß³Ì
-4 ĞÅºÅ²»Æğ×÷ÓÃ£¬Òò´Ë½«»á¶ªÊ§
+å”¤é†’ä¸¢å¤±é—®é¢˜
+1 ä¸€ä¸ªçº¿ç¨‹è°ƒç”¨ pthread_cond_signal() æˆ– pthread_cond_broadcast() 
+2 å¦ä¸€ä¸ªçº¿ç¨‹å·²ç»æµ‹è¯•äº†è¯¥æ¡ä»¶ï¼Œä½†æ˜¯å°šæœªè°ƒç”¨ pthread_cond_wait() 
+3 æ²¡æœ‰æ­£åœ¨ç­‰å¾…çš„çº¿ç¨‹
+4 ä¿¡å·ä¸èµ·ä½œç”¨ï¼Œå› æ­¤å°†ä¼šä¸¢å¤±
 */

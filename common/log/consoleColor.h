@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 #include "../basic/basicTypes.h"
 #ifdef WIN32	// WIN32
 #include <windows.h>
@@ -8,11 +8,11 @@ class CConsoleColor
 {
 public:
 	enum _emColor{
-		color_read		,//∫Ï
-		color_green		,//¬Ã
-		color_yellow	,//ª∆
-		color_blue		,//¿∂
-		color_intensity	,//∏ﬂ¡¡
+		color_read		,//Á∫¢
+		color_green		,//Áªø
+		color_yellow	,//ÈªÑ
+		color_blue		,//Ëìù
+		color_intensity	,//È´ò‰∫Æ
 		color_max
 	};
 private:

@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 #include "../basic/basicTypes.h"
 #ifdef WIN32
 #include <winsock2.h>
 #include <windows.h>
 #else//linux
-#include <sys/types.h>//ÏµÍ³ÀàĞÍ¶¨Òå
+#include <sys/types.h>//ç³»ç»Ÿç±»å‹å®šä¹‰
 #include <signal.h>
 #endif//WIN32
 #include "csLocker.h"
@@ -16,15 +16,15 @@
 class CCondEvent
 {
 protected:
-	bool m_bCreated;	// ÊÂ¼ş¶ÔÏóÊÇ·ñÒÑ´´½¨
+	bool m_bCreated;	// äº‹ä»¶å¯¹è±¡æ˜¯å¦å·²åˆ›å»º
 #ifdef WIN32
-	HANDLE				m_hEvent;	//win32ÖĞÎªÊÂ¼ş¾ä±ú
+	HANDLE				m_hEvent;	//win32ä¸­ä¸ºäº‹ä»¶å¥æŸ„
 #else//linux
-	//linuxÖĞÊ¹ÓÃ»¥³âËøÓëÌõ¼ş±äÁ¿½áºÏ
+	//linuxä¸­ä½¿ç”¨äº’æ–¥é”ä¸æ¡ä»¶å˜é‡ç»“åˆ
 	pthread_cond_t		m_pthread_cond;
 	CMutex				m_clLocker;
-	bool				m_manual_reset;	//ÊÖ¶¯³õÊ¼»¯
-	bool				m_signaled;		//ÊÇ·ñÒÑ´¥·¢ĞÅºÅ
+	bool				m_manual_reset;	//æ‰‹åŠ¨åˆå§‹åŒ–
+	bool				m_signaled;		//æ˜¯å¦å·²è§¦å‘ä¿¡å·
 #endif//WIN32
 
 public:
@@ -32,12 +32,12 @@ public:
 	~CCondEvent();
 
 public:
-	// ÊÂ¼şÊÇ·ñÓĞĞ§
+	// äº‹ä»¶æ˜¯å¦æœ‰æ•ˆ
 	inline bool	isValid() { return m_bCreated; }
 
-	bool create_event(bool bManualReset,bool bInitialState);	// ´´½¨ÊÂ¼ş
-	void close_event();	// ¹Ø±ÕÊÂ¼ş
-	void set_event();	// ´¥·¢ÊÂ¼ş
-	void reset_event();	// ¸´Î»ÊÂ¼ş
-	bool wait_event(uint64 milliseconds);	// µÈ´ıÊÂ¼ş[·µ»Øfalse±êÊ¾³¬Ê±]
+	bool create_event(bool bManualReset,bool bInitialState);	// åˆ›å»ºäº‹ä»¶
+	void close_event();	// å…³é—­äº‹ä»¶
+	void set_event();	// è§¦å‘äº‹ä»¶
+	void reset_event();	// å¤ä½äº‹ä»¶
+	bool wait_event(uint64 milliseconds);	// ç­‰å¾…äº‹ä»¶[è¿”å›falseæ ‡ç¤ºè¶…æ—¶]
 };

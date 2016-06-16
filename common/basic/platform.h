@@ -1,12 +1,12 @@
-#pragma once
+ï»¿#pragma once
 #include "basicTypes.h"
 
-// ´íÎóÂë
-extern long get_error();//»ñµÃ´íÎóÂë
-extern const char*	get_error_str(long _error);//»ñµÃ´íÎó×Ö·û´®
-extern const char*	get_herror_str();//»ñµÃ´íÎó×Ö·û´®(linuxÏÂµ÷ÓÃÊ±ÎŞ´íÎó»á¶àÓà´òÓ¡Êä³ö)
-extern const char*	get_herror_str(long _error);//»ñµÃ´íÎó×Ö·û´®
+// é”™è¯¯ç 
+extern long get_error();//è·å¾—é”™è¯¯ç 
+extern const char*	get_error_str(long _error);//è·å¾—é”™è¯¯å­—ç¬¦ä¸²
+extern const char*	get_herror_str();//è·å¾—é”™è¯¯å­—ç¬¦ä¸²(linuxä¸‹è°ƒç”¨æ—¶æ— é”™è¯¯ä¼šå¤šä½™æ‰“å°è¾“å‡º)
+extern const char*	get_herror_str(long _error);//è·å¾—é”™è¯¯å­—ç¬¦ä¸²
 
-// ÎÄ¼şÄ¿Â¼Ïà¹Ø
-extern bool	findDirectory(pc_str _dir);//²éÑ¯Ä¿Â¼ÊÇ·ñ´æÔÚ
-extern bool	createDirectory(pc_str _dir,char _break = '/');//´´½¨Ä¿Â¼
+// æ–‡ä»¶ç›®å½•ç›¸å…³
+extern bool	findDirectory(pc_str _dir);//æŸ¥è¯¢ç›®å½•æ˜¯å¦å­˜åœ¨
+extern bool	createDirectory(pc_str _dir,char _break = '/');//åˆ›å»ºç›®å½•

@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 #include "basicTypes.h"
 #include <time.h>
 #ifdef WIN32	//WIN32
-#include <winsock2.h>//Î´·ÅÖÃÍøÂç¶¨Òå³åÍ»
+#include <winsock2.h>//æœªæ”¾ç½®ç½‘ç»œå®šä¹‰å†²çª
 #include <windows.h>
 #else	//linux
 #include <sys/time.h>
@@ -22,27 +22,27 @@ struct SYSTEMTIME
 };
 #endif // WIN32
 
-extern uint32	getTickCount	();//--- »ñµÃÏµÍ³Æô¶¯ºÁÃë
-extern uint64	getTickCount64	();//--- »ñµÃÏµÍ³Æô¶¯ºÁÃë(64Î»)
-extern uint64	getSystemTick64	();//--- »ñµÃÏµÍ³Æô¶¯ºÁÃë(64Î»)¡¾ĞèÒªÊÖ¶¯¸üĞÂ¡¿
-extern uint64	setSystemTick64	();//--- ÉèÖÃÏµÍ³Æô¶¯ºÁÃë
-extern uint64	getSecond		();//--- »ñµÃÏµÍ³ÃëÊ±¼ä
-extern uint64	getMillisecond	();//--- »ñµÃÏµÍ³ºÁÃëÊ±¼ä
-extern uint64	getMicroseconds	();//--- »ñµÃÏµÍ³Î¢ÃëÊ±¼ä
-extern uint64	getClockTime	();//--- »ñµÃÊ±ÖÓÊ±¼ä(ºÁÃë)
-extern void	    setStartTime    ( uint64 time );//--- ÉèÖÃÏµÍ³ÆğÊ¼Ê±¼ä£¬ÓÃÓÚµ÷ÊÔ
-extern uint64	getTime			();//--- »ñµÃÏµÍ³Ê±¼ä
+extern uint32	getTickCount	();//--- è·å¾—ç³»ç»Ÿå¯åŠ¨æ¯«ç§’
+extern uint64	getTickCount64	();//--- è·å¾—ç³»ç»Ÿå¯åŠ¨æ¯«ç§’(64ä½)
+extern uint64	getSystemTick64	();//--- è·å¾—ç³»ç»Ÿå¯åŠ¨æ¯«ç§’(64ä½)ã€éœ€è¦æ‰‹åŠ¨æ›´æ–°ã€‘
+extern uint64	setSystemTick64	();//--- è®¾ç½®ç³»ç»Ÿå¯åŠ¨æ¯«ç§’
+extern uint64	getSecond		();//--- è·å¾—ç³»ç»Ÿç§’æ—¶é—´
+extern uint64	getMillisecond	();//--- è·å¾—ç³»ç»Ÿæ¯«ç§’æ—¶é—´
+extern uint64	getMicroseconds	();//--- è·å¾—ç³»ç»Ÿå¾®ç§’æ—¶é—´
+extern uint64	getClockTime	();//--- è·å¾—æ—¶é’Ÿæ—¶é—´(æ¯«ç§’)
+extern void	    setStartTime    ( uint64 time );//--- è®¾ç½®ç³»ç»Ÿèµ·å§‹æ—¶é—´ï¼Œç”¨äºè°ƒè¯•
+extern uint64	getTime			();//--- è·å¾—ç³»ç»Ÿæ—¶é—´
 extern uint32	getTime32		();
-extern uint64	setSysTime		();//--- »ñµÃÏµÍ³Ê±¼ä
+extern uint64	setSysTime		();//--- è·å¾—ç³»ç»Ÿæ—¶é—´
 extern uint64	getSysTime		();
-extern uint64	getDayBeginTime	(); //--- »ñµÃ½ñÈÕ¿ªÊ¼Ê±¼ä
-extern int32	getLocalTime	(struct tm* _Tm,const uint64* _Time); //--- »ñµÃ±¾µØÊ±¼ä
+extern uint64	getDayBeginTime	(); //--- è·å¾—ä»Šæ—¥å¼€å§‹æ—¶é—´
+extern int32	getLocalTime	(struct tm* _Tm,const uint64* _Time); //--- è·å¾—æœ¬åœ°æ—¶é—´
 extern int32	getLocalTime	(struct tm* _Tm,uint64 _Time);
-extern int32	diffTimeDay		(uint32 _early,uint32 _late);//--- »ñµÃÊ±¼äÏà²îÌìÊı
-extern int32	diffTimeWeek	(uint64 _early,uint64 _late);//--- »ñµÃÊ±¼äÏà²îÖÜÊı
-extern int32	diffTimeMonth	(uint64 _early,uint64 _late);//--- »ñµÃÊ±¼äÏà²îÔÂÊı
-extern pc_str	time_format		(uint64 _time);//--- Ê±¼ä¸ñÊ½»¯(YYYY-MM-DD HH:MM:SS)
-extern void		dSleep			(uint32 millisecond);//--- Ë¯Ãß
-extern bool		isDayExpired	(uint64 _early, uint64 _late, uint16 _limit);//--- ÌìÊıÊÇ·ñµ½ÆÚ
+extern int32	diffTimeDay		(uint32 _early,uint32 _late);//--- è·å¾—æ—¶é—´ç›¸å·®å¤©æ•°
+extern int32	diffTimeWeek	(uint64 _early,uint64 _late);//--- è·å¾—æ—¶é—´ç›¸å·®å‘¨æ•°
+extern int32	diffTimeMonth	(uint64 _early,uint64 _late);//--- è·å¾—æ—¶é—´ç›¸å·®æœˆæ•°
+extern pc_str	time_format		(uint64 _time);//--- æ—¶é—´æ ¼å¼åŒ–(YYYY-MM-DD HH:MM:SS)
+extern void		dSleep			(uint32 millisecond);//--- ç¡çœ 
+extern bool		isDayExpired	(uint64 _early, uint64 _late, uint16 _limit);//--- å¤©æ•°æ˜¯å¦åˆ°æœŸ
 extern bool		isDayExpired	(uint16 _diff, uint16 _limit);
 extern void		getLocalTime	(SYSTEMTIME&systime);

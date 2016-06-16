@@ -1,11 +1,11 @@
-
+ï»¿
 #include "platform.h"
 #include "stringFunctions.h"
 #ifdef WIN32
 #include <windows.h>
 #else//WIN32
-#include <sys/types.h>	//ÏµÍ³ÀàĞÍ¶¨Òå
-#include <errno.h>		//°üº¬´ËÎÄ¼ş¾Í»áÉèÖÃerrno±äÁ¿
+#include <sys/types.h>	//ç³»ç»Ÿç±»å‹å®šä¹‰
+#include <errno.h>		//åŒ…å«æ­¤æ–‡ä»¶å°±ä¼šè®¾ç½®errnoå˜é‡
 #include <netdb.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -30,7 +30,7 @@ const char*	get_error_str(long _error){
 	long _size = ::FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
 										nullptr,
 										_error,
-										MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),/*Ä¬ÈÏÓïÑÔ*/ 
+										MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),/*é»˜è®¤è¯­è¨€*/ 
 										szMessage,
 										sizeof(szMessage),
 										nullptr );
@@ -139,111 +139,111 @@ bool createDirectory(pc_str _dir, char _break){
 
 /*linux
 //------------------------------ 
-stat£¨È¡µÃÎÄ¼ş×´Ì¬£©  
-Ïà¹Øº¯Êı  fstat£¬lstat£¬chmod£¬chown£¬readlink£¬utime
-±íÍ·ÎÄ¼ş  #include<sys/stat.h>
+statï¼ˆå–å¾—æ–‡ä»¶çŠ¶æ€ï¼‰  
+ç›¸å…³å‡½æ•°  fstatï¼Œlstatï¼Œchmodï¼Œchownï¼Œreadlinkï¼Œutime
+è¡¨å¤´æ–‡ä»¶  #include<sys/stat.h>
 #include<unistd.h>
-¶¨Òåº¯Êı  int stat(const char * file_name,struct stat *buf);
-º¯ÊıËµÃ÷  stat()ÓÃÀ´½«²ÎÊıfile_nameËùÖ¸µÄÎÄ¼ş×´Ì¬£¬¸´ÖÆµ½²ÎÊıbufËùÖ¸µÄ½á¹¹ÖĞ¡£
-ÏÂÃæÊÇstruct statÄÚ¸÷²ÎÊıµÄËµÃ÷
+å®šä¹‰å‡½æ•°  int stat(const char * file_name,struct stat *buf);
+å‡½æ•°è¯´æ˜  stat()ç”¨æ¥å°†å‚æ•°file_nameæ‰€æŒ‡çš„æ–‡ä»¶çŠ¶æ€ï¼Œå¤åˆ¶åˆ°å‚æ•°bufæ‰€æŒ‡çš„ç»“æ„ä¸­ã€‚
+ä¸‹é¢æ˜¯struct statå†…å„å‚æ•°çš„è¯´æ˜
 //------------------------------ 
 
 //------------------------------ 
-*¼ì²éÊÇ·ñ¿ÉÒÔ¶Á/Ğ´Ä³Ò»ÒÑ´æÔÚµÄÎÄ¼ş
-±íÍ·ÎÄ¼ş  #include<unistd.h>
-¶¨Òåº¯Êı  int access(const char * pathname,int mode);
-@mode:R_OK¡¾¶Á¡¿W_OK¡¾Ğ´¡¿X_OK¡¾Ö´ĞĞ¡¿F_OK¡¾´æÔÚ¡¿
-·µ»Ø£ºÈôËùÓĞÓû²éºËµÄÈ¨ÏŞ¶¼Í¨¹ıÁË¼ì²éÔò·µ»Ø0Öµ£¬±íÊ¾³É¹¦£¬Ö»ÒªÓĞÒ»È¨ÏŞ±»½ûÖ¹Ôò·µ»Ø-1
-´íÎó´úÂë:
-EACCESS ²ÎÊıpathname ËùÖ¸¶¨µÄÎÄ¼ş²»·ûºÏËùÒªÇó²âÊÔµÄÈ¨ÏŞ¡£
-EROFS Óû²âÊÔĞ´ÈëÈ¨ÏŞµÄÎÄ¼ş´æÔÚÓÚÖ»¶ÁÎÄ¼şÏµÍ³ÄÚ¡£
-EFAULT ²ÎÊıpathnameÖ¸Õë³¬³ö¿É´æÈ¡ÄÚ´æ¿Õ¼ä¡£
-EINVAL ²ÎÊımode ²»ÕıÈ·¡£
-ENAMETOOLONG ²ÎÊıpathnameÌ«³¤¡£
-ENOTDIR ²ÎÊıpathnameÎªÒ»Ä¿Â¼¡£
-ENOMEM ºËĞÄÄÚ´æ²»×ã
-ELOOP ²ÎÊıpathnameÓĞ¹ı¶à·ûºÅÁ¬½ÓÎÊÌâ¡£
-EIO I/O ´æÈ¡´íÎó¡£
+*æ£€æŸ¥æ˜¯å¦å¯ä»¥è¯»/å†™æŸä¸€å·²å­˜åœ¨çš„æ–‡ä»¶
+è¡¨å¤´æ–‡ä»¶  #include<unistd.h>
+å®šä¹‰å‡½æ•°  int access(const char * pathname,int mode);
+@mode:R_OKã€è¯»ã€‘W_OKã€å†™ã€‘X_OKã€æ‰§è¡Œã€‘F_OKã€å­˜åœ¨ã€‘
+è¿”å›ï¼šè‹¥æ‰€æœ‰æ¬²æŸ¥æ ¸çš„æƒé™éƒ½é€šè¿‡äº†æ£€æŸ¥åˆ™è¿”å›0å€¼ï¼Œè¡¨ç¤ºæˆåŠŸï¼Œåªè¦æœ‰ä¸€æƒé™è¢«ç¦æ­¢åˆ™è¿”å›-1
+é”™è¯¯ä»£ç :
+EACCESS å‚æ•°pathname æ‰€æŒ‡å®šçš„æ–‡ä»¶ä¸ç¬¦åˆæ‰€è¦æ±‚æµ‹è¯•çš„æƒé™ã€‚
+EROFS æ¬²æµ‹è¯•å†™å…¥æƒé™çš„æ–‡ä»¶å­˜åœ¨äºåªè¯»æ–‡ä»¶ç³»ç»Ÿå†…ã€‚
+EFAULT å‚æ•°pathnameæŒ‡é’ˆè¶…å‡ºå¯å­˜å–å†…å­˜ç©ºé—´ã€‚
+EINVAL å‚æ•°mode ä¸æ­£ç¡®ã€‚
+ENAMETOOLONG å‚æ•°pathnameå¤ªé•¿ã€‚
+ENOTDIR å‚æ•°pathnameä¸ºä¸€ç›®å½•ã€‚
+ENOMEM æ ¸å¿ƒå†…å­˜ä¸è¶³
+ELOOP å‚æ•°pathnameæœ‰è¿‡å¤šç¬¦å·è¿æ¥é—®é¢˜ã€‚
+EIO I/O å­˜å–é”™è¯¯ã€‚
 //------------------------------ 
-*ÒÀ×ÖÄ¸Ë³ĞòÅÅĞòÄ¿Â¼½á¹¹
-±íÍ·ÎÄ¼ş  #include<dirent.h>
-¶¨Òåº¯Êı  int alphasort(const struct dirent **a,const struct dirent **b);
-º¯ÊıËµÃ÷  alphasort()Îªscandir()×îºóµ÷ÓÃqsort()º¯ÊıÊ±´«¸øqsort()×÷ÎªÅĞ¶ÏµÄº¯Êı£¬ÏêÏ¸ËµÃ÷Çë²Î¿¼scandir()¼°qsort()¡£
-·µ»ØÖµ  ²Î¿¼qsort()¡£
-·¶Àı:
-//* ¶ÁÈ¡/Ä¿Â¼ÏÂËùÓĞµÄÄ¿Â¼½á¹¹£¬²¢ÒÀ×ÖÄ¸Ë³ĞòÅÅÁĞ
+*ä¾å­—æ¯é¡ºåºæ’åºç›®å½•ç»“æ„
+è¡¨å¤´æ–‡ä»¶  #include<dirent.h>
+å®šä¹‰å‡½æ•°  int alphasort(const struct dirent **a,const struct dirent **b);
+å‡½æ•°è¯´æ˜  alphasort()ä¸ºscandir()æœ€åè°ƒç”¨qsort()å‡½æ•°æ—¶ä¼ ç»™qsort()ä½œä¸ºåˆ¤æ–­çš„å‡½æ•°ï¼Œè¯¦ç»†è¯´æ˜è¯·å‚è€ƒscandir()åŠqsort()ã€‚
+è¿”å›å€¼  å‚è€ƒqsort()ã€‚
+èŒƒä¾‹:
+//* è¯»å–/ç›®å½•ä¸‹æ‰€æœ‰çš„ç›®å½•ç»“æ„ï¼Œå¹¶ä¾å­—æ¯é¡ºåºæ’åˆ—
 main()
 {
 	struct dirent **namelist;
 	int i,total;
-	total = scandir(¡°/¡±,&namelist ,0,alphasort);
+	total = scandir(â€œ/â€,&namelist ,0,alphasort);
 	if(total <0)
-		perror(¡°scandir¡±);
+		perror(â€œscandirâ€);
 	else
 	{
 		for(i=0;i<total;i++)
-			printf(¡°%s\n¡±,namelist[i]->d_name);
-		printf(¡°total = %d\n¡±,total);
+			printf(â€œ%s\nâ€,namelist[i]->d_name);
+		printf(â€œtotal = %d\nâ€,total);
 	}
 }
 //------------------------------ 
 
 //------------------------------ 
-*chdir£¨¸Ä±äµ±Ç°µÄ¹¤×÷£¨Ä¿Â¼£©  
-Ïà¹Øº¯Êı  getcwd£¬chroot
-±íÍ·ÎÄ¼ş  #include<unistd.h>
-¶¨Òåº¯Êı  int chdir(const char * path);
-º¯ÊıËµÃ÷  chdir()ÓÃÀ´½«µ±Ç°µÄ¹¤×÷Ä¿Â¼¸Ä±ä³ÉÒÔ²ÎÊıpathËùÖ¸µÄÄ¿Â¼¡£
-·µ»ØÖµ  Ö´ĞĞ³É¹¦Ôò·µ»Ø0£¬Ê§°Ü·µ»Ø-1£¬errnoÎª´íÎó´úÂë¡£
+*chdirï¼ˆæ”¹å˜å½“å‰çš„å·¥ä½œï¼ˆç›®å½•ï¼‰  
+ç›¸å…³å‡½æ•°  getcwdï¼Œchroot
+è¡¨å¤´æ–‡ä»¶  #include<unistd.h>
+å®šä¹‰å‡½æ•°  int chdir(const char * path);
+å‡½æ•°è¯´æ˜  chdir()ç”¨æ¥å°†å½“å‰çš„å·¥ä½œç›®å½•æ”¹å˜æˆä»¥å‚æ•°pathæ‰€æŒ‡çš„ç›®å½•ã€‚
+è¿”å›å€¼  æ‰§è¡ŒæˆåŠŸåˆ™è¿”å›0ï¼Œå¤±è´¥è¿”å›-1ï¼Œerrnoä¸ºé”™è¯¯ä»£ç ã€‚
 //------------------------------ 
-*fchdir£¨¸Ä±äµ±Ç°µÄ¹¤×÷Ä¿Â¼£©  
-Ïà¹Øº¯Êı  getcwd£¬chroot
-±íÍ·ÎÄ¼ş  #include<unistd.h>
-¶¨Òåº¯Êı  int fchdir(int fd);
-º¯ÊıËµÃ÷  fchdir()ÓÃÀ´½«µ±Ç°µÄ¹¤×÷Ä¿Â¼¸Ä±ä³ÉÒÔ²ÎÊıfd ËùÖ¸µÄÎÄ¼şÃèÊö´Ê¡£
-·µ»ØÖµÖ´  ĞĞ³É¹¦Ôò·µ»Ø0£¬Ê§°Ü·µ»Ø-1£¬errnoÎª´íÎó´úÂë¡£
+*fchdirï¼ˆæ”¹å˜å½“å‰çš„å·¥ä½œç›®å½•ï¼‰  
+ç›¸å…³å‡½æ•°  getcwdï¼Œchroot
+è¡¨å¤´æ–‡ä»¶  #include<unistd.h>
+å®šä¹‰å‡½æ•°  int fchdir(int fd);
+å‡½æ•°è¯´æ˜  fchdir()ç”¨æ¥å°†å½“å‰çš„å·¥ä½œç›®å½•æ”¹å˜æˆä»¥å‚æ•°fd æ‰€æŒ‡çš„æ–‡ä»¶æè¿°è¯ã€‚
+è¿”å›å€¼æ‰§  è¡ŒæˆåŠŸåˆ™è¿”å›0ï¼Œå¤±è´¥è¿”å›-1ï¼Œerrnoä¸ºé”™è¯¯ä»£ç ã€‚
 //------------------------------ 
-*getcwd£¨È¡µÃµ±Ç°µÄ¹¤×÷Ä¿Â¼£©  
-Ïà¹Øº¯Êı  get_current_dir_name£¬getwd£¬chdir
-±íÍ·ÎÄ¼ş  #include<unistd.h>
-¶¨Òåº¯Êı  char * getcwd(char * buf,size_t size);
-º¯ÊıËµÃ÷  getcwd()»á½«µ±Ç°µÄ¹¤×÷Ä¿Â¼¾ø¶ÔÂ·¾¶¸´ÖÆµ½²ÎÊıbufËùÖ¸µÄÄÚ´æ¿Õ¼ä£¬²ÎÊısizeÎªbufµÄ¿Õ¼ä´óĞ¡¡£
-ÔÚµ÷ÓÃ´Ëº¯ÊıÊ±£¬bufËùÖ¸µÄÄÚ´æ¿Õ¼äÒª×ã¹»´ó£¬Èô¹¤×÷Ä¿Â¼¾ø¶ÔÂ·¾¶µÄ×Ö·û´®³¤¶È³¬¹ı²ÎÊısize´óĞ¡£¬Ôò»ØÖµNULL£¬
-errnoµÄÖµÔòÎªERANGE¡£ÌÈÈô²ÎÊıbufÎªNULL£¬getcwd()»áÒÀ²ÎÊısizeµÄ´óĞ¡×Ô¶¯ÅäÖÃÄÚ´æ(Ê¹ÓÃmalloc())£¬
-Èç¹û²ÎÊısizeÒ²Îª0£¬Ôògetcwd()»áÒÀ¹¤×÷Ä¿Â¼¾ø¶ÔÂ·¾¶µÄ×Ö·û´®³Ì¶ÈÀ´¾ö¶¨ËùÅäÖÃµÄÄÚ´æ´óĞ¡£¬½ø³Ì¿ÉÒÔÔÚÊ¹ÓÃÍê´Ë×Ö·û´®ºóÀûÓÃfree()À´ÊÍ·Å´Ë¿Õ¼ä¡£
-·µ»ØÖµ  Ö´ĞĞ³É¹¦Ôò½«½á¹û¸´ÖÆµ½²ÎÊıbufËùÖ¸µÄÄÚ´æ¿Õ¼ä£¬»òÊÇ·µ»Ø×Ô¶¯ÅäÖÃµÄ×Ö·û´®Ö¸Õë¡£Ê§°Ü·µ»ØNULL£¬´íÎó´úÂë´æÓÚerrno¡£
+*getcwdï¼ˆå–å¾—å½“å‰çš„å·¥ä½œç›®å½•ï¼‰  
+ç›¸å…³å‡½æ•°  get_current_dir_nameï¼Œgetwdï¼Œchdir
+è¡¨å¤´æ–‡ä»¶  #include<unistd.h>
+å®šä¹‰å‡½æ•°  char * getcwd(char * buf,size_t size);
+å‡½æ•°è¯´æ˜  getcwd()ä¼šå°†å½“å‰çš„å·¥ä½œç›®å½•ç»å¯¹è·¯å¾„å¤åˆ¶åˆ°å‚æ•°bufæ‰€æŒ‡çš„å†…å­˜ç©ºé—´ï¼Œå‚æ•°sizeä¸ºbufçš„ç©ºé—´å¤§å°ã€‚
+åœ¨è°ƒç”¨æ­¤å‡½æ•°æ—¶ï¼Œbufæ‰€æŒ‡çš„å†…å­˜ç©ºé—´è¦è¶³å¤Ÿå¤§ï¼Œè‹¥å·¥ä½œç›®å½•ç»å¯¹è·¯å¾„çš„å­—ç¬¦ä¸²é•¿åº¦è¶…è¿‡å‚æ•°sizeå¤§å°ï¼Œåˆ™å›å€¼NULLï¼Œ
+errnoçš„å€¼åˆ™ä¸ºERANGEã€‚å€˜è‹¥å‚æ•°bufä¸ºNULLï¼Œgetcwd()ä¼šä¾å‚æ•°sizeçš„å¤§å°è‡ªåŠ¨é…ç½®å†…å­˜(ä½¿ç”¨malloc())ï¼Œ
+å¦‚æœå‚æ•°sizeä¹Ÿä¸º0ï¼Œåˆ™getcwd()ä¼šä¾å·¥ä½œç›®å½•ç»å¯¹è·¯å¾„çš„å­—ç¬¦ä¸²ç¨‹åº¦æ¥å†³å®šæ‰€é…ç½®çš„å†…å­˜å¤§å°ï¼Œè¿›ç¨‹å¯ä»¥åœ¨ä½¿ç”¨å®Œæ­¤å­—ç¬¦ä¸²ååˆ©ç”¨free()æ¥é‡Šæ”¾æ­¤ç©ºé—´ã€‚
+è¿”å›å€¼  æ‰§è¡ŒæˆåŠŸåˆ™å°†ç»“æœå¤åˆ¶åˆ°å‚æ•°bufæ‰€æŒ‡çš„å†…å­˜ç©ºé—´ï¼Œæˆ–æ˜¯è¿”å›è‡ªåŠ¨é…ç½®çš„å­—ç¬¦ä¸²æŒ‡é’ˆã€‚å¤±è´¥è¿”å›NULLï¼Œé”™è¯¯ä»£ç å­˜äºerrnoã€‚
 //------------------------------ 
 
 //------------------------------ 
-*chmod£¨¸Ä±äÎÄ¼şµÄÈ¨ÏŞ£©  
-Ïà¹Øº¯Êı  fchmod£¬stat£¬open£¬chown
-±íÍ·ÎÄ¼ş  #include<sys/types.h>
+*chmodï¼ˆæ”¹å˜æ–‡ä»¶çš„æƒé™ï¼‰  
+ç›¸å…³å‡½æ•°  fchmodï¼Œstatï¼Œopenï¼Œchown
+è¡¨å¤´æ–‡ä»¶  #include<sys/types.h>
 #include<sys/stat.h>
-¶¨Òåº¯Êı  int chmod(const char * path,mode_t mode);
-º¯ÊıËµÃ÷  chmod()»áÒÀ²ÎÊımode È¨ÏŞÀ´¸ü¸Ä²ÎÊıpath Ö¸¶¨ÎÄ¼şµÄÈ¨ÏŞ¡£
+å®šä¹‰å‡½æ•°  int chmod(const char * path,mode_t mode);
+å‡½æ•°è¯´æ˜  chmod()ä¼šä¾å‚æ•°mode æƒé™æ¥æ›´æ”¹å‚æ•°path æŒ‡å®šæ–‡ä»¶çš„æƒé™ã€‚
 
 //------------------------------ 
-closedir£¨¹Ø±ÕÄ¿Â¼£©  
-Ïà¹Øº¯Êı  opendir
-±íÍ·ÎÄ¼ş  #include<sys/types.h>
+closedirï¼ˆå…³é—­ç›®å½•ï¼‰  
+ç›¸å…³å‡½æ•°  opendir
+è¡¨å¤´æ–‡ä»¶  #include<sys/types.h>
 #include<dirent.h>
-¶¨Òåº¯Êı  int closedir(DIR *dir);
+å®šä¹‰å‡½æ•°  int closedir(DIR *dir);
 //------------------------------ 
-opendir£¨´ò¿ªÄ¿Â¼£©  
-Ïà¹Øº¯Êı  open£¬readdir£¬closedir£¬rewinddir£¬seekdir£¬telldir£¬scandir
-±íÍ·ÎÄ¼ş  #include<sys/types.h>
+opendirï¼ˆæ‰“å¼€ç›®å½•ï¼‰  
+ç›¸å…³å‡½æ•°  openï¼Œreaddirï¼Œclosedirï¼Œrewinddirï¼Œseekdirï¼Œtelldirï¼Œscandir
+è¡¨å¤´æ–‡ä»¶  #include<sys/types.h>
 #include<dirent.h>
-¶¨Òåº¯Êı  DIR * opendir(const char * name);
-º¯ÊıËµÃ÷  opendir()ÓÃÀ´´ò¿ª²ÎÊınameÖ¸¶¨µÄÄ¿Â¼£¬²¢·µ»ØDIR*ĞÎÌ¬µÄÄ¿Â¼Á÷£¬ºÍopen()ÀàËÆ£¬½ÓÏÂÀ´¶ÔÄ¿Â¼µÄ¶ÁÈ¡ºÍËÑË÷¶¼ÒªÊ¹ÓÃ´Ë·µ»ØÖµ¡£
-·µ»ØÖµ  ³É¹¦Ôò·µ»ØDIR* ĞÍÌ¬µÄÄ¿Â¼Á÷£¬´ò¿ªÊ§°ÜÔò·µ»ØNULL¡£
+å®šä¹‰å‡½æ•°  DIR * opendir(const char * name);
+å‡½æ•°è¯´æ˜  opendir()ç”¨æ¥æ‰“å¼€å‚æ•°nameæŒ‡å®šçš„ç›®å½•ï¼Œå¹¶è¿”å›DIR*å½¢æ€çš„ç›®å½•æµï¼Œå’Œopen()ç±»ä¼¼ï¼Œæ¥ä¸‹æ¥å¯¹ç›®å½•çš„è¯»å–å’Œæœç´¢éƒ½è¦ä½¿ç”¨æ­¤è¿”å›å€¼ã€‚
+è¿”å›å€¼  æˆåŠŸåˆ™è¿”å›DIR* å‹æ€çš„ç›®å½•æµï¼Œæ‰“å¼€å¤±è´¥åˆ™è¿”å›NULLã€‚
 //------------------------------ 
-readdir£¨¶ÁÈ¡Ä¿Â¼£©  
-Ïà¹Øº¯Êı  open£¬opendir£¬closedir£¬rewinddir£¬seekdir£¬telldir£¬scandir
-±íÍ·ÎÄ¼ş  #include<sys/types.h>
+readdirï¼ˆè¯»å–ç›®å½•ï¼‰  
+ç›¸å…³å‡½æ•°  openï¼Œopendirï¼Œclosedirï¼Œrewinddirï¼Œseekdirï¼Œtelldirï¼Œscandir
+è¡¨å¤´æ–‡ä»¶  #include<sys/types.h>
 #include<dirent.h>
-¶¨Òåº¯Êı  struct dirent * readdir(DIR * dir);
-º¯ÊıËµÃ÷  readdir()·µ»Ø²ÎÊıdirÄ¿Â¼Á÷µÄÏÂ¸öÄ¿Â¼½øÈëµã¡£
-½á¹¹dirent¶¨ÒåÈçÏÂ
+å®šä¹‰å‡½æ•°  struct dirent * readdir(DIR * dir);
+å‡½æ•°è¯´æ˜  readdir()è¿”å›å‚æ•°dirç›®å½•æµçš„ä¸‹ä¸ªç›®å½•è¿›å…¥ç‚¹ã€‚
+ç»“æ„direntå®šä¹‰å¦‚ä¸‹
 struct dirent
 {
 	ino_t d_ino;
@@ -252,42 +252,42 @@ struct dirent
 	unsigned char d_type;
 	har d_name[256;
 	};
-d_ino ´ËÄ¿Â¼½øÈëµãµÄinode
-d_off Ä¿Â¼ÎÄ¼ş¿ªÍ·ÖÁ´ËÄ¿Â¼½øÈëµãµÄÎ»ÒÆ
-d_reclen _nameµÄ³¤¶È£¬²»°üº¬NULL×Ö·û
-d_type d_name ËùÖ¸µÄÎÄ¼şÀàĞÍ
-d_name ÎÄ¼şÃû
-·µ»ØÖµ  ³É¹¦Ôò·µ»ØÏÂ¸öÄ¿Â¼½øÈëµã¡£ÓĞ´íÎó·¢Éú»ò¶ÁÈ¡µ½Ä¿Â¼ÎÄ¼şÎ²Ôò·µ»ØNULL¡£
+d_ino æ­¤ç›®å½•è¿›å…¥ç‚¹çš„inode
+d_off ç›®å½•æ–‡ä»¶å¼€å¤´è‡³æ­¤ç›®å½•è¿›å…¥ç‚¹çš„ä½ç§»
+d_reclen _nameçš„é•¿åº¦ï¼Œä¸åŒ…å«NULLå­—ç¬¦
+d_type d_name æ‰€æŒ‡çš„æ–‡ä»¶ç±»å‹
+d_name æ–‡ä»¶å
+è¿”å›å€¼  æˆåŠŸåˆ™è¿”å›ä¸‹ä¸ªç›®å½•è¿›å…¥ç‚¹ã€‚æœ‰é”™è¯¯å‘ç”Ÿæˆ–è¯»å–åˆ°ç›®å½•æ–‡ä»¶å°¾åˆ™è¿”å›NULLã€‚
 //------------------------------ 
-rewinddir£¨ÖØÉè¶ÁÈ¡Ä¿Â¼µÄÎ»ÖÃÎª¿ªÍ·Î»ÖÃ£©  
-Ïà¹Øº¯Êı  open£¬opendir£¬closedir£¬telldir£¬seekdir£¬readdir£¬scandir
-±íÍ·ÎÄ¼ş  #include<sys/types.h>
+rewinddirï¼ˆé‡è®¾è¯»å–ç›®å½•çš„ä½ç½®ä¸ºå¼€å¤´ä½ç½®ï¼‰  
+ç›¸å…³å‡½æ•°  openï¼Œopendirï¼Œclosedirï¼Œtelldirï¼Œseekdirï¼Œreaddirï¼Œscandir
+è¡¨å¤´æ–‡ä»¶  #include<sys/types.h>
 #include<dirent.h>
-¶¨Òåº¯Êı  void rewinddir(DIR *dir);
-º¯ÊıËµÃ÷  rewinddir()ÓÃÀ´ÉèÖÃ²ÎÊıdir Ä¿Â¼Á÷Ä¿Ç°µÄ¶ÁÈ¡Î»ÖÃÎªÔ­À´¿ªÍ·µÄ¶ÁÈ¡Î»ÖÃ¡£
+å®šä¹‰å‡½æ•°  void rewinddir(DIR *dir);
+å‡½æ•°è¯´æ˜  rewinddir()ç”¨æ¥è®¾ç½®å‚æ•°dir ç›®å½•æµç›®å‰çš„è¯»å–ä½ç½®ä¸ºåŸæ¥å¼€å¤´çš„è¯»å–ä½ç½®ã€‚
 //------------------------------ 
-seekdir£¨ÉèÖÃÏÂ»Ø¶ÁÈ¡Ä¿Â¼µÄÎ»ÖÃ£©  
-Ïà¹Øº¯Êı  open£¬opendir£¬closedir£¬rewinddir£¬telldir£¬readdir£¬scandir
-±íÍ·ÎÄ¼ş  #include<dirent.h>
-¶¨Òåº¯Êı  void seekdir(DIR * dir,off_t offset);
-º¯ÊıËµÃ÷  seekdir()ÓÃÀ´ÉèÖÃ²ÎÊıdirÄ¿Â¼Á÷Ä¿Ç°µÄ¶ÁÈ¡Î»ÖÃ£¬ÔÚµ÷ÓÃreaddir()Ê±±ã´Ó´ËĞÂÎ»ÖÃ¿ªÊ¼¶ÁÈ¡¡£²ÎÊıoffset ´ú±í¾àÀëÄ¿Â¼ÎÄ¼ş¿ªÍ·µÄÆ«ÒÆÁ¿¡£
+seekdirï¼ˆè®¾ç½®ä¸‹å›è¯»å–ç›®å½•çš„ä½ç½®ï¼‰  
+ç›¸å…³å‡½æ•°  openï¼Œopendirï¼Œclosedirï¼Œrewinddirï¼Œtelldirï¼Œreaddirï¼Œscandir
+è¡¨å¤´æ–‡ä»¶  #include<dirent.h>
+å®šä¹‰å‡½æ•°  void seekdir(DIR * dir,off_t offset);
+å‡½æ•°è¯´æ˜  seekdir()ç”¨æ¥è®¾ç½®å‚æ•°dirç›®å½•æµç›®å‰çš„è¯»å–ä½ç½®ï¼Œåœ¨è°ƒç”¨readdir()æ—¶ä¾¿ä»æ­¤æ–°ä½ç½®å¼€å§‹è¯»å–ã€‚å‚æ•°offset ä»£è¡¨è·ç¦»ç›®å½•æ–‡ä»¶å¼€å¤´çš„åç§»é‡ã€‚
 //------------------------------ 
-telldir£¨È¡µÃÄ¿Â¼Á÷µÄ¶ÁÈ¡Î»ÖÃ£©  
-Ïà¹Øº¯Êı  open£¬opendir£¬closedir£¬rewinddir£¬seekdir£¬readdir£¬scandir
-±íÍ·ÎÄ¼ş  #include<dirent.h>
-¶¨Òåº¯Êı  off_t telldir(DIR *dir);
-º¯ÊıËµÃ÷  telldir()·µ»Ø²ÎÊıdirÄ¿Â¼Á÷Ä¿Ç°µÄ¶ÁÈ¡Î»ÖÃ¡£´Ë·µ»ØÖµ´ú±í¾àÀëÄ¿Â¼ÎÄ¼ş¿ªÍ·µÄÆ«ÒÆÁ¿·µ»ØÖµ·µ»ØÏÂ¸ö¶ÁÈ¡Î»ÖÃ£¬ÓĞ´íÎó·¢ÉúÊ±·µ»Ø-1¡£
-´íÎó´úÂë  EBADF²ÎÊıdirÎªÎŞĞ§µÄÄ¿Â¼Á÷¡£
+telldirï¼ˆå–å¾—ç›®å½•æµçš„è¯»å–ä½ç½®ï¼‰  
+ç›¸å…³å‡½æ•°  openï¼Œopendirï¼Œclosedirï¼Œrewinddirï¼Œseekdirï¼Œreaddirï¼Œscandir
+è¡¨å¤´æ–‡ä»¶  #include<dirent.h>
+å®šä¹‰å‡½æ•°  off_t telldir(DIR *dir);
+å‡½æ•°è¯´æ˜  telldir()è¿”å›å‚æ•°dirç›®å½•æµç›®å‰çš„è¯»å–ä½ç½®ã€‚æ­¤è¿”å›å€¼ä»£è¡¨è·ç¦»ç›®å½•æ–‡ä»¶å¼€å¤´çš„åç§»é‡è¿”å›å€¼è¿”å›ä¸‹ä¸ªè¯»å–ä½ç½®ï¼Œæœ‰é”™è¯¯å‘ç”Ÿæ—¶è¿”å›-1ã€‚
+é”™è¯¯ä»£ç   EBADFå‚æ•°dirä¸ºæ— æ•ˆçš„ç›®å½•æµã€‚
 //------------------------------ 
 
 //------------------------------ 
-utime£¨ĞŞ¸ÄÎÄ¼şµÄ´æÈ¡Ê±¼äºÍ¸ü¸ÄÊ±¼ä£©  
-Ïà¹Øº¯Êı  utimes£¬stat
-±íÍ·ÎÄ¼ş  #include<sys/types.h>
+utimeï¼ˆä¿®æ”¹æ–‡ä»¶çš„å­˜å–æ—¶é—´å’Œæ›´æ”¹æ—¶é—´ï¼‰  
+ç›¸å…³å‡½æ•°  utimesï¼Œstat
+è¡¨å¤´æ–‡ä»¶  #include<sys/types.h>
 #include<utime.h>
-¶¨Òåº¯Êı  int utime(const char * filename,struct utimbuf * buf);
-º¯ÊıËµÃ÷  utime()ÓÃÀ´ĞŞ¸Ä²ÎÊıfilenameÎÄ¼şËùÊôµÄinode´æÈ¡Ê±¼ä¡£
-½á¹¹utimbuf¶¨ÒåÈçÏÂ
+å®šä¹‰å‡½æ•°  int utime(const char * filename,struct utimbuf * buf);
+å‡½æ•°è¯´æ˜  utime()ç”¨æ¥ä¿®æ”¹å‚æ•°filenameæ–‡ä»¶æ‰€å±çš„inodeå­˜å–æ—¶é—´ã€‚
+ç»“æ„utimbufå®šä¹‰å¦‚ä¸‹
 struct utimbuf
 {
 	time_t actime;
@@ -296,17 +296,17 @@ struct utimbuf
 //------------------------------ 
 
 //------------------------------ 
-remove£¨É¾³ıÎÄ¼ş£©  
-Ïà¹Øº¯Êı  link£¬rename£¬unlink
-±íÍ·ÎÄ¼ş  #include<stdio.h>
-¶¨Òåº¯Êı  int remove(const char * pathname);
+removeï¼ˆåˆ é™¤æ–‡ä»¶ï¼‰  
+ç›¸å…³å‡½æ•°  linkï¼Œrenameï¼Œunlink
+è¡¨å¤´æ–‡ä»¶  #include<stdio.h>
+å®šä¹‰å‡½æ•°  int remove(const char * pathname);
 
 //------------------------------ 
-rename£¨¸ü¸ÄÎÄ¼şÃû³Æ»òÎ»ÖÃ£©  
-Ïà¹Øº¯Êı  link£¬unlink£¬symlink
-±íÍ·ÎÄ¼ş  #include<stdio.h>
-¶¨Òåº¯Êı  int rename(const char * oldpath,const char * newpath);
-º¯ÊıËµÃ÷  rename()»á½«²ÎÊıoldpath ËùÖ¸¶¨µÄÎÄ¼şÃû³Æ¸ÄÎª²ÎÊınewpathËùÖ¸µÄÎÄ¼şÃû³Æ¡£ÈônewpathËùÖ¸¶¨µÄÎÄ¼şÒÑ´æÔÚ£¬Ôò»á±»É¾³ı¡£
-·µ»ØÖµ  Ö´ĞĞ³É¹¦Ôò·µ»Ø0£¬Ê§°Ü·µ»Ø-1£¬´íÎóÔ­Òò´æÓÚerrno
+renameï¼ˆæ›´æ”¹æ–‡ä»¶åç§°æˆ–ä½ç½®ï¼‰  
+ç›¸å…³å‡½æ•°  linkï¼Œunlinkï¼Œsymlink
+è¡¨å¤´æ–‡ä»¶  #include<stdio.h>
+å®šä¹‰å‡½æ•°  int rename(const char * oldpath,const char * newpath);
+å‡½æ•°è¯´æ˜  rename()ä¼šå°†å‚æ•°oldpath æ‰€æŒ‡å®šçš„æ–‡ä»¶åç§°æ”¹ä¸ºå‚æ•°newpathæ‰€æŒ‡çš„æ–‡ä»¶åç§°ã€‚è‹¥newpathæ‰€æŒ‡å®šçš„æ–‡ä»¶å·²å­˜åœ¨ï¼Œåˆ™ä¼šè¢«åˆ é™¤ã€‚
+è¿”å›å€¼  æ‰§è¡ŒæˆåŠŸåˆ™è¿”å›0ï¼Œå¤±è´¥è¿”å›-1ï¼Œé”™è¯¯åŸå› å­˜äºerrno
 */
 //-------------------------------------------------------------

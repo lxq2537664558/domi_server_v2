@@ -1,4 +1,4 @@
-// server
+ï»¿// server
 
 #include "../common/singleton/singleton.h"
 #include "../common/basic/stringFunctions.h"
@@ -16,20 +16,20 @@ public:
 	void showServerInfo();
 	void showToConsole(const char* pFormat, ...);
 	void setServicesTitle(const char* pTitle, ...);
-	bool initialize(uint16 uServerID);	// ³õÊ¼»¯server
-	bool startServices();				// Æô¶¯server
-	void denyServices();				// ¾Ü¾ø·şÎñ
-	void stopServices();				// ¹Ø±Õserver
+	bool initialize(uint16 uServerID);	// åˆå§‹åŒ–server
+	bool startServices();				// å¯åŠ¨server
+	void denyServices();				// æ‹’ç»æœåŠ¡
+	void stopServices();				// å…³é—­server
 	
 public:
 	CTcpServer	m_el;					// eventloop
-	bool		m_bInitFlag;			// serverÊÇ·ñÒÑ¾­³õÊ¼»¯Íê³É
-	uint32		m_uLoadFlag;			// ¶ÁÈ¡ÅäÖÃÍê³É±êÊ¾
-	uint64		m_tmStartTime;			// Æô¶¯Ê±¼ä
-	char		m_szTitle[256];			// ±êÌâ
-	uint8		m_uServerType;			// ·şÎñÆ÷ÀàĞÍ
-	uint16		m_uServerID;			// ·şÎñÆ÷id
+	bool		m_bInitFlag;			// serveræ˜¯å¦å·²ç»åˆå§‹åŒ–å®Œæˆ
+	uint32		m_uLoadFlag;			// è¯»å–é…ç½®å®Œæˆæ ‡ç¤º
+	uint64		m_tmStartTime;			// å¯åŠ¨æ—¶é—´
+	char		m_szTitle[256];			// æ ‡é¢˜
+	uint8		m_uServerType;			// æœåŠ¡å™¨ç±»å‹
+	uint16		m_uServerID;			// æœåŠ¡å™¨id
 #ifdef WIN32
-	static HANDLE m_hServerEvent;		// È«¾ÖÊÂ¼ş¾ä±ú£¬windowsÏÂ×÷Î¨Ò»½ø³Ì±êÊ¾
+	static HANDLE m_hServerEvent;		// å…¨å±€äº‹ä»¶å¥æŸ„ï¼Œwindowsä¸‹ä½œå”¯ä¸€è¿›ç¨‹æ ‡ç¤º
 #endif
 };

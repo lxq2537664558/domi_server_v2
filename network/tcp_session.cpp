@@ -1,7 +1,7 @@
-/******************************************************************** 
-´´½¨Ê±¼ä:        2015/06/28 14:03
-ÎÄ¼şÃû³Æ:        tcp_context.cpp
-ÎÄ¼ş×÷Õß:        Domi
+ï»¿/******************************************************************** 
+åˆ›å»ºæ—¶é—´:        2015/06/28 14:03
+æ–‡ä»¶åç§°:        tcp_context.cpp
+æ–‡ä»¶ä½œè€…:        Domi
 *********************************************************************/
 
 #include <functional>
@@ -28,7 +28,7 @@ CTcpSession::~CTcpSession(){
 	}
 }
 
-// ³õÊ¼»¯
+// åˆå§‹åŒ–
 void CTcpSession::initialize(){
 	m_mask = 0;
 	m_fd = 0;
@@ -50,12 +50,12 @@ bool CTcpSession::send(const char* pBuffer,int32 nSize){
 void CTcpSession::disconnect(){
 }
 
-// Ô¶³ÌµØÖ·
+// è¿œç¨‹åœ°å€
 ulong CTcpSession::remote_address(){
 	return 0;
 }
 
-// Ô¶³ÌµØÖ·µÄip
+// è¿œç¨‹åœ°å€çš„ip
 const char*	CTcpSession::remote_ip(){
 	return "test";
 }

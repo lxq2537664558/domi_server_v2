@@ -1,4 +1,4 @@
-// ÄÚ´æ²Ù×÷Ïà¹Øº¯Êı
+ï»¿// å†…å­˜æ“ä½œç›¸å…³å‡½æ•°
 
 #pragma once
 #include <iostream>
@@ -6,9 +6,9 @@
 #include "basicTypes.h"
 
 #ifdef WIN32	//WIN32
-extern int32 dMemcpy(void* _Dst,size_t _DstSize,const void* _Src,size_t _MaxCount);  //ÄÚ´æ¿½±´
-extern int32 dMemmove(void* _Dst,size_t _DstSize,const void* _Src,size_t _MaxCount); //ÄÚ´æÒÆ¶¯
+extern int32 dMemcpy(void* _Dst,size_t _DstSize,const void* _Src,size_t _MaxCount);  //å†…å­˜æ‹·è´
+extern int32 dMemmove(void* _Dst,size_t _DstSize,const void* _Src,size_t _MaxCount); //å†…å­˜ç§»åŠ¨
 #else	// linux
-extern void* dMemcpy(void* _Dst,size_t _DstSize,const void* _Src,size_t _MaxCount);  //ÄÚ´æ¿½±´
-extern void* dMemmove(void* _Dst,size_t _DstSize,const void* _Src,size_t _MaxCount); //ÄÚ´æÒÆ¶¯
+extern void* dMemcpy(void* _Dst,size_t _DstSize,const void* _Src,size_t _MaxCount);  //å†…å­˜æ‹·è´
+extern void* dMemmove(void* _Dst,size_t _DstSize,const void* _Src,size_t _MaxCount); //å†…å­˜ç§»åŠ¨
 #endif

@@ -1,9 +1,9 @@
-#include <signal.h>
+ï»¿#include <signal.h>
 #include <iostream>
 #include "domiServer.h"
 #include "../common/log/log.h"
 
-// ´¦ÀíÏûÏ¢
+// å¤„ç†æ¶ˆæ¯
 static uint64 STnowTime = getSecond();
 static uint32 STnum = 0;
 static uint32 STCount = 0;
@@ -32,13 +32,13 @@ void CDomiServer::installBreakHandlers(){
 #ifdef WIN32
 	::signal(SIGBREAK, onBreak);
 #else
-	::signal(SIGSTOP, onBreak);//Í£Ö¹½ø³Ì
-	::signal(SIGTSTP, onBreak);//ÖÕ¶ËÉÏ·¢³öµÄÍ£Ö¹ĞÅºÅ
-	::signal(SIGKILL, onBreak);//É±ËÀ½ø³ÌĞÅºÅ
-	::signal(SIGHUP, onBreak);//ÔÚ¿ØÖÆÖÕ¶ËÉÏÊÇ¹ÒÆğĞÅºÅ, »òÕß¿ØÖÆ½ø³Ì½áÊø
+	::signal(SIGSTOP, onBreak);//åœæ­¢è¿›ç¨‹
+	::signal(SIGTSTP, onBreak);//ç»ˆç«¯ä¸Šå‘å‡ºçš„åœæ­¢ä¿¡å·
+	::signal(SIGKILL, onBreak);//æ€æ­»è¿›ç¨‹ä¿¡å·
+	::signal(SIGHUP, onBreak);//åœ¨æ§åˆ¶ç»ˆç«¯ä¸Šæ˜¯æŒ‚èµ·ä¿¡å·, æˆ–è€…æ§åˆ¶è¿›ç¨‹ç»“æŸ
 #endif
-	::signal(SIGTERM, onBreak);	//Ê¹ÓÃkillÖ¸ÁîÊ±
-	::signal(SIGINT, onBreak);	//Ctrl+CµÄÊ±ºò½ø³ÌÊÕµ½ĞÅºÅ£¬´¥·¢OnBreakº¯Êı
+	::signal(SIGTERM, onBreak);	//ä½¿ç”¨killæŒ‡ä»¤æ—¶
+	::signal(SIGINT, onBreak);	//Ctrl+Cçš„æ—¶å€™è¿›ç¨‹æ”¶åˆ°ä¿¡å·ï¼Œè§¦å‘OnBreakå‡½æ•°
 }
 
 bool CDomiServer::loadConfig(){
@@ -60,7 +60,7 @@ void CDomiServer::showToConsole(const char* pFormat, ...){
 }
 
 void CDomiServer::setServicesTitle(const char* pTitle, ...){
-#ifdef WIN32 // ÉèÖÃ¿ØÖÆÌ¨±êÌâ
+#ifdef WIN32 // è®¾ç½®æ§åˆ¶å°æ ‡é¢˜
 	if (!pTitle && m_szTitle[0])
 		return;
 
@@ -93,9 +93,9 @@ bool CDomiServer::initialize(uint16 uServerID) {
 	showServerInfo();
 
 #ifdef WIN32
-	char szEvent[256] = { 0 };	/*Î¨Ò»ÊÂ¼ş*/
+	char szEvent[256] = { 0 };	/*å”¯ä¸€äº‹ä»¶*/
 	dSprintf(szEvent, sizeof(szEvent), "%s_%d", "DomiServer", uServerID);
-	// Èç¹û¿ÉÒÔ´ò¿ªÖ¸¶¨ÊÂ¼şÃûµÄÊÂ¼ş£¬ËµÃ÷ÒÑ¾­´æÔÚ¸Ã½ø³Ì
+	// å¦‚æœå¯ä»¥æ‰“å¼€æŒ‡å®šäº‹ä»¶åçš„äº‹ä»¶ï¼Œè¯´æ˜å·²ç»å­˜åœ¨è¯¥è¿›ç¨‹
 	m_hServerEvent = ::OpenEvent(EVENT_ALL_ACCESS, FALSE, szEvent);
 	if (m_hServerEvent)
 		return false;
@@ -104,17 +104,17 @@ bool CDomiServer::initialize(uint16 uServerID) {
 
 	char logprev[256] = { 0 };
 	dSprintf(logprev, sizeof(logprev), "%s_%u", "test_log_", uServerID);
-	CLog::initialize(NULL, logprev);// ÈÕÖ¾³õÊ¼»¯
+	CLog::initialize(NULL, logprev);// æ—¥å¿—åˆå§‹åŒ–
 
-	// ÕâÀï±ØĞëÔÚCLog::initilizeÖ®ºó
-	// ÊØ»¤½ø³Ì TODO
+	// è¿™é‡Œå¿…é¡»åœ¨CLog::initilizeä¹‹å
+	// å®ˆæŠ¤è¿›ç¨‹ TODO
 	if (m_bInitFlag) return true;
 
-	::srand((uint32)getTime());		// ÉèÖÃËæ»úÖÖ×Ó
-	m_uServerID = uServerID;		// ÉèÖÃ·şÎñÆ÷id
+	::srand((uint32)getTime());		// è®¾ç½®éšæœºç§å­
+	m_uServerID = uServerID;		// è®¾ç½®æœåŠ¡å™¨id
 
-	if (!loadConfig()) {// load ·şÎñÆ÷ÅäÖÃ
-		CLog::error("ÅäÖÃÎÄ¼ş×°ÔØÊ§°Ü!...");
+	if (!loadConfig()) {// load æœåŠ¡å™¨é…ç½®
+		CLog::error("é…ç½®æ–‡ä»¶è£…è½½å¤±è´¥!...");
 		return false;
 	}
 
@@ -137,6 +137,6 @@ void CDomiServer::denyServices(){
 
 void CDomiServer::stopServices(){
 	CLog::info("server shutdown!...");
-	// ¸÷ÖÖµ×²ãµÄshutdown
+	// å„ç§åº•å±‚çš„shutdown
 	CLog::shutdown();
 }

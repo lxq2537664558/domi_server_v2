@@ -1,9 +1,9 @@
-#pragma once
+ï»¿#pragma once
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
-// »ù´¡ÀàĞÍ
+// åŸºç¡€ç±»å‹
 typedef signed char			int8;	///< Compiler independent Signed Char
 typedef unsigned char		uint8;	///< Compiler independent Unsigned Char
 typedef signed short		int16;	///< Compiler independent Signed 16-bit short
@@ -29,7 +29,7 @@ typedef unsigned char		BYTE;
 typedef unsigned short		WORD;
 typedef unsigned long		DWORD;
 
-// ³£ÓÃ³£Á¿
+// å¸¸ç”¨å¸¸é‡
 static const float32 Float_Pi			= float32(3.14159265358979323846);			///< Constant float PI
 static const float32 Float_2Pi			= float32(2.0 * 3.14159265358979323846);	///< Constant float 2*PI
 static const float32 Float_InversePi	= float32(1.0 / 3.14159265358979323846);	///< Constant float 1 / PI
@@ -48,7 +48,7 @@ static const int32	int32_MIN			= int32(-2147483647 - 1);					///< Constant Min L
 static const int32	int32_MAX			= int32(2147483647);						///< Constant Max Limit int32
 static const uint32	uint32_MAX			= uint32(0xffffffff);						///< Constant Max Limit uint32
 
-// ³£ÓÃdefine
+// å¸¸ç”¨define
 #ifndef MIN
 #define MIN(a,b)	(a > b ? b: a)
 #endif//MIN
@@ -57,7 +57,7 @@ static const uint32	uint32_MAX			= uint32(0xffffffff);						///< Constant Max Li
 #define MAX(a,b)	(a > b ? a: b)
 #endif//MAX
 
-// Î»²Ù×÷
+// ä½æ“ä½œ
 #ifndef _BIT32
 #define _BIT32(x) ((x < 32) ? (1 << (x)) : 0) 					///< Returns value with bit x set (2^x)
 #endif//_BIT32
@@ -67,7 +67,7 @@ static const uint32	uint32_MAX			= uint32(0xffffffff);						///< Constant Max Li
 #endif//_SET_BIT32
 
 #ifndef _CHECK_BIT
-#define _CHECK_BIT(mark,bit)	((mark & bit) > 0)				///¼ì²âÊÇ·ñ´æÔÚÏàÍ¬Î»
+#define _CHECK_BIT(mark,bit)	((mark & bit) > 0)				///æ£€æµ‹æ˜¯å¦å­˜åœ¨ç›¸åŒä½
 #endif//_CHECK_BIT
 
 #ifndef _BIT64
@@ -83,7 +83,7 @@ static const uint32	uint32_MAX			= uint32(0xffffffff);						///< Constant Max Li
 #endif//_SET_BIT8ARRAY
 
 #ifndef _CHECK_BIT8ARRAY
-#define _CHECK_BIT8ARRAY(arr,bit)	((arr[bit >> 3] & uint8(1 << (bit & 0x7))) != 0)	///¼ì²âÊÇ·ñ´æÔÚÏàÍ¬Î»
+#define _CHECK_BIT8ARRAY(arr,bit)	((arr[bit >> 3] & uint8(1 << (bit & 0x7))) != 0)	///æ£€æµ‹æ˜¯å¦å­˜åœ¨ç›¸åŒä½
 #endif//_CHECK_BIT8ARRAY
 
 #define MAKE_UINT64(h,l)((uint64)( (((uint64)((uint32)(h) & 0xffffffff)) << 32) | ((uint32)((uint64)(l) & 0xffffffff)) ))
@@ -99,13 +99,13 @@ static const uint32	uint32_MAX			= uint32(0xffffffff);						///< Constant Max Li
 #define LU8(w)			((BYTE)((DWORD)(w) & 0xff))
 #define HU8(w)			((BYTE)((DWORD)(w) >> 8))
 
-/*(type *)0£º°Ñ0µØÖ·µ±³ÉtypeÀàĞÍµÄÖ¸Õë¡£
-((type *)0)->field£º¶ÔÓ¦ÓòµÄ±äÁ¿¡£
-&((type *)0)->field:È¡¸Ã±äÁ¿µÄµØÖ·£¬ÆäÊµ¾ÍµÈÓÚ¸ÃÓòÏà¶ÔÓÚ0µØÖ·µÄÆ«ÒÆÁ¿¡£
-(size_t)&(((type *)0)->field)£º½«¸ÃµØÖ·£¨Æ«ÒÆÁ¿£©×ª»¯Îªsize_tĞÍÊı¾İ¡£*/
-#define OFFSETOF(s,m)	offsetof(s,m)			///¼ÆËãÊı¾İ½á¹¹³ÉÔ±±äÁ¿Æ«ÒÆÖµ(struct,³ÉÔ±±äÁ¿)
+/*(type *)0ï¼šæŠŠ0åœ°å€å½“æˆtypeç±»å‹çš„æŒ‡é’ˆã€‚
+((type *)0)->fieldï¼šå¯¹åº”åŸŸçš„å˜é‡ã€‚
+&((type *)0)->field:å–è¯¥å˜é‡çš„åœ°å€ï¼Œå…¶å®å°±ç­‰äºè¯¥åŸŸç›¸å¯¹äº0åœ°å€çš„åç§»é‡ã€‚
+(size_t)&(((type *)0)->field)ï¼šå°†è¯¥åœ°å€ï¼ˆåç§»é‡ï¼‰è½¬åŒ–ä¸ºsize_tå‹æ•°æ®ã€‚*/
+#define OFFSETOF(s,m)	offsetof(s,m)			///è®¡ç®—æ•°æ®ç»“æ„æˆå‘˜å˜é‡åç§»å€¼(struct,æˆå‘˜å˜é‡)
 
-// Èı½ÇĞÎÊı¾İ
+// ä¸‰è§’å½¢æ•°æ®
 #ifndef M_PI
 #define M_PI		3.1415926535897932384626433
 #endif//M_PI
@@ -122,5 +122,5 @@ static const uint32	uint32_MAX			= uint32(0xffffffff);						///< Constant Max Li
 #define M_2PI_F	(M_PI_F * 2.0f)
 #endif//M_2PI_F
 
-//ËùÓĞ±ÈÂÊ·ÖÄ¸(°ÙÍò)
+//æ‰€æœ‰æ¯”ç‡åˆ†æ¯(ç™¾ä¸‡)
 #define Max_Probability		1000000

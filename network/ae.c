@@ -1,4 +1,4 @@
-// ee.c
+ï»¿// ee.c
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -344,10 +344,10 @@ static int processTimeEvents(aeEventLoop *eventLoop) {
  * The function returns the number of events processed. */
 int aeProcessEvents(aeEventLoop *eventLoop, int flags)
 {
-    int processed = 0, numevents; // ÕâÀï±íÊ¾ÉùÃ÷Á½±ßint±äÁ¿
+    int processed = 0, numevents; // è¿™é‡Œè¡¨ç¤ºå£°æ˜ä¸¤è¾¹intå˜é‡
 
     /* Nothing to do? return ASAP */
-	/* As Soon As Possible ¾¡¿ì*/
+	/* As Soon As Possible å°½å¿«*/
     if (!(flags & AE_TIME_EVENTS) && !(flags & AE_FILE_EVENTS)) return 0;
 
     /* Note that we want call select() even if there are no

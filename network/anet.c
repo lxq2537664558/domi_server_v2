@@ -1,4 +1,4 @@
-
+ï»¿
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -40,9 +40,9 @@ int anetSetBlock(char *err, int fd, int non_block) {
     int flags;
 
 #ifdef WIN32
-    if (non_block) /* ÉèÖÃ·Ç×èÈû */
+    if (non_block) /* Ã‰ÄÃ–Ä‚Ë‡Ã‡Ã—ÄÄŒÅ± */
 		flags = 1;
-    else	/* Çå³ı·Ç×èÈû */
+    else	/* Ã‡ÄºÅ‚Ã½Ë‡Ã‡Ã—ÄÄŒÅ± */
 		flags = 0;
 
     if (ioctlsocket(fd, FIONBIO, &flags) == -1) {

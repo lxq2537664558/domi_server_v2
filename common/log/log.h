@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <ctime>
 #include <stdlib.h>
@@ -15,19 +15,19 @@ class CLog
 private:
 	enum _e_LogType{
 		LT_Log,		// log
-		LT_Warn,	// ¾¯¸æ
-		LT_Error,	// ´íÎó
+		LT_Warn,	// è­¦å‘Š
+		LT_Error,	// é”™è¯¯
 		LT_Max
 	};
 
 private:
-	static bool				m_bInitiate;			// ÊÇ·ñÒÑ¾­³õÊ¼»¯
-	static SYSTEMTIME		m_gSysTime[LT_Max];		// ´´½¨Ê±¼ä
-	static char				m_szDirectory[256];		// Â·¾¶
-	static char				m_szBuffer[2048];		// »º´æ
-	static CMutex			m_csLock;				// »¥³âËø
-	static CFileStream		m_clgFile[LT_Max];		// Ä¿±êÎÄ¼ş 
-    static char             m_logFilePrev[ 256 ];	// logÎÄ¼şÇ°×º
+	static bool				m_bInitiate;			// æ˜¯å¦å·²ç»åˆå§‹åŒ–
+	static SYSTEMTIME		m_gSysTime[LT_Max];		// åˆ›å»ºæ—¶é—´
+	static char				m_szDirectory[256];		// è·¯å¾„
+	static char				m_szBuffer[2048];		// ç¼“å­˜
+	static CMutex			m_csLock;				// äº’æ–¥é”
+	static CFileStream		m_clgFile[LT_Max];		// ç›®æ ‡æ–‡ä»¶ 
+    static char             m_logFilePrev[ 256 ];	// logæ–‡ä»¶å‰ç¼€
 
 private:
 	static void	createAFile	(uint8 ucType);
@@ -36,8 +36,8 @@ private:
 	static void	_print		(const char* pFormat,va_list&argptr);
 
 public:
-	static bool	initialize(const char* root = nullptr, const char* prev = nullptr);		// ³õÊ¼»¯
-	static void	shutdown();	// ¹Ø±Õ
+	static bool	initialize(const char* root = nullptr, const char* prev = nullptr);		// åˆå§‹åŒ–
+	static void	shutdown();	// å…³é—­
 	static void	print(const char* pFormat,...);
 	static void info(const char* pFormat, ...);
 	static void	warn(const char* pFormat,...);

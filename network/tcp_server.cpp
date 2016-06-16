@@ -1,4 +1,4 @@
-#include "tcp_server.h"
+ï»¿#include "tcp_server.h"
 #include <functional>
 #include "../common/log/log.h"
 
@@ -39,7 +39,7 @@ void CTcpServer::Initialize() {
 	m_sessions.clear();
 	CTcpSession* pSession;
 	for (int i = 0; i < 5;++i){
-		pSession = new CTcpSession();//new ¼ÓÀ¨ºÅ£¬±íÊ¾ÏÔÊ½µ÷ÓÃ¹¹Ôìº¯Êý£¬²»´øÀ¨ºÅ±íÊ¾ÒþÊ½µ÷ÓÃ¹¹Ôìº¯Êý
+		pSession = new CTcpSession();//new åŠ æ‹¬å·ï¼Œè¡¨ç¤ºæ˜¾å¼è°ƒç”¨æž„é€ å‡½æ•°ï¼Œä¸å¸¦æ‹¬å·è¡¨ç¤ºéšå¼è°ƒç”¨æž„é€ å‡½æ•°
 		pSession->m_id = i;
 		pSession->m_tcpServer = this;
 		m_free.push(pSession);
@@ -68,10 +68,10 @@ bool CTcpServer::StartServer(uint16 port) {
 
 bool CTcpServer::StopServer(){
 	aeStop(m_event_loop);
-	CLog::info("[CTcpServer::StopServer],close tcp server¡­¡­");
+	CLog::info("[CTcpServer::StopServer],close tcp serverâ€¦â€¦");
 	timeval delay = { 0, 0 };
 
-	//CLog::info("[CTcpServer::StopServer],Ïß³ÌÈ«²¿¹Ø±Õ¡­¡­");
+	//CLog::info("[CTcpServer::StopServer],çº¿ç¨‹å…¨éƒ¨å…³é—­â€¦â€¦");
 	return true;
 }
 
@@ -88,7 +88,7 @@ void CTcpServer::DoAccept(aeEventLoop* el, int fd, void* privdata, int mask){
 		return;
 	}
 
-	// ÕâÀïÐèÒª´´½¨Ò»¸ösession
+	// è¿™é‡Œéœ€è¦åˆ›å»ºä¸€ä¸ªsession
 	CTcpSession* pSession = nullptr;
 	if (pEl->m_free.empty()){
 		printf("fuck ----->\n");
@@ -142,7 +142,7 @@ void CTcpServer::DoRead(aeEventLoop* el, int fd, void* privdata, int mask){
 }
 
 THREAD_RETURN CTcpServer::_el_thread_(void* _param){
-	CLog::info("[CTcpServer]Ïß³ÌÆô¶¯,id = %d¡­¡­", CThread::getCurrentThreadID());
+	CLog::info("[CTcpServer]çº¿ç¨‹å¯åŠ¨,id = %dâ€¦â€¦", CThread::getCurrentThreadID());
 	CTcpServer* _this = (CTcpServer*)_param;
 	if (!_this) {
 #ifdef WIN32
@@ -155,7 +155,7 @@ THREAD_RETURN CTcpServer::_el_thread_(void* _param){
 	_this->StartServer(17777);
 	_this->m_stop = 1;
 	printf("prt = %d\n", _this->m_event_loop);
-	CLog::info("[CTcpServer]Ïß³Ì½áÊø¡­¡­");
+	CLog::info("[CTcpServer]çº¿ç¨‹ç»“æŸâ€¦â€¦");
 	return 0;
 }
 
@@ -164,24 +164,24 @@ bool CTcpServer::OnProcessPacket(CTcpContext* pContext)
 {
 while (pContext->m_inbuf && pContext->getPendingLen() > sizeof(PacketHead))
 {
-//Ò»¸öÐ­Òé°üµÄÇëÇóÍ·»¹Ã»¶ÁÍê£¬Ôò¼ÌÐøÑ­»·¶Á»òÕßµÈ´ýÏÂÒ»¸ölibeventÊ±¼ä½øÐÐÑ­»·¶Á
+//ä¸€ä¸ªåè®®åŒ…çš„è¯·æ±‚å¤´è¿˜æ²¡è¯»å®Œï¼Œåˆ™ç»§ç»­å¾ªçŽ¯è¯»æˆ–è€…ç­‰å¾…ä¸‹ä¸€ä¸ªlibeventæ—¶é—´è¿›è¡Œå¾ªçŽ¯è¯»
 PacketHead* pHead = (PacketHead*)(pContext->m_inbuf + pContext->m_readBegin);
-if (pHead->uPacketSize > MaxBuffLen || pHead->uPacketSize < sizeof(PacketHead)){ // ÏûÏ¢°üÍ·²»ºÏ·¨
+if (pHead->uPacketSize > MaxBuffLen || pHead->uPacketSize < sizeof(PacketHead)){ // æ¶ˆæ¯åŒ…å¤´ä¸åˆæ³•
 pContext->disconnect();
 return false;
 }
 
-if (pHead->uPacketSize > pContext->getPendingLen()){ // Ê£ÓàÊý¾Ý²»¹»Ò»¸ö°ü£¬¼ÌÐøÊÕ
-printf("Ê£ÓàÊý¾Ý²»¹»Ò»¸ö°ü£¬¼ÌÐøÊÕ£¡\n");
+if (pHead->uPacketSize > pContext->getPendingLen()){ // å‰©ä½™æ•°æ®ä¸å¤Ÿä¸€ä¸ªåŒ…ï¼Œç»§ç»­æ”¶
+printf("å‰©ä½™æ•°æ®ä¸å¤Ÿä¸€ä¸ªåŒ…ï¼Œç»§ç»­æ”¶ï¼\n");
 break;
 }
 
-if (pContext->m_readBegin > pContext->m_inbufLen){ // ³öÎÊÌâÁË£¬ÒÑ¶ÁµÄ×Ö½ÚÊý¾ÓÈ»´óÓÚ×ÜÊý£¬Ö±½Ó¶ÏµôÁ¬½Ó
+if (pContext->m_readBegin > pContext->m_inbufLen){ // å‡ºé—®é¢˜äº†ï¼Œå·²è¯»çš„å­—èŠ‚æ•°å±…ç„¶å¤§äºŽæ€»æ•°ï¼Œç›´æŽ¥æ–­æŽ‰è¿žæŽ¥
 pContext->disconnect();
 return false;
 }
 
-// Ñ¹Èëmessage
+// åŽ‹å…¥message
 {
 CCritLocker connMapLock(ConnectLock());
 CTcpSession* pConn = ConnectFind(pContext);
@@ -189,13 +189,13 @@ if (pConn)
 this->m_clMessageQueue.push(pConn->getApplyKey(), pContext, pContext->m_inbuf + pContext->m_readBegin + sizeof(PacketHead), pHead->uPacketSize - sizeof(PacketHead));
 }
 
-//´¦ÀíÏÂÒ»¸öÐ­Òé°ü
+//å¤„ç†ä¸‹ä¸€ä¸ªåè®®åŒ…
 pContext->m_readBegin += pHead->uPacketSize;
 }
 
-// ²»×ãÒ»¸ö°üµÄÊý¾Ý£¬ÒÆ¶¯µ½¿ªÊ¼Î»ÖÃ
+// ä¸è¶³ä¸€ä¸ªåŒ…çš„æ•°æ®ï¼Œç§»åŠ¨åˆ°å¼€å§‹ä½ç½®
 int pending = pContext->getPendingLen();
-if (pending > 0)	// ÓÐÐèÒªÒÆ¶¯µÄ×Ö½Ú
+if (pending > 0)	// æœ‰éœ€è¦ç§»åŠ¨çš„å­—èŠ‚
 memmove(pContext->m_inbuf, pContext->m_inbuf + pContext->m_readBegin, pending);
 
 pContext->m_inbufLen = pending;

@@ -1,9 +1,9 @@
-/******************************************************************** 
-´´½¨Ê±¼ä:        2015/06/22 14:07
-ÎÄ¼şÃû³Æ:        main.cpp
-ÎÄ¼ş×÷Õß:        Domi
-¹¦ÄÜËµÃ÷:        main   
-ÆäËûËµÃ÷:         
+ï»¿/******************************************************************** 
+åˆ›å»ºæ—¶é—´:        2015/06/22 14:07
+æ–‡ä»¶åç§°:        main.cpp
+æ–‡ä»¶ä½œè€…:        Domi
+åŠŸèƒ½è¯´æ˜:        main   
+å…¶ä»–è¯´æ˜:         
 *********************************************************************/
 
 #include <iostream>
@@ -13,12 +13,12 @@
 int main(int argc, char* argv[])
 {
 	if (!CDomiServer::GetSingleton().initialize(7)){
-		printf("CGameServer::Initialize()Ê§°Ü!\n");
+		printf("CGameServer::Initialize()å¤±è´¥!\n");
 		return 0;
 	}
 	
 	if (!CDomiServer::GetSingleton().startServices()) {
-		printf(":StartServices()Æô¶¯·şÎñÊ§°Ü!\n");
+		printf(":StartServices()å¯åŠ¨æœåŠ¡å¤±è´¥!\n");
 	}
 	CDomiServer::GetSingleton().stopServices();
 	dSleep(1000);

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #ifdef WIN32
 #include <winsock2.h>
 #include <windows.h>
@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-// »¥³â
+// äº’æ–¥
 class CMutex
 {
 private:
@@ -55,7 +55,7 @@ public:
 };
 
 
-//ÁÙ½çÇøËø
+//ä¸´ç•ŒåŒºé”
 class CCritLocker
 {
 private:
@@ -78,20 +78,20 @@ public:
 /*
 * linux
 *
-//¾²Ì¬Ëø¡¾È«¾Ö±äÁ¿¡¿
+//é™æ€é”ã€å…¨å±€å˜é‡ã€‘
 pthread_mutex_t mutex=PTHREAD_MUTEX_INITIALIZER
 *
-//×¢ÏúÒ»¸ö»¥³âËø
+//æ³¨é”€ä¸€ä¸ªäº’æ–¥é”
 int pthread_mutex_destroy(pthread_mutex_t *mutex)
 *
-//¼ÓËø
+//åŠ é”
 int pthread_mutex_lock(pthread_mutex_t *mutex)
 *
-//½âËø
+//è§£é”
 int pthread_mutex_unlock(pthread_mutex_t *mutex)
 *
-//²âÊÔ¼ÓËø
+//æµ‹è¯•åŠ é”
 int pthread_mutex_trylock(pthread_mutex_t *mutex)
--ËøÒÑ¾­±»Õ¼¾İÊ±·µ»ØEBUSY
+-é”å·²ç»è¢«å æ®æ—¶è¿”å›EBUSY
 *
 */

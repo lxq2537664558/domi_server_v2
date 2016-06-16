@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 #include "basicTypes.h"
 #include <map>
 
-// ×Ö·û´®×ª»»ÎªÊı×Ö
+// å­—ç¬¦ä¸²è½¬æ¢ä¸ºæ•°å­—
 extern int32 dAtoi(const char*pString);
 extern uint32 dAtoui(const char*pString);
 extern long	dAtol(const char*pString);
@@ -10,36 +10,36 @@ extern double dAtof(const char*pString);
 extern int64 dAtoll(const char*pString);
 extern uint64 dAtoull(const char*pString);
 
-extern uint8 getNumberBit(uint32 uNumber); //»ñµÃuint32Êı¾İÖĞ°üº¬¶àÉÙÎ»
-extern uint32 getAddValue(uint32 uFrom,uint32 uValue,uint32 nMax); //»ñµÃÀÛ¼ÓÊı
-extern uint32 addValue(uint32 uValue,int nValue,uint32 nMax = uint32(-1)); //Ôö¼ÓÊı
-extern bool	setInt(int32&iOld,int32 iNew,int32 iMax = 0x7FFFFFFF,int32 iMin = 0/*0x80000000*/); //ÉèÖÃintÖµ
+extern uint8 getNumberBit(uint32 uNumber); //è·å¾—uint32æ•°æ®ä¸­åŒ…å«å¤šå°‘ä½
+extern uint32 getAddValue(uint32 uFrom,uint32 uValue,uint32 nMax); //è·å¾—ç´¯åŠ æ•°
+extern uint32 addValue(uint32 uValue,int nValue,uint32 nMax = uint32(-1)); //å¢åŠ æ•°
+extern bool	setInt(int32&iOld,int32 iNew,int32 iMax = 0x7FFFFFFF,int32 iMin = 0/*0x80000000*/); //è®¾ç½®intå€¼
 extern bool	setInt8(int8&iOld,int8 iNew,int8 iMax = 0x7F,int8 iMin=0);
-extern bool	updateInt(int32&iValue,int32 iUpdate,int32 iMax = 0x7FFFFFFF,int32 iMin = 0); //¸üĞÂintÖµ
-extern bool	updateUint32(uint32&uValue,int32 iUpdate,uint32 uMax = 0xFFFFFFFF); //¸üĞÂint32Öµ
+extern bool	updateInt(int32&iValue,int32 iUpdate,int32 iMax = 0x7FFFFFFF,int32 iMin = 0); //æ›´æ–°intå€¼
+extern bool	updateUint32(uint32&uValue,int32 iUpdate,uint32 uMax = 0xFFFFFFFF); //æ›´æ–°int32å€¼
 extern bool	canUpdateUint32(uint32 uValue,int32 iUpdate,uint32 uMax = 0xFFFFFFFF);
 extern bool	canUpdateUint32(uint32 uValue,uint32 uUpdate,bool bAdd,uint32 uMax = 0xFFFFFFFF);
 extern bool	updateUint32(uint32&uValue,uint32&uUpdate,bool bAdd,uint32 uMax = 0xFFFFFFFF);
 extern bool	updateUint32_(uint32&uValue,uint32 uUpdate,bool bAdd,uint32 uMax = 0xFFFFFFFF);
-extern bool	updateUint64(uint64&uValue,int64 iUpdate,uint64 uMax = 0xFFFFFFFFFFFFFFFF); //¸üĞÂint64Öµ
+extern bool	updateUint64(uint64&uValue,int64 iUpdate,uint64 uMax = 0xFFFFFFFFFFFFFFFF); //æ›´æ–°int64å€¼
 extern bool	canUpdateUint64(uint64 uValue,int64 iUpdate,uint64 uMax = 0xFFFFFFFFFFFFFFFF);
 extern bool	canUpdateUint64(uint64 uValue,uint64 uUpdate,bool bAdd,uint64 uMax = 0xFFFFFFFFFFFFFFFF);
 extern bool	updateUint64(uint64&uValue,uint64&uUpdate,bool bAdd,uint64 uMax = 0xFFFFFFFFFFFFFFFF);
 extern bool	updateUint64_(uint64&uValue,uint64 uUpdate,bool bAdd,uint64 uMax = 0xFFFFFFFFFFFFFFFF);
 extern bool	canUpdateInt64(int64 iValue,int64 iUpdate,int64 iMax = 0x7FFFFFFFFFFFFFFF,int64 iMin = 0x8000000000000000);
 extern bool	updateInt64	(int64 &iValue,int64 iUpdate,int64 iMax = 0x7FFFFFFFFFFFFFFF,int64 iMin = 0x8000000000000000);
-extern uint32	getUint32Proportion	(uint32 uValue,float32 fRatio,bool bRoundedUp = true); //»ñÈ¡±ÈÀıÖµ
+extern uint32	getUint32Proportion	(uint32 uValue,float32 fRatio,bool bRoundedUp = true); //è·å–æ¯”ä¾‹å€¼
 
-/*³ı·¨ molecular=·Ö×Ó _denominator=·ÖÄ¸ _floor=ÏòÏÂÈ¡Õû*/
+/*é™¤æ³• molecular=åˆ†å­ _denominator=åˆ†æ¯ _floor=å‘ä¸‹å–æ•´*/
 extern uint32	dDivisionUint32	(uint64 _molecular,uint32 _denominator,bool _floor = true);
 extern uint64	dDivisionUint64	(uint64 _molecular,uint64 _denominator,bool _floor = true);
 
-// ³Ë·¨
+// ä¹˜æ³•
 extern bool		canMultiplicationUint16(uint16 _multiplier, uint16 _multiplicand, uint16 uMax = 0xFFFF);
 extern bool		canMultiplicationUint32(uint32 _multiplier, uint32 _multiplicand, uint32 uMax = 0xFFFFFFFF);
 extern void		multiplicationUint32(uint32& _multiplier, float _multiplicand, uint32 uMax = 0xFFFFFFFF);
 
-//Ö¸ÕëÅÅĞò(¿ÕÖ¸ÕëÔÚºó)
+//æŒ‡é’ˆæ’åº(ç©ºæŒ‡é’ˆåœ¨å)
 template<class T>
 inline void	_qsort_pointer(T *_list, const uint32&_count){
 	if(!_list || !_count) return;
@@ -57,18 +57,18 @@ inline void	_qsort_pointer(T *_list, const uint32&_count){
 	}
 }
 
-//ÉèÖÃÖ¸ÕëÖµ
+//è®¾ç½®æŒ‡é’ˆå€¼
 template<class _T>
 inline void	setValue(_T*_pointer,_T _value){
 	if(_pointer) *_pointer = _value;
 }
 
-// ¼ì²é32Î» uBit=µÚ¼¸¸öbitÎ»
+// æ£€æŸ¥32ä½ uBit=ç¬¬å‡ ä¸ªbitä½
 inline bool checkBit32(uint32 uMark, uint8 uBit){
 	return _CHECK_BIT(uMark, _BIT32(uBit));
 }
 
-// ÉèÖÃ32Î»
+// è®¾ç½®32ä½
 inline uint32 setBit32(uint32 uMark, uint8 uBit, bool bSet){
 	_SET_BIT32(uMark, uBit, bSet);
 	return uMark;

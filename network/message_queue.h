@@ -1,9 +1,9 @@
-/******************************************************************** 
-´´½¨Ê±¼ä:        2015/07/01 9:56
-ÎÄ¼şÃû³Æ:        CMessageQueue.h
-ÎÄ¼ş×÷Õß:        Domi
-¹¦ÄÜËµÃ÷:        ÏûÏ¢¶ÓÁĞ  
-ÆäËûËµÃ÷:        ²ÉÓÃË«¶ÓÁĞÇĞ»»¡£
+ï»¿/******************************************************************** 
+åˆ›å»ºæ—¶é—´:        2015/07/01 9:56
+æ–‡ä»¶åç§°:        CMessageQueue.h
+æ–‡ä»¶ä½œè€…:        Domi
+åŠŸèƒ½è¯´æ˜:        æ¶ˆæ¯é˜Ÿåˆ—  
+å…¶ä»–è¯´æ˜:        é‡‡ç”¨åŒé˜Ÿåˆ—åˆ‡æ¢ã€‚
 *********************************************************************/
 
 #pragma once
@@ -15,8 +15,8 @@ class CMessageQueue
 public:
 	enum
 	{
-		message_pop	,//È¡³ö¶ÓÁĞ
-		message_push,//¼ÓÈë¶ÓÁĞ
+		message_pop	,//å–å‡ºé˜Ÿåˆ—
+		message_push,//åŠ å…¥é˜Ÿåˆ—
 		message_max
 	};
 	typedef CQueuePool<_stNetMessage> msg_queue;
@@ -24,7 +24,7 @@ public:
 public:
 	CMessageQueue(){
 		reset();
-		queue_max(60000);	// Ã¿¸ö¶ÓÁĞ×î¶àÓĞ6w¸öÏûÏ¢
+		queue_max(60000);	// æ¯ä¸ªé˜Ÿåˆ—æœ€å¤šæœ‰6wä¸ªæ¶ˆæ¯
 	}
 	~CMessageQueue(){}
 
@@ -34,20 +34,20 @@ public:
 	inline msg_queue*	get_push()				{	return m_message[message_push];	}
 
 public:
-	inline void	reset();					// ¸´Î»(¼ÓËø,±ÜÃâ¶àÏß³ÌÕıÔÚĞ´)
-	inline void	swap_queue();				// ½»»»ÏûÏ¢¶ÓÁĞ(¼ÓËø,±ÜÃâ¶àÏß³ÌÕıÔÚĞ´)
-	inline _stNetMessage* front();			// È¡³öÏûÏ¢Í·(µ¥Ïß³Ì²»ĞèÒª¼ÓËø)
-	inline void	pop();						// È¡³öÏûÏ¢(µ¥Ïß³Ì²»ĞèÒª¼ÓËø)
-	inline bool	push(uint32 _apply_key,char*_buffer, uint16 _size);	// Ğ´ÈëÏûÏ¢(¶àÏß³ÌĞèÒª¼ÓËø)
+	inline void	reset();					// å¤ä½(åŠ é”,é¿å…å¤šçº¿ç¨‹æ­£åœ¨å†™)
+	inline void	swap_queue();				// äº¤æ¢æ¶ˆæ¯é˜Ÿåˆ—(åŠ é”,é¿å…å¤šçº¿ç¨‹æ­£åœ¨å†™)
+	inline _stNetMessage* front();			// å–å‡ºæ¶ˆæ¯å¤´(å•çº¿ç¨‹ä¸éœ€è¦åŠ é”)
+	inline void	pop();						// å–å‡ºæ¶ˆæ¯(å•çº¿ç¨‹ä¸éœ€è¦åŠ é”)
+	inline bool	push(uint32 _apply_key,char*_buffer, uint16 _size);	// å†™å…¥æ¶ˆæ¯(å¤šçº¿ç¨‹éœ€è¦åŠ é”)
 
 protected:
-	uint32		m_queue_max;				//¶ÓÁĞ×î´óÊıÁ¿
-	msg_queue	m_instance[message_max];	//ÏûÏ¢ÊµÀı
-	msg_queue*	m_message[message_max];		//ÏûÏ¢Ö¸Õë
+	uint32		m_queue_max;				//é˜Ÿåˆ—æœ€å¤§æ•°é‡
+	msg_queue	m_instance[message_max];	//æ¶ˆæ¯å®ä¾‹
+	msg_queue*	m_message[message_max];		//æ¶ˆæ¯æŒ‡é’ˆ
 };
 
 //-----------------------------------------------------------------------
-// ÖØÖÃÏûÏ¢¶ÓÁĞ
+// é‡ç½®æ¶ˆæ¯é˜Ÿåˆ—
 inline void	CMessageQueue::reset()
 {
 	try
@@ -66,12 +66,12 @@ inline void	CMessageQueue::reset()
 	}
 }
 
-// ½»»»ÏûÏ¢¶ÓÁĞ
+// äº¤æ¢æ¶ˆæ¯é˜Ÿåˆ—
 inline void	CMessageQueue::swap_queue()
 {
 	try
 	{
-		//ÇĞ»»Ê±ĞèÒª¶ÔÁ½¸ö¶¼¼ÓËø
+		//åˆ‡æ¢æ—¶éœ€è¦å¯¹ä¸¤ä¸ªéƒ½åŠ é”
 		CCritLocker clLock_pop(m_instance[message_pop].get_mutex());
 		CCritLocker clLock_push(m_instance[message_push].get_mutex());
 
@@ -117,7 +117,7 @@ inline bool	CMessageQueue::push(uint32 _apply_key,char* _buffer,uint16 _size)
 		if(!m_message[message_push])
 			return false;
 
-		//Ôö¼ÓËø
+		//å¢åŠ é”
 		CCritLocker clLock(m_message[message_push]->get_mutex());
 		if(m_queue_max && m_message[message_push]->size() > m_queue_max)
 			return false;

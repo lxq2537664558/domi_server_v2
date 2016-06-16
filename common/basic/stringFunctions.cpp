@@ -1,4 +1,4 @@
-#include "basicFunctions.h"
+ï»¿#include "basicFunctions.h"
 #include "stringFunctions.h"
 #include "memoryFunctions.h"
 
@@ -125,7 +125,7 @@ char* dStrupr(char *s){
 }
 
 int32 ismbblead(char c){
-	/*ÊÇ·ñ¿í×Ö½Ú*/ 
+	/*æ˜¯å¦å®½å­—èŠ‚*/ 
 #ifdef WIN32
 	return ::_ismbblead(c);
 #else // WIN32
@@ -147,12 +147,12 @@ int32 ismbblead(char c){
 #endif // WIN32
 }
 
-// ×Ö·û´®±È½Ï(Çø·Ö´óĞ¡Ğ´)
+// å­—ç¬¦ä¸²æ¯”è¾ƒ(åŒºåˆ†å¤§å°å†™)
 int	dStrncmp(const char *s1,const char * s2,int n){
 	return ::strncmp(s1,s2,n);
 }
 
-// ×Ö·û´®±È½Ï(²»Çø·Ö´óĞ¡Ğ´)
+// å­—ç¬¦ä¸²æ¯”è¾ƒ(ä¸åŒºåˆ†å¤§å°å†™)
 int	dStrnicmp(const char *s1,const char * s2,int n){
 #ifdef WIN32
 	return ::_strnicmp(s1,s2,n);
@@ -179,19 +179,19 @@ int	dStrnicmp(const char *s1,const char * s2,int n){
 #endif // WIN32
 }
 
-//×Ö·û´®²éÕÒµÚÒ»´Î³öÏÖµÄÎ»ÖÃ(Çø·Ö´óĞ¡Ğ´)
+//å­—ç¬¦ä¸²æŸ¥æ‰¾ç¬¬ä¸€æ¬¡å‡ºç°çš„ä½ç½®(åŒºåˆ†å¤§å°å†™)
 char* dStrstr(char *haystack,char *needle){
 	return ::strstr(haystack,needle);
 }
 
-//×Ö·û´®²éÕÒµÚÒ»´Î³öÏÖµÄÎ»ÖÃ(²»Çø·Ö´óĞ¡Ğ´)
+//å­—ç¬¦ä¸²æŸ¥æ‰¾ç¬¬ä¸€æ¬¡å‡ºç°çš„ä½ç½®(ä¸åŒºåˆ†å¤§å°å†™)
 char* dStristr(char *haystack,char *needle){
 	//strcasestr(haystack, needle);
 	size_t len = ::dStrlen(needle);
-	if(len == 0) return haystack;	/* ÕâÀïÎÒ²¢Î´ÕÕstrstrÒ»Ñù·µ»Østr£¬¶øÊÇ·µ»ØNULL*/
+	if(len == 0) return haystack;	/* è¿™é‡Œæˆ‘å¹¶æœªç…§strsträ¸€æ ·è¿”å›strï¼Œè€Œæ˜¯è¿”å›NULL*/
 
 	while(*haystack){
-		/* ÕâÀïÊ¹ÓÃÁË¿ÉÏŞ¶¨±È½Ï³¤¶ÈµÄstrnicmp*/
+		/* è¿™é‡Œä½¿ç”¨äº†å¯é™å®šæ¯”è¾ƒé•¿åº¦çš„strnicmp*/
 		if(dStrnicmp(haystack, needle, len) == 0)
 			return haystack;
 		haystack++;
@@ -259,7 +259,7 @@ bool testMultibyte(char* pStr){
 
 	for (uint32 i = uLen;i > 0;i--) {
 		if (!pStr[i - 1]) continue;
-		/*ÊÇ·ñ¿í×Ö½Ú*/ 
+		/*æ˜¯å¦å®½å­—èŠ‚*/ 
 		if (!ismbblead(pStr[i - 1]))break;
 		uMultibyte++;
 		if (!uLastIndex) uLastIndex	= i - 1;
@@ -274,7 +274,7 @@ void wipeOffChar(char* pStr,uint32 uLen,char cChar){
 
 	pStr[uLen] = 0;
 	uint32	uCount = 0;
-	/*1¡¢Çå³ıËùÓĞ×Ö·û*/ 
+	/*1ã€æ¸…é™¤æ‰€æœ‰å­—ç¬¦*/ 
 	for (uint32 i = 0;i < uLen;i++){
 		if (pStr[i] == 0) break;
 		if (pStr[i] != cChar) continue;
@@ -283,7 +283,7 @@ void wipeOffChar(char* pStr,uint32 uLen,char cChar){
 	}
 	if (!uCount) return;
 
-	/*2¡¢ÒÆ¶¯*/ 
+	/*2ã€ç§»åŠ¨*/ 
 	uint32 uMove = 0;
 	for (uint32 i = 0;i < uLen;i++){
 		if (uMove >= uCount) break;
@@ -299,9 +299,9 @@ void filtrationBlank(char* pStr,uint32 uLen){
 	if (!pStr || !uLen) return;
 	pStr[uLen] = 0;
 
-	/*1.½«ËùÓĞÍ·²¿¿Õ¸ñÈ«²¿±äÎª0*/ 
+	/*1.å°†æ‰€æœ‰å¤´éƒ¨ç©ºæ ¼å…¨éƒ¨å˜ä¸º0*/ 
 	for (uint32 i = 0;i < uLen;i++){
-		/*Óöµ½0Ìø³ö*/ 
+		/*é‡åˆ°0è·³å‡º*/ 
 		if (pStr[i] == 0) break;
 		if (pStr[i] == ' '){
 			pStr[i] = 0;
@@ -316,7 +316,7 @@ void filtrationBlank(char* pStr,uint32 uLen){
 			}
 		}
 
-		/*1.½«ËùÓĞÎ²²¿¿Õ¸ñÈ«²¿±äÎª0*/ 
+		/*1.å°†æ‰€æœ‰å°¾éƒ¨ç©ºæ ¼å…¨éƒ¨å˜ä¸º0*/ 
 		for (uint32 j = uLen - 1;j > i;j--){
 			if (pStr[j] == 0) continue;
 			if(pStr[j] == ' '){
@@ -335,7 +335,7 @@ void filtrationBlank(char* pStr,uint32 uLen){
 		break;
 	}
 
-	/*3.½«0Ö®ºóµÄÊı¾İÒÆ¶¯µ½Ç°ÃæÀ´*/ 
+	/*3.å°†0ä¹‹åçš„æ•°æ®ç§»åŠ¨åˆ°å‰é¢æ¥*/ 
 	for (uint32 i = 0;i < uLen;i++){
 		if (pStr[i] == 0) continue;
 		dMemmove(pStr,uLen,pStr + i,uLen - i);
@@ -360,7 +360,7 @@ void getSubString(std::string&strString,std::string&strSubString,char c){
 	int32 iFind = strString.find(c);
 	if(iFind == std::string::npos) iFind = strString.length();
 
-	//ÄÚÈİ¶Îbegin
+	//å†…å®¹æ®µbegin
 	strSubString = strString.substr(0,iFind);
 	strString.erase(0,iFind+1);
 }
@@ -383,7 +383,7 @@ int64 readInt64FromString(std::string&strString,char c){
 	return iRelsult;
 }
 
-uint64 readDateTimeFromString(std::string&strString){//[Äê-ÔÂ-ÈÕ Ê±:·Ö:Ãë]
+uint64 readDateTimeFromString(std::string&strString){//[å¹´-æœˆ-æ—¥ æ—¶:åˆ†:ç§’]
 	if(strString.empty())return 0;
 
 	tm tmTime;
@@ -391,7 +391,7 @@ uint64 readDateTimeFromString(std::string&strString){//[Äê-ÔÂ-ÈÕ Ê±:·Ö:Ãë]
 
 	int32 iTemp;
 	std::string strTemp;
-	//Äê
+	//å¹´
 	getSubString(strString,strTemp,'-');
 	iTemp = readInt32FromString(strTemp);
 	if(iTemp > 1900)
@@ -399,14 +399,14 @@ uint64 readDateTimeFromString(std::string&strString){//[Äê-ÔÂ-ÈÕ Ê±:·Ö:Ãë]
 	else
 		return 0;
 
-	//ÔÂ
+	//æœˆ
 	getSubString(strString,strTemp,'-');
 	iTemp = readInt32FromString(strTemp);
 	if(iTemp > 0)
 		tmTime.tm_mon = iTemp - 1;
 	else
 		return 0;
-	//ÈÕ
+	//æ—¥
 	getSubString(strString,strTemp,' ');
 	iTemp = readInt32FromString(strTemp);
 	if(iTemp > 0 && iTemp <= 31)
@@ -414,7 +414,7 @@ uint64 readDateTimeFromString(std::string&strString){//[Äê-ÔÂ-ÈÕ Ê±:·Ö:Ãë]
 	else
 		return 0;
 
-	//Ê±
+	//æ—¶
 	getSubString(strString,strTemp,':');
 	iTemp = readInt32FromString(strTemp);
 	if(iTemp >= 0 && iTemp <= 23)
@@ -422,7 +422,7 @@ uint64 readDateTimeFromString(std::string&strString){//[Äê-ÔÂ-ÈÕ Ê±:·Ö:Ãë]
 	else
 		return 0;
 
-	//·Ö
+	//åˆ†
 	getSubString(strString,strTemp,':');
 	iTemp = readInt32FromString(strTemp);
 	if(iTemp >= 0 && iTemp <= 59)
@@ -430,7 +430,7 @@ uint64 readDateTimeFromString(std::string&strString){//[Äê-ÔÂ-ÈÕ Ê±:·Ö:Ãë]
 	else
 		return 0;
 
-	//Ãë
+	//ç§’
 	getSubString(strString,strTemp);
 	iTemp = readInt32FromString(strTemp);
 	if(iTemp >= 0 && iTemp <= 59)
@@ -447,7 +447,7 @@ bool getSubString(std::string&strString,std::string&strSubString,const char*pStr
 	if(iFind == std::string::npos) return false;
 
 	uint32 uLen = dStrlen(pStrtok);
-	//ÄÚÈİ¶Îbegin
+	//å†…å®¹æ®µbegin
 	strSubString = strString.substr(iFind+uLen);
 	strString.erase(iFind);
 
@@ -537,15 +537,15 @@ bool convertANSItoUTF8(char* pAnsiString,int32 nLen){
 	if(!pAnsiString || nLen <= 0) return false;
 
 #ifdef WIN32
-	//------------------------------ ANSI×ªUNICODE
+	//------------------------------ ANSIè½¬UNICODE
 	int32 wcsLen = ::MultiByteToWideChar(CP_ACP, 0, pAnsiString, strlen(pAnsiString), nullptr, 0);
 
-	//·ÖÅä¿Õ¼äÒª¸ø'\0'Áô¸ö¿Õ¼ä£¬MultiByteToWideChar²»»á¸ø'\0'¿Õ¼ä 
+	//åˆ†é…ç©ºé—´è¦ç»™'\0'ç•™ä¸ªç©ºé—´ï¼ŒMultiByteToWideCharä¸ä¼šç»™'\0'ç©ºé—´ 
 	wchar_t* wszString = new wchar_t[wcsLen + 1]; 
 	::MultiByteToWideChar(CP_ACP, 0, pAnsiString, strlen(pAnsiString), wszString, wcsLen);
 	wszString[wcsLen] = '\0';
 
-	//------------------------------ UNICODE×ªUTF8
+	//------------------------------ UNICODEè½¬UTF8
 	int32 u8Len = WideCharToMultiByte(CP_UTF8, 0, wszString, wcslen(wszString), nullptr, 0, nullptr, nullptr);
 	if(nLen < u8Len) u8Len = nLen - 1;
 
@@ -562,17 +562,17 @@ bool convertUTF8toANSI(char* pUtf8String,int32 nLen){
 	if(!pUtf8String || nLen <= 0) return false;
 
 #ifdef WIN32
-	//------------------------------ UTF8×ªUNICODE
+	//------------------------------ UTF8è½¬UNICODE
 	int32 wcsLen = ::MultiByteToWideChar(CP_UTF8, 0, pUtf8String, strlen(pUtf8String), nullptr, 0);
 	wchar_t* wszString = new wchar_t[wcsLen + 1]; 
 	::MultiByteToWideChar(CP_UTF8, 0, pUtf8String, strlen(pUtf8String), wszString, wcsLen);
 	wszString[wcsLen] = '\0';
 
-	//------------------------------ UNICODE×ªANSI
+	//------------------------------ UNICODEè½¬ANSI
 	int32 ansiLen = ::WideCharToMultiByte(CP_ACP, 0, wszString, wcslen(wszString), nullptr, 0, nullptr, nullptr);
 	if(nLen < ansiLen) ansiLen = nLen - 1;
 
-	//unicode°æ¶ÔÓ¦µÄstrlenÊÇwcslen 
+	//unicodeç‰ˆå¯¹åº”çš„strlenæ˜¯wcslen 
 	::WideCharToMultiByte(CP_ACP, 0, wszString, wcslen(wszString), pUtf8String, ansiLen, nullptr, nullptr);
 	pUtf8String[ansiLen] = '\0';
 
@@ -625,26 +625,26 @@ std::wstring&convertToWString(const char *str){
 	return wString;
 
 	/*
-	mbtowc ºÍ wctomb ÊÇµ¥¸ö×Ö·ûÏà»¥×ª»»
+	mbtowc å’Œ wctomb æ˜¯å•ä¸ªå­—ç¬¦ç›¸äº’è½¬æ¢
 	int len;
-	setlocale (LC_ALL, "chs");  //ÉèÖÃÎª¼òÌåÖĞÎÄ»·¾³
-	wchar_t wc = L''''ÖĞ''
-	wprintf(L"1¸ö¿íÖĞÎÄ×Ö·û£º%c \n",wc);
-	char* p = "ÖĞ";
+	setlocale (LC_ALL, "chs");  //è®¾ç½®ä¸ºç®€ä½“ä¸­æ–‡ç¯å¢ƒ
+	wchar_t wc = L''''ä¸­''
+	wprintf(L"1ä¸ªå®½ä¸­æ–‡å­—ç¬¦ï¼š%c \n",wc);
+	char* p = "ä¸­";
 	len = mbtowc (&wc, p, MB_LEN_MAX);
-	wprintf(L"µ¥×Ö·û´®×ª»»Îª1¸ö¿í×Ö·û£º%c ³¤¶È£º %d\n",wc,len);
+	wprintf(L"å•å­—ç¬¦ä¸²è½¬æ¢ä¸º1ä¸ªå®½å­—ç¬¦ï¼š%c é•¿åº¦ï¼š %d\n",wc,len);
 	char pcmb[MB_LEN_MAX];
 	len = wctomb (pcmb, wc);
 	pcmb[len] = 0;
-	printf("¿í×Ö·û×ª»»Îªµ¥×Ö·û´®£º%s ³¤¶È:%d\n",pcmb,len);
+	printf("å®½å­—ç¬¦è½¬æ¢ä¸ºå•å­—ç¬¦ä¸²ï¼š%s é•¿åº¦:%d\n",pcmb,len);
 
-	BYTE utf8[1024];        //utf8 ×Ö·û´®
+	BYTE utf8[1024];        //utf8 å­—ç¬¦ä¸²
 	wchar_t wstr[1024];
 	char mstr[1024];
-	//UTF-8 ×ª»»Îª¿í×Ö·û
+	//UTF-8 è½¬æ¢ä¸ºå®½å­—ç¬¦
 	MultiByteToWideChar( CP_UTF8, 0, utf8,1024, wstr, sizeof(wstr)/sizeof(wstr[0]) );
 	WideCharToMultiByte( CP_ACP,0,wstr,-1,mstr,1024,NULL,NULL );
-	×¢£ºmbstowcs()ÊÇC¿âº¯Êı£¬ÒªÕıÈ·µÄÉèÖÃLocale²ÅÄÜ½øĞĞ×ª»»£¬MultiByteToWideChar()ÊÇwin32º¯Êı£¬±ğ¸ã»ìÁË£¡
+	æ³¨ï¼šmbstowcs()æ˜¯Cåº“å‡½æ•°ï¼Œè¦æ­£ç¡®çš„è®¾ç½®Localeæ‰èƒ½è¿›è¡Œè½¬æ¢ï¼ŒMultiByteToWideChar()æ˜¯win32å‡½æ•°ï¼Œåˆ«ææ··äº†ï¼
 	*/
 }
 

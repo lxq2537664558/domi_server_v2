@@ -1,6 +1,4 @@
-// anet м╥нд╪Ч
-
-#ifndef ANET_H
+О╩©#ifndef ANET_H
 #define ANET_H
 
 #include <sys/types.h>

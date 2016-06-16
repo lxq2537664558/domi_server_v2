@@ -1,4 +1,4 @@
-// tcp ·şÎñ
+ï»¿// tcp æœåŠ¡
 
 #pragma once
 #include <map>
@@ -28,20 +28,20 @@ private:
 	inline void SetListenPort(uint16 port)	{ m_port = port; }
 
 public:
-	void Initialize();				// ³õÊ¼»¯
-	bool StartServer(uint16 port);	// tcpserver³õÊ¼»¯
-	bool StopServer();				// ¹Ø±Õ·şÎñ
+	void Initialize();				// åˆå§‹åŒ–
+	bool StartServer(uint16 port);	// tcpserveråˆå§‹åŒ–
+	bool StopServer();				// å…³é—­æœåŠ¡
 
 	static void DoAccept(aeEventLoop* el, int fd, void* privdata, int mask);
 	static void DoRead(aeEventLoop* el, int fd, void* privdata, int mask);
 	static THREAD_RETURN _el_thread_(void* _param);
 private:
-	uint16 m_port;				//¼àÌı¶Ë¿Ú
+	uint16 m_port;				//ç›‘å¬ç«¯å£
 
 public:
 	aeEventLoop* m_event_loop;	//eventloop
-	int m_stop;		// ÍË³ö±êÊ¾
-	uint16 m_idGen;						//sessionidÉú³ÉÆ÷
+	int m_stop;		// é€€å‡ºæ ‡ç¤º
+	uint16 m_idGen;						//sessionidç”Ÿæˆå™¨
 	std::map<int, CTcpSession*> m_sessions;
 	std::queue<CTcpSession*> m_free;
 };
