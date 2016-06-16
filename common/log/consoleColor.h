@@ -12,6 +12,7 @@ public:
 		color_green		,//绿
 		color_yellow	,//黄
 		color_blue		,//蓝
+		color_white		,//白
 		color_intensity	,//高亮
 		color_max
 	};

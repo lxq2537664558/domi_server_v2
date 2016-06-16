@@ -125,6 +125,7 @@ bool CDomiServer::initialize(uint16 uServerID) {
 }
 
 bool CDomiServer::startServices(){
+	CLog::print("tata");
 	if (!m_el.StartServer(7777)){
 		return false;
 	}

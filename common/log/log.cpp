@@ -138,8 +138,7 @@ void CLog::print(const char* pFormat,...){
 	if (!pFormat) return;
     CCritLocker lock(m_csLock);
 	initialize();
-	CConsoleColor clColor(_BIT32(CConsoleColor::color_read) | _BIT32(CConsoleColor::color_green) |
-							_BIT32(CConsoleColor::color_blue) | _BIT32(CConsoleColor::color_intensity));
+	CConsoleColor clColor(_BIT32(CConsoleColor::color_white) | _BIT32(CConsoleColor::color_intensity));
 	va_list	argptr;
 	va_start(argptr,pFormat);
 	_print(pFormat,argptr);

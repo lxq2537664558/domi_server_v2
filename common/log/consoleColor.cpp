@@ -23,6 +23,7 @@ WORD CConsoleColor::g_fore_color[color_max] = {
 	FOREGROUND_GREEN									,//绿
 	FOREGROUND_RED | FOREGROUND_GREEN					,//黄
 	FOREGROUND_BLUE										,//蓝
+	FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE	,//白
 	FOREGROUND_INTENSITY								,//高亮
 };
 
@@ -32,6 +33,7 @@ WORD CConsoleColor::g_back_color[color_max] = {
 	BACKGROUND_GREEN									,//绿
 	BACKGROUND_RED | BACKGROUND_GREEN					,//黄
 	BACKGROUND_BLUE										,//蓝
+	BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE	,//白
 	BACKGROUND_INTENSITY								,//高亮
 };
 #else // WIN32
@@ -41,6 +43,7 @@ const char*	CConsoleColor::g_fore_color[CConsoleColor::color_max] =
 	"32"	,//绿
 	"33"	,//黄
 	"34"	,//蓝
+	"37"	,//白
 	"1"		,//高亮
 };
 const char*	CConsoleColor::g_back_color[CConsoleColor::color_max] =
@@ -49,6 +52,7 @@ const char*	CConsoleColor::g_back_color[CConsoleColor::color_max] =
 	"42"	,//绿
 	"43"	,//黄
 	"44"	,//蓝
+	"47"	,//白
 	"1"		,//高亮
 };
 #endif // WIN32
