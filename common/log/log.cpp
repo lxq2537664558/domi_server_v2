@@ -130,7 +130,11 @@ void CLog::_print(const char* pFormat,va_list&argptr){
 	memset( m_szBuffer, 0, sizeof( m_szBuffer ) );
 	dSprintf( m_szBuffer, sizeof( m_szBuffer ), "%s %s", szDate, szStrint );
     m_szBuffer[ 2047 ] = 0;
-	dPrintf( "%s\n", m_szBuffer );
+#ifdef WIN32
+	dPrintf("%s\n", m_szBuffer );
+#else
+	dPrintf("%s\033[0m\n", m_szBuffer );
+#endif
 }
 
 // print

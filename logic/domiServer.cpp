@@ -125,7 +125,9 @@ bool CDomiServer::initialize(uint16 uServerID) {
 }
 
 bool CDomiServer::startServices(){
-	CLog::print("tata");
+	CLog::print("hahaha,测试汉字打印");
+	CLog::error("test%s,error","错误日志");
+	CLog::warn("test%s,warn","警告日志");
 	if (!m_el.StartServer(7777)){
 		return false;
 	}

@@ -98,8 +98,8 @@ CConsoleColor::~CConsoleColor(){
 #ifdef WIN32
 	if(g_hConsole != nullptr && g_hConsole != INVALID_HANDLE_VALUE)
 		::SetConsoleTextAttribute(g_hConsole,m_wColorSave);
-#else // WIN32
-	dPrintf("\033[0m");
+#else
+	//dPrintf("\033[0m");
 #endif // WIN32
 }
  
