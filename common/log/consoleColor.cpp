@@ -35,32 +35,28 @@ WORD CConsoleColor::g_back_color[color_max] = {
 	BACKGROUND_INTENSITY								,//¸ßÁÁ
 };
 #else // WIN32
-const char*	CConsoleColor::g_fore_color[CConsoleColor::color_max+1] =
+const char*	CConsoleColor::g_fore_color[CConsoleColor::color_max] =
 {
 	"31"	,//ºì
 	"32"	,//ÂÌ
 	"33"	,//»Æ
 	"34"	,//À¶
-	"37"	,//°×
 	"1"		,//¸ßÁÁ
 };
-const char*	CConsoleColor::g_back_color[CConsoleColor::color_max+1] =
+const char*	CConsoleColor::g_back_color[CConsoleColor::color_max] =
 {
 	"41"	,//ºì
 	"42"	,//ÂÌ
 	"43"	,//»Æ
 	"44"	,//À¶
-	"47"	,//°×
 	"1"		,//¸ßÁÁ
 };
 #endif // WIN32
 
 // ³õÊ¼»¯
-bool CConsoleColor::initialize()
-{
+bool CConsoleColor::initialize(){
 #ifdef WIN32
-	if(g_hConsole == INVALID_HANDLE_VALUE || g_hConsole == nullptr)
-	{
+	if(g_hConsole == INVALID_HANDLE_VALUE || g_hConsole == nullptr){
 		g_hConsole= ::GetStdHandle(STD_OUTPUT_HANDLE);
 		if(g_hConsole == nullptr || g_hConsole == INVALID_HANDLE_VALUE)
 			return false;
@@ -70,8 +66,7 @@ bool CConsoleColor::initialize()
 }
 
 // ¹Ø±Õ 
-void CConsoleColor::shutdown()
-{
+void CConsoleColor::shutdown(){
 #ifdef WIN32
 	if(g_hConsole != nullptr && g_hConsole != INVALID_HANDLE_VALUE)
 		::CloseHandle(g_hConsole);
@@ -80,13 +75,11 @@ void CConsoleColor::shutdown()
 #endif // WIN32
 }
 
-CConsoleColor::CConsoleColor(uint8 _fore,uint8 _bank)
-{
+CConsoleColor::CConsoleColor(uint8 _fore,uint8 _bank){
 	initialize();
 #ifdef WIN32
 	m_wColorSave	= 0;
-	if(g_hConsole != nullptr && g_hConsole != INVALID_HANDLE_VALUE)
-	{
+	if(g_hConsole != nullptr && g_hConsole != INVALID_HANDLE_VALUE){
 		CONSOLE_SCREEN_BUFFER_INFO stInfo;
 		::GetConsoleScreenBufferInfo(g_hConsole, &stInfo);
 		m_wColorSave = stInfo.wAttributes;
@@ -96,8 +89,7 @@ CConsoleColor::CConsoleColor(uint8 _fore,uint8 _bank)
 	setColor(_fore,_bank);
 }
  
-CConsoleColor::~CConsoleColor()
-{
+CConsoleColor::~CConsoleColor(){
 	//Çå³ý
 #ifdef WIN32
 	if(g_hConsole != nullptr && g_hConsole != INVALID_HANDLE_VALUE)
@@ -107,14 +99,11 @@ CConsoleColor::~CConsoleColor()
 #endif // WIN32
 }
  
-void CConsoleColor::setColor(uint8 _fore,uint8 _bank)
-{
+void CConsoleColor::setColor(uint8 _fore,uint8 _bank){
 #ifdef WIN32
-	if(g_hConsole != nullptr && g_hConsole != INVALID_HANDLE_VALUE)
-	{
+	if(g_hConsole != nullptr && g_hConsole != INVALID_HANDLE_VALUE){
 		WORD wColor = 0;
-		for (int i = 0;i < color_max;i++)
-		{
+		for (int i = 0;i < color_max;i++){
 			if(_fore && _CHECK_BIT(_fore,_BIT32(i)))
 				wColor |= g_fore_color[i];
 
@@ -132,30 +121,21 @@ void CConsoleColor::setColor(uint8 _fore,uint8 _bank)
 	}
 #else // WIN32
 	bool bFirst = true;
-	for (int i = 0;i < color_max;i++)
-	{
-		if(_CHECK_BIT(_fore,_BIT32(i)))
-		{
-			if(bFirst)
-			{
+	for (int i = 0;i < color_max;i++){
+		if(_CHECK_BIT(_fore,_BIT32(i))){
+			if(bFirst){
 				bFirst	= false;
 				dPrintf("\033[%s",g_fore_color[i]);
-			}
-			else
-			{
+			} else {
 				dPrintf(";%s",g_fore_color[i]);
 			}
 		}
 
-		if(_CHECK_BIT(_bank,_BIT32(i)))
-		{
-			if(bFirst)
-			{
+		if(_CHECK_BIT(_bank,_BIT32(i))){
+			if(bFirst){
 				bFirst	= false;
 				dPrintf("\033[%s",g_fore_color[i]);
-			}
-			else
-			{
+			}else{
 				dPrintf(";%s",g_fore_color[i]);
 			}
 		}

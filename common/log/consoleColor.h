@@ -21,8 +21,8 @@ private:
 	static WORD			g_fore_color[color_max];
 	static WORD			g_back_color[color_max];
 #else // WIN32
-	static const char*	g_fore_color[color_max+1];
-	static const char*	g_back_color[color_max+1];
+	static const char*	g_fore_color[color_max];
+	static const char*	g_back_color[color_max];
 #endif // WIN32
 
 private:
